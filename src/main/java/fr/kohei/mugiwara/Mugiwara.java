@@ -27,14 +27,12 @@ public class Mugiwara extends JavaPlugin {
 
     private MUModule module;
     private List<UUID> powerBlocked;
-    private List<UUID> canSeeLife;
 
     @Override
     public void onEnable() {
         instance = this;
 
         this.powerBlocked = new ArrayList<>();
-        this.canSeeLife = new ArrayList<>();
 
         UHC.getModuleManager().setModule(module = new MUModule());
 
