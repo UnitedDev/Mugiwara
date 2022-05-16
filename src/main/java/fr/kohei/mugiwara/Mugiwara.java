@@ -29,6 +29,19 @@ public class Mugiwara extends JavaPlugin {
     private List<UUID> powerBlocked;
     private List<UUID> canSeeLife;
 
+    @Override
+    public void onEnable() {
+        instance = this;
+
+        this.powerBlocked = new ArrayList<>();
+        this.canSeeLife = new ArrayList<>();
+
+        UHC.getModuleManager().setModule(module = new MUModule());
+
+        this.getServer().getPluginManager().registerEvents(new MUListener(this), this);
+        BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
+    }
+
     public static Player findRole(RolesType role) {
         Player toReturn = null;
 
@@ -57,18 +70,4 @@ public class Mugiwara extends JavaPlugin {
 
         player.sendMessage(ChatUtil.prefix("&fLe &c" + role.getName() + " &fde la partie est &a" + target.getName()));
     }
-
-    @Override
-    public void onEnable() {
-        instance = this;
-
-        this.powerBlocked = new ArrayList<>();
-        this.canSeeLife = new ArrayList<>();
-
-        UHC.getModuleManager().setModule(module = new MUModule());
-
-        this.getServer().getPluginManager().registerEvents(new MUListener(this), this);
-        BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
-    }
-
 }
