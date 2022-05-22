@@ -43,7 +43,7 @@ public class Cooldown {
     }
 
     public String getCooldownMessage() {
-        return ChatUtil.prefix("&cVous ne pouvez pas utiliser cette capacité. Elle sera disponible dans " + this.getSeconds() + " secondes.");
+        return ChatUtil.prefix("&cVous ne pouvez pas utiliser cette capacité. Elle sera de nouveau disponible dans " + this.getSeconds() + " secondes.");
     }
 
     public boolean isCooldown(Player player) {

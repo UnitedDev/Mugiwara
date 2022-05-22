@@ -27,6 +27,38 @@ public enum Messages {
     ZORO_SECONDKILL("&fVous avez obtenu &bSpeed II &fpour votre kill."),
     ZORO_THIRDKILL("&fVous avez obtenu &cForce I &fpour votre kill."),
     ZORO_FOURTHDKILL("&fVous avez obtenu &c1 coeur &fet &6+20% d'enflammer un joueur en le tapant &fpour votre kill."),
+    ZORO_DASH("&fVous avez utilisé votre &6dash&f."),
+    ZORO_DASH_ONWAY("&fLe &cdash &fde zoro est passé &cà côté de vous&f."),
+    ZORO_DASH_ONYOU("&cZoro &fa utilisé son &cdash &fsur vous."),
+
+    NAMI_CLIMATTACT_USE("&fVous avez utilisé votre &bClimat-Tact &fsur &6<name>"),
+    NAMI_CLIMATTACT_TARGET("&6Nami &fa utilisé son &6Climat-Tact &fsur vous."),
+    NAMI_PISTER_NOTSEEN("&cVous devez croiser <name> pour le pister."),
+    NAMI_PISTER_USE("&fVous avez pisté &a<name> &fpendant &a5 minutes&f."),
+    NAMI_PISTER_END("&cVotre pouvoir de pistage vient d'expirer."),
+
+    NAMI_VOL_USE("&fVous avez volé &6<amount> &fpommes d'ors à &6<name>&f."),
+    NAMI_VOL_ONME("&cNami &fvous a volé &6<amount> &fpommes d'ors."),
+
+    NAMI_ZEUS_USE("&fVous avez utilisé votre pouvoir &aZeus&f."),
+    NAMI_ZEUS_FINISH("&cVotre pouvoir Zeus a expiré."),
+    NAMI_ZEUS_LIGHTNING("&fVous avez fait spawn des &aéclairs&f."),
+
+    USSOP_KABUTO_POISON_USE("&fVous avez &2empoisonné &6<name>&f."),
+    USSOP_KABUTO_POISON_ONME("&fVous vous êtes fait &2empoisonné &fpar &6Ussop&f."),
+    USSOP_KABUTO_FIRE_USE("&fVous avez &eenflammé &6<name>&f."),
+    USSOP_KABUTO_FIRE_ONME("&fVous vous êtes fait &aenflammé &fpar &6Ussop&f."),
+    USSOP_KABUTO_STUN_USE("&fVous avez &dimmobilisé &6<name>&f."),
+    USSOP_KABUTO_STUN_ONME("&fVous vous êtes fait &dimmobilisé &fpar &6Ussop&f."),
+    USSOP_KABUTO_EXPLOSION_USE("&fVous avez créé une &cexplosion &6<name>&f."),
+    USSOP_KABUTO_EXPLOSION_ONME("&fVous vous êtes fait &cexplosé &fpar &6Ussop&f."),
+    USSOP_KABUTO_AVEUGLE_USE("&fVous avez créé une &aaveuglé &6<name>&f."),
+    USSOP_KABUTO_AVEUGLE_ONME("&fVous vous êtes fait &aaveuglé &fpar &6Ussop&f."),
+
+    SANJI_KILLEDFEMALE("&fVous avez perdu &c3 coeurs &fcar vous avez tué un rôle &aféminin&f."),
+    SANJI_STAYED1MINUTE("&fVous êtes resté &a1 minute &fà côté d'un rôle féminin, vous perdez &c1 coeur&f."),
+    SANJI_DIABLEJAMBE_USE("&fVous avez utilisé votre pouvoir &aDiable Jambe&f."),
+    SANJI_DIABLEJAMBE_END("&fVotre pouvoir &aDiable Jambe&f a été &cdésactivé&f."),
 
     ;
 
@@ -49,6 +81,8 @@ public enum Messages {
     }
 
     public void send(Player player, Replacement... replacements) {
+        if(getDisplay().equals("false")) return;
+
         String message = ChatUtil.prefix(getDisplay());
         for (Replacement replacement : replacements) {
             message = message.replace(replacement.getIndex(), replacement.getReplace());

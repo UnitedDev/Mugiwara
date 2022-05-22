@@ -13,7 +13,8 @@ public abstract class Power {
     private final Cooldown cooldown;
 
     public Power() {
-        this.cooldown = new Cooldown(getName());
+        if(getName() == null) cooldown = null;
+        else this.cooldown = new Cooldown(getName());
     }
 
     public static void onUse() {

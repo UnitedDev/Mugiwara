@@ -29,12 +29,13 @@ public class GomuNoMiRightPower extends RightClickPower {
     }
 
     @Override
-    public void onEnable(Player player, boolean rightClick) {
-        if (!rightClick) return;
+    public boolean onEnable(Player player, boolean rightClick) {
+        if (!rightClick) return false;
 
         Damage.addTempNoDamage(player, EntityDamageEvent.DamageCause.FALL, 10);
         player.setVelocity(player.getLocation().getDirection().multiply(3).setY(0.2));
 
         Messages.LUFFY_GOMUGOMUNOMI.send(player);
+        return true;
     }
 }

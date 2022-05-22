@@ -3,9 +3,11 @@ package fr.kohei.mugiwara.utils;
 import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.EpisodeManager;
 import fr.kohei.uhc.game.GameManager;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Utils {
-
     public static int getTimeBeforeEpisode() {
         GameManager gameManager = UHC.getGameManager();
         EpisodeManager episodeManager = gameManager.getEpisodeManager();
@@ -27,4 +29,25 @@ public class Utils {
         return "&8❘ &c&l" + name;
     }
 
+    public static int getItemAmount(Player player, Material material) {
+        int toReturn = 0;
+        for (ItemStack content : player.getInventory().getContents()) {
+            if (content != null && content.getType() == material) {
+                toReturn += content.getAmount();
+            }
+        }
+
+        return toReturn;
+    }
+
+    public static void removeItem(Player player, Material material, int remove) {
+        if (player.getInventory().getItem(player.getInventory().first(material)).getAmount() <= remove) {
+            player.getInventory().removeItem(player.getInventory().getItem(player.getInventory().first(material)));
+            return;
+        }
+        player.getInventory().getItem(player.getInventory().first(material)).setAmount(player.getInventory().getItem(player.getInventory().first(material)).getAmount() - remove);
+        if (remove > 64) {
+            player.getInventory().getItem(player.getInventory().first(material)).setAmount(player.getInventory().getItem(player.getInventory().first(material)).getAmount() - (remove - 64));
+        }
+    }
 }

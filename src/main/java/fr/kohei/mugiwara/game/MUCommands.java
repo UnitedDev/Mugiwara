@@ -60,10 +60,13 @@ public class MUCommands {
                 break;
             }
         }
-
         if (commandPower == null) return;
 
-        commandPower.onEnable(player, args);
+        boolean worked = commandPower.onEnable(player, args);
+        if (commandPower.getCooldown() != null && worked) {
+            if (commandPower.getCooldown().isCooldown(player)) return;
+            commandPower.getCooldown().setCooldown(commandPower.getCooldownAmount());
+        }
         Power.onUse();
     }
 

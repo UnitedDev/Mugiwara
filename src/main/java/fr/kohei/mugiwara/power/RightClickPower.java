@@ -24,6 +24,6 @@ public abstract class RightClickPower extends ClickPower {
         return power;
     }
 
-    public abstract void onEnable(Player player, boolean rightClick);
+    public abstract boolean onEnable(Player player, boolean rightClick);
 
 }

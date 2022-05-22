@@ -49,7 +49,7 @@ public class GearFourthPower extends RightClickPower {
     }
 
     @Override
-    public void onEnable(Player player, boolean rightClick) {
+    public boolean onEnable(Player player, boolean rightClick) {
         uses++;
 
         switch (uses) {
@@ -65,6 +65,8 @@ public class GearFourthPower extends RightClickPower {
             default:
                 break;
         }
+
+        return true;
     }
 
     private void useFirstPower(Player player) {
@@ -142,17 +144,21 @@ public class GearFourthPower extends RightClickPower {
                     return;
                 }
 
-                Location location = player.getLocation();
-
-                for (int degree = 0; degree < 360; degree++) {
-                    double radians = Math.toRadians(degree);
-                    double x = Math.cos(radians);
-                    double z = Math.sin(radians);
-                    location.add(x, 0, z);
-                    location.getWorld().playEffect(location, Effect.PARTICLE_SMOKE, 1);
-                    location.subtract(x, 0, z);
-                }
+                spawnParticle(player);
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 10);
+    }
+
+    public static void spawnParticle(Player player) {
+        Location location = player.getLocation();
+
+        for (int degree = 0; degree < 360; degree++) {
+            double radians = Math.toRadians(degree);
+            double x = Math.cos(radians);
+            double z = Math.sin(radians);
+            location.add(x, 0, z);
+            location.getWorld().playEffect(location, Effect.PARTICLE_SMOKE, 1);
+            location.subtract(x, 0, z);
+        }
     }
 }

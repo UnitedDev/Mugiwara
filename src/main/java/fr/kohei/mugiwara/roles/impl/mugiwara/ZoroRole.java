@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.power.impl.DashPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.Utils;
 import fr.kohei.uhc.UHC;
@@ -34,7 +35,7 @@ public class ZoroRole extends RolesType.MURole implements Listener {
 
     public ZoroRole() {
         super(Arrays.asList(
-
+                new DashPower()
         ));
     }
 
@@ -62,7 +63,7 @@ public class ZoroRole extends RolesType.MURole implements Listener {
         if (random == 1) randomRole(player);
     }
 
-    private void randomRole(Player player) {
+    public static void randomRole(Player player) {
         List<RolesType> roles = Arrays.asList(RolesType.SANJI, RolesType.LAW, RolesType.EUSTASS, RolesType.PIRATE);
 
         List<RolesType> players = Bukkit.getOnlinePlayers().stream()
@@ -154,5 +155,6 @@ public class ZoroRole extends RolesType.MURole implements Listener {
         if (sanji == null || sanji.getLocation().distance(player.getLocation()) > 25 || found) return;
 
         found = true;
+        Mugiwara.knowsRole(player, RolesType.SANJI);
     }
 }

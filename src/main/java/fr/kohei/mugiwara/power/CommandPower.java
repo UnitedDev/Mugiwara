@@ -6,6 +6,6 @@ public abstract class CommandPower extends Power {
 
     public abstract String getArgument();
 
-    public abstract void onEnable(Player player, String[] args);
+    public abstract boolean onEnable(Player player, String[] args);
 
 }

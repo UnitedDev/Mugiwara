@@ -93,8 +93,8 @@ public class MUListener implements Listener {
 
         if (rightClickPower == null) return;
 
-        rightClickPower.onEnable(player, event.getAction().name().contains("RIGHT"));
-        if (rightClickPower.getCooldown() != null) {
+        boolean worked = rightClickPower.onEnable(player, event.getAction().name().contains("RIGHT"));
+        if (rightClickPower.getCooldown() != null && worked) {
             if (rightClickPower.getCooldown().isCooldown(player)) return;
             rightClickPower.getCooldown().setCooldown(rightClickPower.getCooldownAmount());
         }
