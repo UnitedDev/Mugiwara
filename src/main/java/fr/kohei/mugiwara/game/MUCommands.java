@@ -67,7 +67,7 @@ public class MUCommands {
             if (commandPower.getCooldown().isCooldown(player)) return;
             commandPower.getCooldown().setCooldown(commandPower.getCooldownAmount());
         }
-        Power.onUse();
+        Power.onUse(player);
     }
 
     @Command(names = {"mu me", "mu role"})

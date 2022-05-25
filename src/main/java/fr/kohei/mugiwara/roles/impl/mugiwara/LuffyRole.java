@@ -79,7 +79,7 @@ public class LuffyRole extends RolesType.MURole implements Listener {
 
         if (this.inWater >= 5) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 4 * 20, 0, false, false));
-            Messages.LUFFY_WATER.send(player);
+            Messages.WATER.send(player);
             this.inWater = 0;
         }
     }

@@ -14,9 +14,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
@@ -27,12 +25,14 @@ public class Mugiwara extends JavaPlugin {
 
     private MUModule module;
     private List<UUID> powerBlocked;
+    private HashMap<UUID, HashMap<String, String>> hotbar;
 
     @Override
     public void onEnable() {
         instance = this;
 
         this.powerBlocked = new ArrayList<>();
+        this.hotbar = new HashMap<>();
 
         UHC.getModuleManager().setModule(module = new MUModule());
 
@@ -67,5 +67,22 @@ public class Mugiwara extends JavaPlugin {
         }
 
         player.sendMessage(ChatUtil.prefix("&fLe &c" + role.getName() + " &fde la partie est &a" + target.getName()));
+    }
+
+    public void addActionBar(Player player, String actionBar, String id) {
+        HashMap<String, String> map = this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>());
+        map.remove(id);
+        map.put(id, actionBar);
+        this.hotbar.put(player.getUniqueId(), map);
+    }
+
+    public void removeActionBar(Player player, String id) {
+        HashMap<String, String> map = this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>());
+        map.remove(id);
+        this.hotbar.put(player.getUniqueId(), map);
+    }
+
+    public Collection<String> getActionBar(Player player) {
+        return this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>()).values();
     }
 }

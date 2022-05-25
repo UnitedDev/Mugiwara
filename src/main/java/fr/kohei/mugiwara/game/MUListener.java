@@ -74,7 +74,7 @@ public class MUListener implements Listener {
         }
 
         rightClickPlayerPower.onEnable(player, target);
-        Power.onUse();
+        Power.onUse(player);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -98,7 +98,7 @@ public class MUListener implements Listener {
             if (rightClickPower.getCooldown().isCooldown(player)) return;
             rightClickPower.getCooldown().setCooldown(rightClickPower.getCooldownAmount());
         }
-        Power.onUse();
+        Power.onUse(player);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -132,7 +132,7 @@ public class MUListener implements Listener {
             damagePower.getCooldown().setCooldown(damagePower.getCooldownAmount());
         }
         damagePower.onEnable(damager, player);
-        Power.onUse();
+        Power.onUse(player);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

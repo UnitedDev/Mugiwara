@@ -9,6 +9,8 @@ import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -55,17 +57,33 @@ public class DiableJambePower extends RightClickPower {
 
         final UUID uuid = player.getUniqueId();
         new BukkitRunnable() {
+            private int i = 120 * 2;
             @Override
             public void run() {
+                i--;
                 Player player = Bukkit.getPlayer(uuid);
-                if(player == null) return;
+                if (player == null) return;
 
-                player.removePotionEffect(PotionEffectType.SPEED);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
-                Messages.SANJI_DIABLEJAMBE_END.send(player);
-                setUsing(true);
+                if (i <= 0) {
+                    player.removePotionEffect(PotionEffectType.SPEED);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
+                    Messages.SANJI_DIABLEJAMBE_END.send(player);
+                    setUsing(false);
+                    cancel();
+                    return;
+                }
+
+                Location location = player.getLocation();
+                for (int degree = 0; degree < 360; degree++) {
+                    double radians = Math.toRadians(degree);
+                    double x = Math.cos(radians);
+                    double z = Math.sin(radians);
+                    location.add(x, 0, z);
+                    location.getWorld().playEffect(location, Effect.FLAME, 1);
+                    location.subtract(x, 0, z);
+                }
             }
-        }.runTaskLater(Mugiwara.getInstance(), 2 * 20 * 60);
+        }.runTaskTimer(Mugiwara.getInstance(), 0, 10);
         return true;
     }
 }

@@ -17,13 +17,13 @@ public abstract class Power {
         else this.cooldown = new Cooldown(getName());
     }
 
-    public static void onUse() {
+    public static void onUse(Player player) {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             RolesType.MURole role = (RolesType.MURole) UPlayer.get(onlinePlayer).getRole();
 
             if (role == null) continue;
 
-            role.onAllUse(onlinePlayer);
+            role.onAllUse(onlinePlayer, player);
         }
     }
 

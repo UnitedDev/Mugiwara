@@ -23,9 +23,9 @@ public enum RolesType {
     NAMI("Nami", CampType.MUGIWARA_HEART, NamiRole.class),
     USSOP("Ussop", CampType.MUGIWARA_HEART, UssopRole.class),
     SANJI("Vinsmoke Sanji", CampType.MUGIWARA_HEART, SanjiRole.class),
-    CHOPPER("Tony Tony Chopper", CampType.MUGIWARA_HEART, null),
-    ROBIN("Nico Robin", CampType.MUGIWARA_HEART, null),
-    FRANKY("Franky", CampType.MUGIWARA_HEART, null),
+    CHOPPER("Tony Tony Chopper", CampType.MUGIWARA_HEART, ChopperRole.class),
+    ROBIN("Nico Robin", CampType.MUGIWARA_HEART, RobinRole.class),
+    FRANKY("Franky", CampType.MUGIWARA_HEART, FrankyRole.class),
     BROOK("Brook", CampType.MUGIWARA_HEART, null),
     JIMBE("Jimbe", CampType.MUGIWARA_HEART, null),
     LAW("Trafalgar D. Water Law", CampType.MUGIWARA_HEART, null),
@@ -92,7 +92,7 @@ public enum RolesType {
             return 1.0;
         }
 
-        public void onAllUse(Player player) {
+        public void onAllUse(Player player, Player use) {
 
         }
 

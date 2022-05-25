@@ -16,8 +16,8 @@ import java.io.File;
 public enum Messages {
 
     COOLDOWN_EXPIRE("&fLe cooldown pour le pouvoir &c<name> &fvient d'expirer."),
+    WATER("&cNe restez pas trop longtemps dans l'eau."),
 
-    LUFFY_WATER("&cNe restez pas trop longtemps dans l'eau."),
     LUFFY_GOMUGOMUNOMI("&fVous avez utilisé votre pouvoir &6Gomu Gomu no Mi&f."),
     LUFFY_FIRSTPOWER("&fVous avez utilisé votre premier pouvoir."),
     LUFFY_SECONDPOWER("&fVous avez utilisé votre deuxième pouvoir."),
@@ -59,6 +59,35 @@ public enum Messages {
     SANJI_STAYED1MINUTE("&fVous êtes resté &a1 minute &fà côté d'un rôle féminin, vous perdez &c1 coeur&f."),
     SANJI_DIABLEJAMBE_USE("&fVous avez utilisé votre pouvoir &aDiable Jambe&f."),
     SANJI_DIABLEJAMBE_END("&fVotre pouvoir &aDiable Jambe&f a été &cdésactivé&f."),
+    SANJI_OSOBAMASK_USE("&fVous avez utilisé votre pouvoir &cO Soba Mask&f."),
+    SANJI_OSOBAMASK_DESACTIVATE("&fVous avez &cdésactivé&f votre pouvoir &cO Soba Mask&f."),
+
+    CHOPPER_FLAIRE_FIRSTLINE("&fEffets de potions de &a<name>&f:"),
+    CHOPPER_FLAIRE_FORMAT(" &8- <name> &8(&7<amplifier>&8) &f&l» &f<duration>"),
+
+    CHOPPER_FORME_ONE_DESC("Description forme 1, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_ONE_MATERIAL("GOLDEN_APPLE"),
+    CHOPPER_FORME_TWO_DESC("Description forme 2, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_TWO_MATERIAL("GOLDEN_APPLE"),
+    CHOPPER_FORME_THREE_DESC("Description forme 3, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_THREE_MATERIAL("GOLDEN_APPLE"),
+    CHOPPER_FORME_FOUR_DESC("Description forme 4, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_FOUR_MATERIAL("GOLDEN_APPLE"),
+    CHOPPER_FORME_USE("&fVous avez selectionné le pouvoir &a<name>&f."),
+
+    ROBIN_OEIL_USE("&fVous avez placé un &aoeil&f."),
+    ROBIN_OEIL_JOIN("&a<name> &fvient de rentrer dans une de vos zones."),
+    ROBIN_OEIL_POWER("&c<name> &fa utilisé un pouvoir dans une de vos zones."),
+    ROBIN_OEIL_GAPPLE("&c<name> &fa mangé une pomme d'or dans une de vos zones."),
+    ROBIN_OEIL_COMBAT("&c<name> &fa attaqué un joueur."),
+
+    ROBIN_CLUTCH_USE("&fVous avez utilisé votre pouvoir &aClutch &fsur &a<name>&f."),
+    ROBIN_CLUTCH_ONME("&aNico Robin &fvous a retourné. &8(&710 secondes&8)"),
+
+    FRANKY_VISION_USE("&fVous traquez désormais &c<name>&f."),
+    FRANKY_GENERAL_USE("&fVous avez utilisé votre pouvoir &aGénéral Franky&f."),
+    FRANKY_GENERAL_END("&fVotre pouvoir &aGénéral Franky&f a été &cdésactivé&f."),
+    FRANKY_GENERAL_DEATHEND("&fVous avez perdu &c5 coeurs&f comme vous êtes restez plus de 5 secondes à côté de la mort de Franky."),
 
     ;
 
@@ -81,9 +110,22 @@ public enum Messages {
     }
 
     public void send(Player player, Replacement... replacements) {
-        if(getDisplay().equals("false")) return;
+        if (getDisplay().equals("false")) return;
 
         String message = ChatUtil.prefix(getDisplay());
+        for (Replacement replacement : replacements) {
+            message = message.replace(replacement.getIndex(), replacement.getReplace());
+        }
+
+        if (display.equalsIgnoreCase("false")) return;
+
+        player.sendMessage(message);
+    }
+
+    public void sendNP(Player player, Replacement... replacements) {
+        if (getDisplay().equals("false")) return;
+
+        String message = ChatUtil.translate(getDisplay());
         for (Replacement replacement : replacements) {
             message = message.replace(replacement.getIndex(), replacement.getReplace());
         }

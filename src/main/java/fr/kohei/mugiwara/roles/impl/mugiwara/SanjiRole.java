@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.impl.DiableJambePower;
+import fr.kohei.mugiwara.power.impl.OSobaMaskPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.uhc.UHC;
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -29,7 +31,8 @@ public class SanjiRole extends RolesType.MURole implements Listener {
 
     public SanjiRole() {
         super(Arrays.asList(
-                new DiableJambePower()
+                new DiableJambePower(),
+                new OSobaMaskPower()
         ));
     }
 
@@ -60,17 +63,48 @@ public class SanjiRole extends RolesType.MURole implements Listener {
         if (!isRole((Player) event.getEntity())) return;
 
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL) event.setCancelled(true);
+
+        OSobaMaskPower power = (OSobaMaskPower) this.getPowers().stream().filter(power1 -> power1 instanceof OSobaMaskPower)
+                .findFirst().orElse(null);
+        if (power == null) return;
+
+        if (power.isUsing()) {
+            power.onEnable((Player) event.getEntity(), false);
+        }
     }
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if(!(event.getDamager() instanceof Player)) return;
-        if(!(event.getEntity() instanceof Player)) return;
+        if (!(event.getDamager() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
 
         Player damager = (Player) event.getDamager();
-        if(!isRole(damager)) return;
+        if (!isRole(damager)) return;
 
+        DiableJambePower power = (DiableJambePower) this.getPowers().stream().filter(power1 -> power1 instanceof DiableJambePower)
+                .findFirst().orElse(null);
+        if (power == null) return;
 
+        if (power.isUsing()) {
+            event.getEntity().setFireTicks(30);
+        }
+    }
+
+    @EventHandler
+    public void onFlight(PlayerToggleFlightEvent event) {
+        Player player = event.getPlayer();
+        if (!isRole(player)) return;
+
+        if (!event.isFlying()) return;
+
+        DiableJambePower power = (DiableJambePower) this.getPowers().stream().filter(power1 -> power1 instanceof DiableJambePower)
+                .findFirst().orElse(null);
+        if (power == null) return;
+
+        if (!power.isUsing()) return;
+
+        event.setCancelled(true);
+        player.setVelocity(player.getLocation().getDirection().multiply(2).setY(0.5));
     }
 
     @EventHandler
@@ -126,6 +160,19 @@ public class SanjiRole extends RolesType.MURole implements Listener {
                     foundZoro = true;
                 }
             }
+        }
+
+        if (player.isOnGround()) {
+            RolesType.MURole role = (RolesType.MURole) MUPlayer.get(player).getRole();
+
+            DiableJambePower power = role.getPowers().stream()
+                    .filter(power1 -> power1 instanceof DiableJambePower)
+                    .map(power1 -> (DiableJambePower) power1)
+                    .findFirst().orElse(null);
+
+            if (power == null) return;
+
+            if (power.isUsing()) player.setAllowFlight(true);
         }
     }
 }

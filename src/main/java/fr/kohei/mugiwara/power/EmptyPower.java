@@ -10,7 +10,7 @@ public abstract class EmptyPower extends RightClickPower {
     }
 
     @Override
-    public void onEnable(Player player) {
-
+    public boolean onEnable(Player player, boolean rightClick) {
+        return false;
     }
 }

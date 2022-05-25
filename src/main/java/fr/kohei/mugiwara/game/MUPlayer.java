@@ -1,5 +1,6 @@
 package fr.kohei.mugiwara.game;
 
+import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.manager.Role;
 import lombok.Getter;
@@ -32,8 +33,8 @@ public class MUPlayer {
         return players.get(player.getUniqueId());
     }
 
-    public Role getRole() {
-        return UPlayer.get(player).getRole();
+    public RolesType.MURole getRole() {
+        return (RolesType.MURole) UPlayer.get(player).getRole();
     }
 
 }
