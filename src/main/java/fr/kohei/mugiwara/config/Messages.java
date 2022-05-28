@@ -89,6 +89,25 @@ public enum Messages {
     FRANKY_GENERAL_END("&fVotre pouvoir &aGénéral Franky&f a été &cdésactivé&f."),
     FRANKY_GENERAL_DEATHEND("&fVous avez perdu &c5 coeurs&f comme vous êtes restez plus de 5 secondes à côté de la mort de Franky."),
 
+    FRANKY_GENERAL_NEWPOWER_TNT_GET("&fVous avez obtenu le pouvoir &cTnT&f."),
+    FRANKY_GENERAL_NEWPOWER_TNT_USE("&fVous avez utilisé le pouvoir &cTnT&f."),
+    FRANKY_GENERAL_NEWPOWER_ASHIMOTO_GET("&fVous avez obtenu le pouvoir &cGénéral Ashimoto Dangereux&f."),
+    FRANKY_GENERAL_NEWPOWER_ASHIMOTO_USE("&fVous avez utilisé le pouvoir &cGénéral Ashimoto Dangereux&f."),
+    FRANKY_GENERAL_NEWPOWER_BOUCLIER_GET("&fVous avez obtenu le pouvoir &cTeinture grise ( Bouclier )&f."),
+    FRANKY_GENERAL_NEWPOWER_BOUCLIER_USE("&fVous avez utilisé le pouvoir &cTeinture grise ( Bouclier )&f."),
+
+    BROOK_DEATH("&fVous êtes mort a allez &arespawn&f dans 5 minutes."),
+    BROOK_RESPAWN("&FHAHAHHAHAH JE VIENS DE RESPWAN EZ HAHAHAHAHAH :slurp:."),
+    BROOK_AME_USE("&fVous avez utilisé votre pouvoir &aAme&f."),
+    BROOK_AME_END("&fVous avez regagné votre forme &cnormale&f."),
+    BROOK_AME_DEATH("&fVotre squelette est mort docn tu meurs&f."),
+    BROOK_AME_CANNOTMOVE("&fVous avez été &cimmobilisé &fpar &cBrook&f."),
+
+    BROOK_SLOW_USE("&fVous avez utilisé votre pouvoir de &cslow &fsur &c<name>&f."),
+    BROOK_SLOW_ATTACK("&fVous avez frappé votre cible &c<name>&f."),
+    BROOK_SLOW_ATTACKONME("&cBrook&f a utilisé son pouvoir de &7Slow &fsur vous."),
+    BROOK_SLOW_ATTACKONME_END("&cVous perdez la moitié de votre vie."),
+
     ;
 
     @Setter

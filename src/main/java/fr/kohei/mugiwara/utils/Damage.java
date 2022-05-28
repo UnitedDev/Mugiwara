@@ -5,12 +5,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class Damage {
 
     public static final HashMap<UUID, EntityDamageEvent.DamageCause> noDamage = new HashMap<>();
+    public static final List<UUID> NO_DAMAGE = new ArrayList<>();
 
     public static void addTempNoDamage(UUID var1, EntityDamageEvent.DamageCause var2, int var3) {
         noDamage.put(var1, var2);
@@ -19,6 +22,11 @@ public class Damage {
 
     public static void addTempNoDamage(Player var1, EntityDamageEvent.DamageCause var2, int var3) {
         addTempNoDamage(var1.getUniqueId(), var2, var3);
+    }
+
+    public static void addNoDamage(Player player, int seconds) {
+        NO_DAMAGE.add(player.getUniqueId());
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> NO_DAMAGE.remove(player.getUniqueId()), seconds * 20L);
     }
 
 }

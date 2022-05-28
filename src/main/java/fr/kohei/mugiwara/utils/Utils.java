@@ -7,6 +7,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Utils {
     public static int getTimeBeforeEpisode() {
         GameManager gameManager = UHC.getGameManager();
@@ -49,5 +52,13 @@ public class Utils {
         if (remove > 64) {
             player.getInventory().getItem(player.getInventory().first(material)).setAmount(player.getInventory().getItem(player.getInventory().first(material)).getAmount() - (remove - 64));
         }
+    }
+
+    public static List<Player> getNearPlayers(Player player, int radius) {
+        return player.getNearbyEntities(radius, radius, radius).stream()
+                .filter(entity -> entity instanceof Player)
+                .map(entity -> (Player) entity)
+                .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.power.*;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.Damage;
+import fr.kohei.mugiwara.utils.Spectator;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.manager.Role;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
 @RequiredArgsConstructor
@@ -115,6 +117,8 @@ public class MUListener implements Listener {
         UPlayer uDamager = UPlayer.get(damager);
         RolesType.MURole damagerRole = (RolesType.MURole) uDamager.getRole();
 
+        if(Damage.NO_DAMAGE.contains(damager.getUniqueId())) event.setCancelled(true);
+
         if (role == null || !uPlayer.isAlive()) return;
         if (damagerRole == null || !uDamager.isAlive()) return;
 
@@ -146,6 +150,8 @@ public class MUListener implements Listener {
                 .filter(uuid -> event.getCause() == Damage.noDamage.get(uuid))
                 .forEach(uuid -> event.setCancelled(true));
 
+        if(Damage.NO_DAMAGE.contains(player.getUniqueId())) event.setCancelled(true);
+
         UPlayer uPlayer = UPlayer.get(player);
         Role role = uPlayer.getRole();
 
@@ -159,4 +165,13 @@ public class MUListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent event) {
+        if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.SPECTATE)) {
+
+            if (Spectator.CANNOT_SPECTATE.contains(event.getPlayer().getUniqueId())) {
+                event.setCancelled(true);
+            }
+        }
+    }
 }

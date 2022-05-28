@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
+import fr.kohei.mugiwara.roles.impl.mugiwara.FrankyRole;
 import fr.kohei.mugiwara.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Getter
 public class GeneralFrankyPower extends RightClickPower {
     private boolean using;
+    private FrankyRole.GeneralPowers power;
 
     @Override
     public ItemStack getItem() {
@@ -42,14 +44,30 @@ public class GeneralFrankyPower extends RightClickPower {
         Messages.FRANKY_GENERAL_USE.send(player);
         using = true;
 
-        final UUID uuid = player.getUniqueId();
+        if (((int) (Math.random() * 3) == 1)) {
+            int random = (int) (Math.random() * 3);
+            power = FrankyRole.GeneralPowers.values()[random];
 
+            player.getInventory().setItem(
+                    player.getInventory().first(getItem()),
+                    power.getToReplace().toItemStack()
+            );
+            power.getMessages().send(player);
+        }
+
+        final UUID uuid = player.getUniqueId();
         new BukkitRunnable() {
             @Override
             public void run() {
                 Player player = Bukkit.getPlayer(uuid);
-                if(player == null) return;
+                if (player == null) return;
 
+                if (player.getInventory().contains(power.getToReplace().toItemStack())) {
+                    player.getInventory().setItem(
+                            player.getInventory().first(power.getToReplace().toItemStack()),
+                            getItem()
+                    );
+                }
                 Messages.FRANKY_GENERAL_END.send(player);
                 using = false;
             }
