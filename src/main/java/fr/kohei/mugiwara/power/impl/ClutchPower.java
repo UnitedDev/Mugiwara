@@ -62,7 +62,8 @@ public class ClutchPower extends RightClickPower {
                 if (target == null) return;
 
                 Location targetLocation = target.getLocation();
-                targetLocation.setYaw(targetLocation.getYaw() + 180);
+                targetLocation.setYaw(targetLocation.getYaw() + 90);
+                target.teleport(targetLocation);
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 20);
 

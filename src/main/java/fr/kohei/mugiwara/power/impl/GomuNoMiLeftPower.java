@@ -53,4 +53,9 @@ public class GomuNoMiLeftPower extends RightClickPower {
         Messages.LUFFY_GOMUGOMUNOMI.send(player);
         return true;
     }
+
+    @Override
+    public boolean rightClick() {
+        return false;
+    }
 }

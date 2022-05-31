@@ -1,0 +1,6 @@
+main: fr.kohei.mugiwara.Mugiwara
+name: Mugiwara
+author: Rhodless
+version: 2.0.0
+depend:
+  - UHC

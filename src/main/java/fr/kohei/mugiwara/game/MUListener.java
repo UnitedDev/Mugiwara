@@ -91,16 +91,23 @@ public class MUListener implements Listener {
 
         if (role == null || !uPlayer.isAlive()) return;
 
-        RightClickPower rightClickPower = RightClickPower.findPower(role, item);
+        for (RightClickPower rightClickPower : RightClickPower.findPowers(role, item)) {
+            if (rightClickPower == null) continue;
+            event.setCancelled(true);
 
-        if (rightClickPower == null) return;
+            if (rightClickPower.rightClick() && event.getAction().name().contains("LEFT")) continue;
+            if (!rightClickPower.rightClick() && !event.getAction().name().contains("LEFT")) continue;
 
-        boolean worked = rightClickPower.onEnable(player, event.getAction().name().contains("RIGHT"));
-        if (rightClickPower.getCooldown() != null && worked) {
-            if (rightClickPower.getCooldown().isCooldown(player)) return;
-            rightClickPower.getCooldown().setCooldown(rightClickPower.getCooldownAmount());
+            if (rightClickPower.getCooldown() != null && rightClickPower.getCooldown().isCooldown(player)) continue;
+            boolean right = event.getAction().name().contains("RIGHT");
+            boolean success = rightClickPower.onEnable(player, right);
+            if (success && rightClickPower.getCooldown() != null) {
+                rightClickPower.getCooldown().setCooldown(rightClickPower.getCooldownAmount());
+            }
+            if (success)
+                Power.onUse(player);
         }
-        Power.onUse(player);
+
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -131,12 +138,13 @@ public class MUListener implements Listener {
 
         if (damagePower == null) return;
 
-        if (damagePower.getCooldown() != null) {
+        boolean success = damagePower.onEnable(damager, player);
+        if (success && damagePower.getCooldown() != null) {
             if (damagePower.getCooldown().isCooldown(damager)) return;
             damagePower.getCooldown().setCooldown(damagePower.getCooldownAmount());
         }
-        damagePower.onEnable(damager, player);
-        Power.onUse(player);
+        if (success)
+            Power.onUse(player);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

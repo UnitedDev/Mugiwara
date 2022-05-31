@@ -36,11 +36,11 @@ public class OeilsPower extends CommandPower {
 
     @Override
     public String getName() {
-        return null;
+        return "Oeil";
     }
 
     @Override
     public Integer getCooldownAmount() {
-        return null;
+        return 10;
     }
 }

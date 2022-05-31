@@ -81,7 +81,7 @@ public class OSobaMaskPower extends RightClickPower {
                 }
 
                 if (player == null) return;
-                Mugiwara.getInstance().addActionBar(player, "&6Invisibilité: &7" + TimeUtil.getReallyNiceTime(timer * 1000L), "soba");
+                Mugiwara.getInstance().addActionBar(player, "&cInvisibilité &8» &f" + TimeUtil.getReallyNiceTime(timer * 1000L), "soba");
 
                 List<Player> players = Bukkit.getOnlinePlayers().stream()
                         .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))

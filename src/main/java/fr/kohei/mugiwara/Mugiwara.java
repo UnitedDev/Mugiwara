@@ -1,6 +1,7 @@
 package fr.kohei.mugiwara;
 
 import fr.kohei.BukkitAPI;
+import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.game.MUCommands;
 import fr.kohei.mugiwara.game.MUListener;
 import fr.kohei.mugiwara.game.MUModule;
@@ -36,6 +37,8 @@ public class Mugiwara extends JavaPlugin {
 
         UHC.getModuleManager().setModule(module = new MUModule());
 
+        this.saveConfig();
+        Messages.init();
         this.getServer().getPluginManager().registerEvents(new MUListener(this), this);
         BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
     }
@@ -62,7 +65,6 @@ public class Mugiwara extends JavaPlugin {
         Player target = findRole(role);
 
         if (target == null) {
-            player.sendMessage(ChatUtil.prefix("&c" + role.getName() + " n'est pas dans la partie."));
             return;
         }
 

@@ -13,6 +13,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UssopRole extends RolesType.MURole {
+public class UssopRole extends RolesType.MURole implements Listener {
     private final List<Arrow> arrows = new ArrayList<>();
     private ItemStack bow = null;
     private final Cooldown arrowCooldown = new Cooldown("Kabuto");

@@ -3,7 +3,9 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
+import fr.kohei.mugiwara.utils.Utils;
 import fr.kohei.utils.Cuboid;
+import fr.kohei.utils.ItemBuilder;
 import fr.kohei.utils.ReflectionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -22,12 +24,12 @@ import java.util.UUID;
 public class DashPower extends RightClickPower {
     @Override
     public ItemStack getItem() {
-        return null;
+        return new ItemBuilder(Material.NETHER_STAR).setName(Utils.itemFormat("Dash")).toItemStack();
     }
 
     @Override
     public String getName() {
-        return null;
+        return "Dash";
     }
 
     @Override
@@ -50,6 +52,7 @@ public class DashPower extends RightClickPower {
                 EntityType.ARMOR_STAND
         );
         List<UUID> damaged = new ArrayList<>();
+
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -60,18 +63,21 @@ public class DashPower extends RightClickPower {
 
                 if (armorStand.getPassenger() == null) armorStand.setPassenger(player);
 
+                if(armorStand.isDead()) cancel();
+
                 if (player == null || target == null) {
                     armorStand.remove();
                     cancel();
                     return;
                 }
 
-                if (armorStand.getLocation().distance(target.getLocation()) < 1.5) {
+                if (player.getLocation().distance(target.getLocation()) <= 3) {
                     cancel();
+                    armorStand.remove();
                     return;
                 }
 
-                final Vector vector = player.getLocation().toVector().subtract(target.getLocation().toVector()).normalize();
+                final Vector vector = player.getLocation().toVector().subtract(target.getLocation().toVector()).normalize().multiply(-1);
                 armorStand.setVelocity(vector);
 
                 Location first = player.getLocation().clone().add(1, 1, 1);
@@ -95,7 +101,7 @@ public class DashPower extends RightClickPower {
                 });
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 2);
-        target.setMaxHealth(target.getMaxHealth() - 4);
+        target.setHealth(target.getHealth() - 4);
 
         Messages.ZORO_DASH.send(player);
         return true;

@@ -37,7 +37,7 @@ public class MUCommands {
     public static void allCommands(Player player, @Param(name = "args", wildcard = true) String arg) {
         String[] args = arg.split(" ");
 
-        if (args.length < 2) return;
+        if (args.length < 1) return;
 
         String arg1 = args[0];
 
@@ -67,7 +67,8 @@ public class MUCommands {
             if (commandPower.getCooldown().isCooldown(player)) return;
             commandPower.getCooldown().setCooldown(commandPower.getCooldownAmount());
         }
-        Power.onUse(player);
+        if (worked)
+            Power.onUse(player);
     }
 
     @Command(names = {"mu me", "mu role"})

@@ -61,8 +61,8 @@ public class LuffyRole extends RolesType.MURole implements Listener {
     public void onSecond(Player player) {
         Block block = player.getLocation().getBlock();
 
-        if (player.isOnGround()) {
-            RolesType.MURole role = (RolesType.MURole) MUPlayer.get(player).getRole();
+        if (player.isOnGround() || player.getLocation().clone().add(0, -1, 0).getBlock().getType() != Material.AIR) {
+            RolesType.MURole role = MUPlayer.get(player).getRole();
 
             GearFourthPower power = role.getPowers().stream()
                     .filter(power1 -> power1 instanceof GearFourthPower)
@@ -72,13 +72,14 @@ public class LuffyRole extends RolesType.MURole implements Listener {
             if (power == null) return;
 
             if (power.isUsing()) player.setAllowFlight(true);
+            else player.setAllowFlight(false);
         }
 
         if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater += 1;
         else this.inWater = 0;
 
         if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 4 * 20, 0, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
             Messages.WATER.send(player);
             this.inWater = 0;
         }
@@ -89,7 +90,8 @@ public class LuffyRole extends RolesType.MURole implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         if (!isRole((Player) event.getEntity())) return;
 
-        event.setDamage(0.0F);
+        if (event.getCause() == EntityDamageEvent.DamageCause.FALL)
+            event.setDamage(0.0F);
     }
 
     @EventHandler
@@ -99,7 +101,7 @@ public class LuffyRole extends RolesType.MURole implements Listener {
 
         if (!event.isFlying()) return;
 
-        RolesType.MURole role = (RolesType.MURole) MUPlayer.get(player).getRole();
+        RolesType.MURole role = MUPlayer.get(player).getRole();
 
         GearFourthPower power = role.getPowers().stream()
                 .filter(power1 -> power1 instanceof GearFourthPower)
@@ -111,6 +113,7 @@ public class LuffyRole extends RolesType.MURole implements Listener {
         if (!power.isUsing()) return;
 
         event.setCancelled(true);
+        player.setAllowFlight(false);
         player.setVelocity(player.getLocation().getDirection().multiply(2).setY(0.5));
     }
 }

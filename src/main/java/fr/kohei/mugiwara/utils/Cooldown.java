@@ -2,6 +2,7 @@ package fr.kohei.mugiwara.utils;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.utils.ChatUtil;
+import fr.kohei.utils.TimeUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
@@ -25,17 +26,6 @@ public class Cooldown {
 
     public void setCooldown(int seconds) {
         this.seconds = seconds;
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (seconds <= 0) {
-                    cancel();
-                    return;
-                }
-
-                onSecond();
-            }
-        }.runTaskTimer(Mugiwara.getInstance(), 0, 20);
     }
 
     public void onSecond() {
@@ -43,7 +33,7 @@ public class Cooldown {
     }
 
     public String getCooldownMessage() {
-        return ChatUtil.prefix("&cVous ne pouvez pas utiliser cette capacité. Elle sera de nouveau disponible dans " + this.getSeconds() + " secondes.");
+        return ChatUtil.prefix("&cVous ne pouvez pas utiliser cette capacité. Elle sera de nouveau disponible dans " + TimeUtil.getReallyNiceTime2(this.getSeconds() * 1000L) + " secondes.");
     }
 
     public boolean isCooldown(Player player) {

@@ -99,7 +99,7 @@ public class BrookRole extends RolesType.MURole implements Listener {
                     return;
                 }
 
-                Mugiwara.getInstance().addActionBar(player, "&6Respawn: &7" + TimeUtil.getReallyNiceTime2(timer * 1000L), "respawn");
+                Mugiwara.getInstance().addActionBar(player, "&cRespawn &8» &f" + TimeUtil.getReallyNiceTime2(timer * 1000L), "respawn");
                 if (player.getLocation().distance(death) > 50) {
                     player.teleport(death);
                 }

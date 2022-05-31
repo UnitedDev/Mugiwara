@@ -5,6 +5,7 @@ import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.Damage;
 import fr.kohei.mugiwara.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

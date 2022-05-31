@@ -19,7 +19,7 @@
             <url>https://maven.pkg.github.com/KoheiDev/UHC</url>
         </repository>
         <repository>
-            <id>kohei</id>
+            <id>bukkitapi</id>
             <url>https://maven.pkg.github.com/KoheiDev/BukkitAPI</url>
         </repository>
     </repositories>

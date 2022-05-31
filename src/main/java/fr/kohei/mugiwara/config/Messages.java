@@ -65,13 +65,13 @@ public enum Messages {
     CHOPPER_FLAIRE_FIRSTLINE("&fEffets de potions de &a<name>&f:"),
     CHOPPER_FLAIRE_FORMAT(" &8- <name> &8(&7<amplifier>&8) &f&l» &f<duration>"),
 
-    CHOPPER_FORME_ONE_DESC("Description forme 1, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_ONE_DESC("Ligne 1 \nLigne 2"),
     CHOPPER_FORME_ONE_MATERIAL("GOLDEN_APPLE"),
-    CHOPPER_FORME_TWO_DESC("Description forme 2, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_TWO_DESC("Ligne 1 \nLigne 2"),
     CHOPPER_FORME_TWO_MATERIAL("GOLDEN_APPLE"),
-    CHOPPER_FORME_THREE_DESC("Description forme 3, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_THREE_DESC("Ligne 1 \nLigne 2"),
     CHOPPER_FORME_THREE_MATERIAL("GOLDEN_APPLE"),
-    CHOPPER_FORME_FOUR_DESC("Description forme 4, utilise \"\n\" pour sauter une ligne"),
+    CHOPPER_FORME_FOUR_DESC("Ligne 1 \nLigne 2"),
     CHOPPER_FORME_FOUR_MATERIAL("GOLDEN_APPLE"),
     CHOPPER_FORME_USE("&fVous avez selectionné le pouvoir &a<name>&f."),
 
@@ -108,6 +108,8 @@ public enum Messages {
     BROOK_SLOW_ATTACKONME("&cBrook&f a utilisé son pouvoir de &7Slow &fsur vous."),
     BROOK_SLOW_ATTACKONME_END("&cVous perdez la moitié de votre vie."),
 
+    JIMBE_SEIKEN_USE("&fVous avez utilisé votre &9Seiken&f sur &c<name>&f."),
+    JIMBE_SEIKEN_ONME("&cJimbe &fa utilisé son &9Seiken &fsur vous."),
     ;
 
     @Setter

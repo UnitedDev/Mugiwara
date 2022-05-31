@@ -61,7 +61,7 @@ public class ChopperRole extends RolesType.MURole {
         else this.inWater = 0;
 
         if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 4 * 20, 0, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
             Messages.WATER.send(player);
             this.inWater = 0;
         }

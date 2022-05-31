@@ -15,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +26,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
-public class RobinRole extends RolesType.MURole {
+public class RobinRole extends RolesType.MURole implements Listener {
     private int inWater = 0;
     private final List<Block> blocks = new ArrayList<>();
     private final HashMap<Block, List<UUID>> inZone = new HashMap<>();
@@ -70,7 +71,7 @@ public class RobinRole extends RolesType.MURole {
         else this.inWater = 0;
 
         if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 4 * 20, 0, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
             Messages.WATER.send(player);
             this.inWater = 0;
         }
@@ -79,8 +80,7 @@ public class RobinRole extends RolesType.MURole {
             for (Player player1 : Bukkit.getOnlinePlayers().stream()
                     .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
                     .collect(Collectors.toList())) {
-                if (player1.getLocation().distance(block1.getLocation()) > 25) return;
-                if (!inZone.get(block1).contains(player1.getUniqueId())) {
+                if (!inZone.get(block1).contains(player1.getUniqueId()) && player1.getLocation().distance(block1.getLocation()) <= 25) {
                     Messages.ROBIN_OEIL_JOIN.send(player, new Replacement("<name>", player1.getName()));
 
                     List<UUID> list = inZone.get(block1);
@@ -88,16 +88,15 @@ public class RobinRole extends RolesType.MURole {
                     inZone.put(block1, list);
 
                     if (player1.getUniqueId().equals(player.getUniqueId())) {
-                        PlayerUtils.makePlayerSeePlayersHealthAboveHead(player);
+                        PlayerUtils.makePlayerSeePlayersHealthAboveHead(player1);
                     }
-                } else {
-                    if (!inZone.get(block1).contains(player1.getUniqueId())) return;
+                } else if (inZone.get(block1).contains(player1.getUniqueId()) && player1.getLocation().distance(block1.getLocation()) > 25) {
                     List<UUID> list = inZone.get(block1);
                     list.remove(player1.getUniqueId());
                     inZone.put(block1, list);
 
                     if (player1.getUniqueId().equals(player.getUniqueId())) {
-                        PlayerUtils.stopSeeHealthHead(player);
+                        PlayerUtils.stopSeeHealthHead(player1);
                     }
                 }
             }

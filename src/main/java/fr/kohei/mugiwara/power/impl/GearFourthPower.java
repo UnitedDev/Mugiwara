@@ -4,13 +4,13 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.Damage;
+import fr.kohei.mugiwara.utils.MathUtil;
 import fr.kohei.mugiwara.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -70,6 +70,7 @@ public class GearFourthPower extends RightClickPower {
     }
 
     private void useFirstPower(Player player) {
+        player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 90 * 20, 0, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 90 * 20, 2, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 90 * 20, 1, false, false));
@@ -113,6 +114,7 @@ public class GearFourthPower extends RightClickPower {
             Player playerUpdated = Bukkit.getPlayer(uuid);
             if (playerUpdated == null) return;
 
+            player.setAllowFlight(false);
             playerUpdated.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, false));
         }, 5 * 20 * 60);
     }
@@ -136,9 +138,14 @@ public class GearFourthPower extends RightClickPower {
 
             @Override
             public void run() {
-                if (duration == 0) cancel();
-                duration--;
                 Player player = Bukkit.getPlayer(uuid);
+
+                if (duration == 0) {
+                    player.setAllowFlight(false);
+                    cancel();
+                    return;
+                }
+                duration--;
                 if (player == null) {
                     cancel();
                     return;
@@ -150,15 +157,6 @@ public class GearFourthPower extends RightClickPower {
     }
 
     public static void spawnParticle(Player player) {
-        Location location = player.getLocation();
-
-        for (int degree = 0; degree < 360; degree++) {
-            double radians = Math.toRadians(degree);
-            double x = Math.cos(radians);
-            double z = Math.sin(radians);
-            location.add(x, 0, z);
-            location.getWorld().playEffect(location, Effect.PARTICLE_SMOKE, 1);
-            location.subtract(x, 0, z);
-        }
+        MathUtil.sendCircleParticle(EnumParticle.SMOKE_LARGE, player.getLocation(), 2.0, 10);
     }
 }

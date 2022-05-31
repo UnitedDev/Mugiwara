@@ -16,6 +16,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -28,7 +29,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
-public class NamiRole extends RolesType.MURole {
+public class NamiRole extends RolesType.MURole implements Listener {
     private final List<UUID> seenPlayers = new ArrayList<>();
 
     public NamiRole() {

@@ -30,7 +30,7 @@ public enum RolesType {
     JIMBE("Jimbe", CampType.MUGIWARA_HEART, JimbeRole.class),
     LAW("Trafalgar D. Water Law", CampType.MUGIWARA_HEART, null),
     EUSTASS("Eustass Kid", CampType.MUGIWARA_HEART, null),
-    PIRATE("Pirate", CampType.MUGIWARA_HEART, null),
+    PIRATE("Pirate", CampType.MUGIWARA_HEART, PirateRole.class),
 
 
     GARP("Monkey D. Garp", CampType.MARINE, null),

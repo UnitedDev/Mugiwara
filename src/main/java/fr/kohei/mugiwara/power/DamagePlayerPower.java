@@ -24,6 +24,6 @@ public abstract class DamagePlayerPower extends ClickPower {
         return power;
     }
 
-    public abstract void onEnable(Player player, Player target);
+    public abstract boolean onEnable(Player player, Player target);
 
 }
