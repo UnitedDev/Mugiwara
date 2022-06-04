@@ -1,6 +1,7 @@
 package fr.kohei.mugiwara.power;
 
 import fr.kohei.mugiwara.roles.RolesType;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,6 +25,6 @@ public abstract class BlockPlacePower extends ClickPower {
         return power;
     }
 
-    public abstract boolean onEnable(Player player);
+    public abstract boolean onEnable(Player player, Location location);
 
 }

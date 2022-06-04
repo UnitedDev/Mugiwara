@@ -110,6 +110,10 @@ public enum Messages {
 
     JIMBE_SEIKEN_USE("&fVous avez utilisé votre &9Seiken&f sur &c<name>&f."),
     JIMBE_SEIKEN_ONME("&cJimbe &fa utilisé son &9Seiken &fsur vous."),
+
+    GARP_DEATH_PVE("&cSengoku &fest mort de PVE."),
+    GARP_DEATH_PLAYER("&cSengoku &fa été tué par &c<name>&f."),
+    GARP_TNT_USE("&fVous avez fait créé une &cexplosion&f."),
     ;
 
     @Setter

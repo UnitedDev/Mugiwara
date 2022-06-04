@@ -8,6 +8,7 @@ import fr.kohei.mugiwara.utils.Spectator;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.manager.Role;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -139,13 +140,14 @@ public class MUListener implements Listener {
 
         if (damagePower == null) return;
 
-        boolean success = damagePower.onEnable(damager, player);
-        if (success && damagePower.getCooldown() != null) {
+        if (damagePower.getCooldown() != null)
             if (damagePower.getCooldown().isCooldown(damager)) return;
+
+        boolean success = damagePower.onEnable(damager, player);
+        if (success && damagePower.getCooldown() != null)
             damagePower.getCooldown().setCooldown(damagePower.getCooldownAmount());
-        }
-        if (success)
-            Power.onUse(player);
+
+        if (success) Power.onUse(player);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -184,7 +186,7 @@ public class MUListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItemInHand();
@@ -193,12 +195,18 @@ public class MUListener implements Listener {
 
         if (blockPower == null) return;
 
-        boolean success = blockPower.onEnable(player);
-        if (success && blockPower.getCooldown() != null) {
-            if (blockPower.getCooldown().isCooldown(player)) return;
-            blockPower.getCooldown().setCooldown(blockPower.getCooldownAmount());
+        if (blockPower.getCooldown() != null && blockPower.getCooldown().isCooldown(player)) {
+            event.setCancelled(true);
+            return;
         }
-        if (success)
+        boolean success = blockPower.onEnable(player, event.getBlock().getLocation());
+        if (success) {
+            if (blockPower.getCooldown() != null)
+                blockPower.getCooldown().setCooldown(blockPower.getCooldownAmount());
             Power.onUse(player);
+            event.getBlock().setType(Material.AIR);
+        } else {
+            event.setCancelled(true);
+        }
     }
 }

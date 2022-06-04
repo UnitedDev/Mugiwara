@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.roles;
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.roles.impl.marine.GarpRole;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
 import fr.kohei.uhc.module.manager.Camp;
 import fr.kohei.uhc.module.manager.Role;
@@ -28,12 +29,12 @@ public enum RolesType {
     FRANKY("Franky", CampType.MUGIWARA_HEART, FrankyRole.class),
     BROOK("Brook", CampType.MUGIWARA_HEART, BrookRole.class),
     JIMBE("Jimbe", CampType.MUGIWARA_HEART, JimbeRole.class),
-    LAW("Trafalgar D. Water Law", CampType.MUGIWARA_HEART, null),
+    LAW("Trafalgar D. Water Law", CampType.MUGIWARA_HEART, LawRole.class),
     EUSTASS("Eustass Kid", CampType.MUGIWARA_HEART, null),
     PIRATE("Pirate", CampType.MUGIWARA_HEART, PirateRole.class),
 
 
-    GARP("Monkey D. Garp", CampType.MARINE, null),
+    GARP("Monkey D. Garp", CampType.MARINE, GarpRole.class),
     COBY("Coby ", CampType.MARINE, null),
     DRAKE("X Drake", CampType.MARINE, null),
     COMMANDANT("Commandant", CampType.MARINE, null),
