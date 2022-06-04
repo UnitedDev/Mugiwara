@@ -8,6 +8,6 @@ import lombok.RequiredArgsConstructor;
 public class Replacement {
 
     private final CharSequence index;
-    private final CharSequence replace;
+    private final Object replace;
 
 }
