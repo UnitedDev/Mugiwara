@@ -114,6 +114,11 @@ public enum Messages {
     GARP_DEATH_PVE("&cSengoku &fest mort de PVE."),
     GARP_DEATH_PLAYER("&cSengoku &fa été tué par &c<name>&f."),
     GARP_TNT_USE("&fVous avez fait créé une &cexplosion&f."),
+
+    COBY_PHASE_CHANGE("&fVous êtes passé à la phase &c<phase>&f."),
+    COBY_DEATH_COORDINATES("&c<name> &fest mort. Voici ses coordonnées approximatives: &c<x>&f, &c<y>&f, &c<z>&f."),
+    COBY_DEATHER_KILLER_ROLE("&fLe rôle du tueur de &c<name> &fest &c<role>&f."),
+    COBY_DEATHER_KILLER_NAME("&fLe nom du tueur de &c<name> &fest &c<killer>&f."),
     ;
 
     @Setter
@@ -141,7 +146,7 @@ public enum Messages {
 
         String message = ChatUtil.prefix(getDisplay());
         for (Replacement replacement : replacements) {
-            message = message.replace(replacement.getIndex(), replacement.getReplace());
+            message = message.replace(replacement.getIndex(), String.valueOf(replacement.getReplace()));
         }
 
         if (display.equalsIgnoreCase("false") || display.equalsIgnoreCase("rien")) return;
@@ -154,7 +159,7 @@ public enum Messages {
 
         String message = ChatUtil.translate(getDisplay());
         for (Replacement replacement : replacements) {
-            message = message.replace(replacement.getIndex(), replacement.getReplace());
+            message = message.replace(replacement.getIndex(), String.valueOf(replacement.getReplace()));
         }
 
         if (display.equalsIgnoreCase("false") || display.equalsIgnoreCase("rien")) return;

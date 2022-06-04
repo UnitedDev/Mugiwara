@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 @Getter
@@ -42,6 +43,7 @@ public class Mugiwara extends JavaPlugin {
         BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
     }
 
+    @Nullable
     public static Player findRole(RolesType role) {
         Player toReturn = null;
 
