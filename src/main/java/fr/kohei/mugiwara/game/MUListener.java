@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -124,7 +125,7 @@ public class MUListener implements Listener {
         UPlayer uDamager = UPlayer.get(damager);
         RolesType.MURole damagerRole = (RolesType.MURole) uDamager.getRole();
 
-        if(Damage.NO_DAMAGE.contains(damager.getUniqueId())) event.setCancelled(true);
+        if (Damage.NO_DAMAGE.contains(damager.getUniqueId())) event.setCancelled(true);
 
         if (role == null || !uPlayer.isAlive()) return;
         if (damagerRole == null || !uDamager.isAlive()) return;
@@ -158,7 +159,7 @@ public class MUListener implements Listener {
                 .filter(uuid -> event.getCause() == Damage.noDamage.get(uuid))
                 .forEach(uuid -> event.setCancelled(true));
 
-        if(Damage.NO_DAMAGE.contains(player.getUniqueId())) event.setCancelled(true);
+        if (Damage.NO_DAMAGE.contains(player.getUniqueId())) event.setCancelled(true);
 
         UPlayer uPlayer = UPlayer.get(player);
         Role role = uPlayer.getRole();
@@ -181,5 +182,23 @@ public class MUListener implements Listener {
                 event.setCancelled(true);
             }
         }
+    }
+
+    @EventHandler
+    public void onPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        ItemStack item = event.getItemInHand();
+
+        BlockPlacePower blockPower = BlockPlacePower.findPower(MUPlayer.get(player).getRole(), item);
+
+        if (blockPower == null) return;
+
+        boolean success = blockPower.onEnable(player);
+        if (success && blockPower.getCooldown() != null) {
+            if (blockPower.getCooldown().isCooldown(player)) return;
+            blockPower.getCooldown().setCooldown(blockPower.getCooldownAmount());
+        }
+        if (success)
+            Power.onUse(player);
     }
 }
