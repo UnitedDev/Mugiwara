@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.roles;
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.roles.impl.marine.CobyRole;
 import fr.kohei.mugiwara.roles.impl.marine.GarpRole;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
 import fr.kohei.uhc.module.manager.Camp;
@@ -35,7 +36,7 @@ public enum RolesType {
 
 
     GARP("Monkey D. Garp", CampType.MARINE, GarpRole.class),
-    COBY("Coby ", CampType.MARINE, null),
+    COBY("Coby ", CampType.MARINE, CobyRole.class),
     DRAKE("X Drake", CampType.MARINE, null),
     COMMANDANT("Commandant", CampType.MARINE, null),
     LIEUTENANT("Lieutenant", CampType.MARINE, null),

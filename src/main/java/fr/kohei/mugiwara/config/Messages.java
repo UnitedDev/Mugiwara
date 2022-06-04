@@ -121,6 +121,8 @@ public enum Messages {
 
     @SneakyThrows
     public static void init() {
+        Mugiwara.getInstance().getConfig();
+
         FileConfiguration config = Mugiwara.getInstance().getConfig();
         config.load(new File(Mugiwara.getInstance().getDataFolder() + "/config.yml"));
 
@@ -142,7 +144,7 @@ public enum Messages {
             message = message.replace(replacement.getIndex(), replacement.getReplace());
         }
 
-        if (display.equalsIgnoreCase("false")) return;
+        if (display.equalsIgnoreCase("false") || display.equalsIgnoreCase("rien")) return;
 
         player.sendMessage(message);
     }
@@ -155,7 +157,7 @@ public enum Messages {
             message = message.replace(replacement.getIndex(), replacement.getReplace());
         }
 
-        if (display.equalsIgnoreCase("false")) return;
+        if (display.equalsIgnoreCase("false") || display.equalsIgnoreCase("rien")) return;
 
         player.sendMessage(message);
     }

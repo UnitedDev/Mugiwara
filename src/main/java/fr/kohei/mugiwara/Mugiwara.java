@@ -26,7 +26,7 @@ public class Mugiwara extends JavaPlugin {
 
     private MUModule module;
     private List<UUID> powerBlocked;
-    private HashMap<UUID, HashMap<String, String>> hotbar;
+    private Map<UUID, Map<String, String>> hotbar;
 
     @Override
     public void onEnable() {
@@ -37,7 +37,6 @@ public class Mugiwara extends JavaPlugin {
 
         UHC.getModuleManager().setModule(module = new MUModule());
 
-        this.saveConfig();
         Messages.init();
         this.getServer().getPluginManager().registerEvents(new MUListener(this), this);
         BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
@@ -72,14 +71,14 @@ public class Mugiwara extends JavaPlugin {
     }
 
     public void addActionBar(Player player, String actionBar, String id) {
-        HashMap<String, String> map = this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>());
+        Map<String, String> map = this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>());
         map.remove(id);
         map.put(id, actionBar);
         this.hotbar.put(player.getUniqueId(), map);
     }
 
     public void removeActionBar(Player player, String id) {
-        HashMap<String, String> map = this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>());
+        Map<String, String> map = this.hotbar.getOrDefault(player.getUniqueId(), new HashMap<>());
         map.remove(id);
         this.hotbar.put(player.getUniqueId(), map);
     }
