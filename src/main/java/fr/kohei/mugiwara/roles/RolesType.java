@@ -5,7 +5,9 @@ import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.impl.marine.CobyRole;
 import fr.kohei.mugiwara.roles.impl.marine.GarpRole;
+import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
+import fr.kohei.mugiwara.roles.impl.pirates.XDrakeRole;
 import fr.kohei.uhc.module.manager.Camp;
 import fr.kohei.uhc.module.manager.Role;
 import fr.kohei.utils.ChatUtil;
@@ -35,11 +37,14 @@ public enum RolesType {
     PIRATE("Pirate", CampType.MUGIWARA_HEART, PirateRole.class),
 
 
+
     GARP("Monkey D. Garp", CampType.MARINE, GarpRole.class),
     COBY("Coby ", CampType.MARINE, CobyRole.class),
-    DRAKE("X Drake", CampType.MARINE, null),
+    DRAKE("X Drake", CampType.MARINE, XDrakeRole.class),
+
+
     COMMANDANT("Commandant", CampType.MARINE, null),
-    LIEUTENANT("Lieutenant", CampType.MARINE, null),
+    LIEUTENANT("Lieutenant", CampType.MARINE, LieutenantRole.class),
     MIHAWK("Mihawk", CampType.MARINE, null),
     SMOKER("Smoker", CampType.MARINE, null),
     HANCOCK("Boa Hancock", CampType.MARINE, null),

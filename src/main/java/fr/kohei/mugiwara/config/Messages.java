@@ -115,6 +115,13 @@ public enum Messages {
     GARP_DEATH_PLAYER("&cSengoku &fa été tué par &c<name>&f."),
     GARP_TNT_USE("&fVous avez fait créé une &cexplosion&f."),
 
+    XDRAKE_ALLOSAURUS_ACTIVATE("&fVous avez activé votre pouvoir &aAllosaurus&f."),
+    XDRAKE_MORSURE_VICTIM("&c<name>, &fvous avez été mordu par &cX-Drake&f."),
+
+    LIEUTENANT_COMMANDANT_DEATH("&c<name> &fest mort, c'était le commandant."),
+    LIEUTENANT_FIVE_ROLES("<name> est <role>"),
+
+
     COBY_PHASE_CHANGE("&fVous êtes passé à la phase &c<phase>&f."),
     COBY_DEATH_COORDINATES("&c<name> &fest mort. Voici ses coordonnées approximatives: &c<x>&f, &c<y>&f, &c<z>&f."),
     COBY_DEATHER_KILLER_ROLE("&fLe rôle du tueur de &c<name> &fest &c<role>&f."),
