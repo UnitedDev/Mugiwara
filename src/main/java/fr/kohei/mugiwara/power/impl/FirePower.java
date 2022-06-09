@@ -19,11 +19,11 @@ public class FirePower extends CommandPower {
         if (kizaruRole.isFire()) {
             kizaruRole.setFire(false);
             // send the fire enabled message
-            Messages.KIZARU_FIRE_DISABLE.send(player);
+            Messages.AKAINU_FIRE_DISABLE.send(player);
         } else {
             kizaruRole.setFire(true);
             // send the fire disabled message
-            Messages.KIZARU_FIRE_DISABLE.send(player);
+            Messages.AKAINU_FIRE_DISABLE.send(player);
         }
         return true;
     }

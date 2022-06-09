@@ -45,7 +45,7 @@ public enum RolesType {
     MIHAWK("Mihawk", CampType.MARINE, null),
     SMOKER("Smoker", CampType.MARINE, SmokerRole.class),
     HANCOCK("Boa Hancock", CampType.MARINE, null),
-    KIZARU("Kizaru", CampType.MARINE, null),
+    KIZARU("Kizaru", CampType.MARINE, KizaruRole.class),
     FUJITORA("Amiral Fujitora", CampType.MARINE, null),
     AKAINU("Chef Akainu", CampType.MARINE, AkainuRole.class),
     SENGOKU("Sengoku", CampType.MARINE, null),

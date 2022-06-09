@@ -41,12 +41,12 @@ public class BlazePower extends RightClickPower {
         }
 
         // send the dai fukai use message to the player
-        Messages.KIZARU_DAI_USE.send(player);
+        Messages.AKAINU_DAI_USE.send(player);
 
         // send the dai fukai use message to the player 30s after
         player.getServer().getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
             // send the dai fukai end message to the player
-            Messages.KIZARU_DAI_END.send(player);
+            Messages.AKAINU_DAI_END.send(player);
         }, 30 * 20);
 
         // new task every seconds for 30 seconds

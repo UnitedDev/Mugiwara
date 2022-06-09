@@ -41,7 +41,7 @@ public class AkainuRole extends RolesType.MURole {
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(Material.GLOWSTONE_DUST);
+        return new ItemStack(Material.LAVA_BUCKET);
     }
 
     @Override
