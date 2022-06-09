@@ -7,12 +7,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 @Getter
 @RequiredArgsConstructor
 public class Cooldown {
 
     private final String name;
+    private BukkitTask runnable;
     private int seconds;
 
     public static boolean canUsePower(Player player) {
@@ -26,6 +28,17 @@ public class Cooldown {
 
     public void setCooldown(int seconds) {
         this.seconds = seconds;
+    }
+
+    public void task() {
+        if (runnable != null)
+            runnable.cancel();
+        runnable = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (seconds > 0) onSecond();
+            }
+        }.runTaskTimer(Mugiwara.getInstance(), 0, 20);
     }
 
     public void onSecond() {
