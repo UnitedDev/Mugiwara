@@ -126,6 +126,15 @@ public enum Messages {
     COBY_DEATH_COORDINATES("&c<name> &fest mort. Voici ses coordonnées approximatives: &c<x>&f, &c<y>&f, &c<z>&f."),
     COBY_DEATHER_KILLER_ROLE("&fLe rôle du tueur de &c<name> &fest &c<role>&f."),
     COBY_DEATHER_KILLER_NAME("&fLe nom du tueur de &c<name> &fest &c<killer>&f."),
+
+    COMMANDANT_GUERRE_USE("&fVous avez utilisé votre pouvoir &aGuerre&f."),
+    COMMANDANT_GUERRE_COORDINATES("&cCommandant &fse trouve aux coordonnées &c<x>&f, &c<y>&f, &c<z>&f."),
+    COMMANDANT_WANTED_TARGET("&fVous avez été recherché par le &cCommandant&f."),
+    COMMANDANT_WANTED_NOTPIRATE("&fVotre joueur recherché n'est pas un pirate. Vous perdez &c2 coeurs&f."),
+    COMMANDANT_WANTED_FIRST("&fVous obtenez &c3 coeurs&f permanent et l'effet &cforce 1 &fpermament."),
+    COMMANDANT_WANTED_SECOND("&fVous obtenez &c2 coeurs&f permanent et l'effet &cforce 1 &fle jour."),
+    COMMANDANT_WANTED_THIRD("&fVous obtenez &c2 coeurs&f permanent."),
+
     ;
 
     @Setter
