@@ -14,13 +14,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
+
+import java.awt.event.KeyAdapter;
 
 @RequiredArgsConstructor
 public class MUListener implements Listener {
@@ -110,6 +111,16 @@ public class MUListener implements Listener {
                 Power.onUse(player);
         }
 
+        if (role.getRole() == RolesType.KATAKURI && item.hasItemMeta() && item.getType() == Material.SNOW_BALL) {
+            if (item.getItemMeta().getDisplayName().contains("Mochi")) {
+                //give damage resistance potion effect to player
+                player.addPotionEffect(new org.bukkit.potion.PotionEffect(org.bukkit.potion.PotionEffectType.DAMAGE_RESISTANCE, 20 * 30, 0));
+                player.addPotionEffect(new org.bukkit.potion.PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 30, 0));
+
+            }
+
+        }
+
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -147,6 +158,14 @@ public class MUListener implements Listener {
         if (success && damagePower.getCooldown() != null)
             damagePower.getCooldown().setCooldown(damagePower.getCooldownAmount());
 
+        if (role.getRole() == RolesType.KATAKURI && event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
+            event.setCancelled(damagerRole.getRole() != RolesType.USSOP);
+        }
+
+        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE && damagerRole.getRole() == RolesType.KATAKURI && event.getDamage() < 0.5D) {
+            player.addPotionEffect(new org.bukkit.potion.PotionEffect(org.bukkit.potion.PotionEffectType.SLOW, 20 * 6, 4));
+        }
+
         if (success) Power.onUse(player);
     }
 
@@ -176,6 +195,7 @@ public class MUListener implements Listener {
         }
     }
 
+
     @EventHandler
     public void onTeleport(PlayerTeleportEvent event) {
         if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.SPECTATE)) {
@@ -185,6 +205,9 @@ public class MUListener implements Listener {
             }
         }
     }
+
+
+
 
     @EventHandler(ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
