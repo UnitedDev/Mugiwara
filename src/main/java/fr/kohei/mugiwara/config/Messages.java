@@ -121,6 +121,8 @@ public enum Messages {
     LIEUTENANT_COMMANDANT_DEATH("&c<name> &fest mort, c'était le commandant."),
     LIEUTENANT_FIVE_ROLES("<name> est <role>"),
 
+    KATAKURI_ROLES_REVEAL("&fLe rôle de <name> est : &a<role>&f."),
+
 
     COBY_PHASE_CHANGE("&fVous êtes passé à la phase &c<phase>&f."),
     COBY_DEATH_COORDINATES("&c<name> &fest mort. Voici ses coordonnées approximatives: &c<x>&f, &c<y>&f, &c<z>&f."),
