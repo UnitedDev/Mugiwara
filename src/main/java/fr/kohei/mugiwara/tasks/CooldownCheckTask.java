@@ -31,13 +31,15 @@ public class CooldownCheckTask extends BukkitRunnable {
             for (Power power : muPlayer.getRole().getPowers()) {
                 if (power.getCooldown() == null) continue;
 
+                if(power.getCooldown().getSeconds() > 0) {
+                    power.getCooldown().onSecond();
+                }
                 if (power.getCooldown().getSeconds() == 1) {
                     Messages.COOLDOWN_EXPIRE.send(player,
                             new Replacement("<name>", power.getCooldown().getName())
                     );
                     Mugiwara.getInstance().removeActionBar(player, power.getCooldown().getName());
                 } else if (power.getCooldown().getSeconds() > 1) {
-                    power.getCooldown().onSecond();
                     Mugiwara.getInstance().addActionBar(
                             player,
                             "&c" + power.getCooldown().getName() + " &8» &f" + TimeUtil.getReallyNiceTime2(power.getCooldown().getSeconds() * 1000L),

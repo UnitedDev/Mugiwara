@@ -1,13 +1,18 @@
 package fr.kohei.mugiwara.utils;
 
+import fr.kohei.mugiwara.Mugiwara;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
+
+import javax.crypto.Mac;
+import java.util.UUID;
 
 public class PlayerUtils {
 
@@ -32,5 +37,22 @@ public class PlayerUtils {
         final ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         final Scoreboard scoreboard = player.getScoreboard();
         player.getScoreboard().clearSlot(DisplaySlot.BELOW_NAME);
+    }
+
+    public static void giveInvisible(final Player player, final int secondes) {
+        final UUID uuid = player.getUniqueId();
+        new BukkitRunnable() {
+            int cooldown = secondes;
+
+            public void run() {
+                final Player connected = Bukkit.getPlayer(uuid);
+
+                if (connected == null) return;
+
+                // all players dont see connected anymore
+                Bukkit.getOnlinePlayers().forEach(p -> p.hidePlayer(connected));
+                --this.cooldown;
+            }
+        }.runTaskTimer(Mugiwara.getInstance(), 20L, 20L);
     }
 }

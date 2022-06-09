@@ -128,6 +128,38 @@ public enum Messages {
     COBY_DEATH_COORDINATES("&c<name> &fest mort. Voici ses coordonnées approximatives: &c<x>&f, &c<y>&f, &c<z>&f."),
     COBY_DEATHER_KILLER_ROLE("&fLe rôle du tueur de &c<name> &fest &c<role>&f."),
     COBY_DEATHER_KILLER_NAME("&fLe nom du tueur de &c<name> &fest &c<killer>&f."),
+
+    COMMANDANT_GUERRE_USE("&fVous avez utilisé votre pouvoir &aGuerre&f."),
+    COMMANDANT_GUERRE_COORDINATES("&cCommandant &fse trouve aux coordonnées &c<x>&f, &c<y>&f, &c<z>&f."),
+    COMMANDANT_WANTED_TARGET("&fVous avez été recherché par le &cCommandant&f."),
+    COMMANDANT_WANTED_NOTPIRATE("&fVotre joueur recherché n'est pas un pirate. Vous perdez &c2 coeurs&f."),
+    COMMANDANT_WANTED_FIRST("&fVous obtenez &c3 coeurs&f permanent et l'effet &cforce 1 &fpermament."),
+    COMMANDANT_WANTED_SECOND("&fVous obtenez &c2 coeurs&f permanent et l'effet &cforce 1 &fle jour."),
+    COMMANDANT_WANTED_THIRD("&fVous obtenez &c2 coeurs&f permanent."),
+
+    SMOKER_WHITESPARKS_USE("&fVous avez utilisé votre pouvoir &aWhitespark&f."),
+    SMOKER_WHITESPARKS_END("&fVotre pouvoir &aWhitespark&f a été &cdésactivé&f."),
+    SMOKER_WHITESPARKS_TARGET("&cSmoker &fa utilisé son pouvoir &aWhitespark&f sur vous."),
+    SMOKER_GAZ_USE("&fVous avez utilisé votre pouvoir &cSmoke &fsur &c<name>&f."),
+    SMOKER_GAZ_TARGET("&cSmoker &fa utilisé son pouvoir &cSmoke &fsur vous."),
+
+    KIZARU_FIOLE_USE("&fVous avez utilisé votre pouvoir &aFiole&f."),
+    KIZARU_FIOLE_END("&fVotre pouvoir &aFiole&f a été &cdésactivé&f."),
+    KIZARU_DAI_USE("&fVous avez utilisé votre pouvoir &aDai&f."),
+    KIZARU_DAI_END("&fVotre pouvoir &aDai&f a été &cdésactivé&f."),
+    KIZARU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
+    KIZARU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
+
+    SOLDAT_CHOICE_ONE_MATERIAL("DIAMOND_SWORD"),
+    SOLDAT_CHOICE_ONE_LORE("ligne 1 \nligne 2"),
+    SOLDAT_CHOICE_ONE_SELECT("&fVous avez &achoisi&f le choix numéro 1."),
+    SOLDAT_CHOICE_TWO_MATERIAL("IRON_CHESTPLATE"),
+    SOLDAT_CHOICE_TWO_LORE("ligne 1 \nligne 2"),
+    SOLDAT_CHOICE_TWO_SELECT("&fVous avez &achoisi&f le choix numéro 2."),
+    SOLDAT_CHOICE_THREE_MATERIAL("PAPER"),
+    SOLDAT_CHOICE_THREE_LORE("ligne 1 \nligne 2"),
+    SOLDAT_CHOICE_THREE_SELECT("&fVous avez &achoisi&f le choix numéro 3."),
+
     ;
 
     @Setter
