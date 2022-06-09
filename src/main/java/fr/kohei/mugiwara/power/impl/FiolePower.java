@@ -57,11 +57,11 @@ public class FiolePower extends RightClickPower {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 90 * 20, 0, false, false));
 
         // send the fiole use message to the player
-        Messages.KIZARU_FIOLE_USE.send(player);
+        Messages.AKAINU_FIOLE_USE.send(player);
 
         // send the fiole end message to the player after 1m30s
         player.getServer().getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
-            Messages.KIZARU_FIOLE_END.send(player);
+            Messages.AKAINU_FIOLE_END.send(player);
         }, 90 * 20);
 
         // remove all the water in a 3 block radius around the player using Cuboid class

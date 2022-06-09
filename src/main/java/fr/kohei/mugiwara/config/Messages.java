@@ -143,12 +143,16 @@ public enum Messages {
     SMOKER_GAZ_USE("&fVous avez utilisé votre pouvoir &cSmoke &fsur &c<name>&f."),
     SMOKER_GAZ_TARGET("&cSmoker &fa utilisé son pouvoir &cSmoke &fsur vous."),
 
-    KIZARU_FIOLE_USE("&fVous avez utilisé votre pouvoir &aFiole&f."),
-    KIZARU_FIOLE_END("&fVotre pouvoir &aFiole&f a été &cdésactivé&f."),
-    KIZARU_DAI_USE("&fVous avez utilisé votre pouvoir &aDai&f."),
-    KIZARU_DAI_END("&fVotre pouvoir &aDai&f a été &cdésactivé&f."),
-    KIZARU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
-    KIZARU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
+    AKAINU_FIOLE_USE("&fVous avez utilisé votre pouvoir &aFiole&f."),
+    AKAINU_FIOLE_END("&fVotre pouvoir &aFiole&f a été &cdésactivé&f."),
+    AKAINU_DAI_USE("&fVous avez utilisé votre pouvoir &aDai&f."),
+    AKAINU_DAI_END("&fVotre pouvoir &aDai&f a été &cdésactivé&f."),
+    AKAINU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
+    AKAINU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
+
+    KIZARU_YATA_USE("&fVous avez utilisé votre pouvoir &aYata&f sur &c<name>&f."),
+    KIZARU_YASAKANI_USE("&fVous avez utilisé votre pouvoir &aYasakani&f."),
+    KIZARU_YASAKANI_END("&fVotre pouvoir &aYasakani&f a été &cdésactivé&f."),
 
     SOLDAT_CHOICE_ONE_MATERIAL("DIAMOND_SWORD"),
     SOLDAT_CHOICE_ONE_LORE("ligne 1 \nligne 2"),
