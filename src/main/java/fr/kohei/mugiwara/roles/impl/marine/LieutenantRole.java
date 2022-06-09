@@ -89,7 +89,7 @@ public class LieutenantRole extends RolesType.MURole {
         if (MUPlayer.get(player).getRole().getRole() == RolesType.COMMANDANT) {
             MUPlayer.players.values().stream().filter(muPlayer -> muPlayer.getRole().getClass().equals(this.getClass())).
                     findAny().get().getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,
-                            1000000, 1, false, false));
+                            1000000, 0, false, false));
             Messages.LIEUTENANT_COMMANDANT_DEATH.send(player);
 
 
