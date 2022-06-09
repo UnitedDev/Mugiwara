@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.roles;
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.roles.impl.alliance.CharlotteKatakuriRole;
 import fr.kohei.mugiwara.roles.impl.marine.CobyRole;
 import fr.kohei.mugiwara.roles.impl.marine.GarpRole;
 import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
@@ -61,8 +62,9 @@ public enum RolesType {
     KING("King", CampType.BIGMOM_KAIDO, null),
     QUEEN("Queen", CampType.BIGMOM_KAIDO, null),
     JACK("Jack", CampType.BIGMOM_KAIDO, null),
-    KATAKURI("Charlotte Katakuri", CampType.BIGMOM_KAIDO, null),
+    KATAKURI("Charlotte Katakuri", CampType.BIGMOM_KAIDO, CharlotteKatakuriRole.class),
     BIG_MOM("Big Mom", CampType.BIGMOM_KAIDO, null),
+
 
 
     SABO("Sabo", CampType.SOLO, null),
