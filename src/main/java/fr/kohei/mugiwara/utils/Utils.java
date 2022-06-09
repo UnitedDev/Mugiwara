@@ -1,13 +1,20 @@
 package fr.kohei.mugiwara.utils;
 
+import fr.kohei.mugiwara.camp.CampType;
+import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.EpisodeManager;
 import fr.kohei.uhc.game.GameManager;
+import fr.kohei.uhc.game.player.UPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -59,6 +66,33 @@ public class Utils {
                 .filter(entity -> entity instanceof Player)
                 .map(entity -> (Player) entity)
                 .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Player> getNearPlayersWithRole(Player player, int radius, RolesType... type) {
+        List<RolesType> roles = Arrays.asList(type);
+        return player.getNearbyEntities(radius, radius, radius).stream()
+                .filter(entity -> entity instanceof Player)
+                .map(entity -> (Player) entity)
+                .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .filter(player1 -> roles.contains(MUPlayer.get(player1).getRole().getRole()))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Player> getPlayersWithRole(RolesType... type) {
+        List<RolesType> roles = Arrays.asList(type);
+        return Bukkit.getOnlinePlayers().stream()
+                .filter(Objects::nonNull)
+                .map(entity -> (Player) entity)
+                .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .filter(player1 -> roles.contains(MUPlayer.get(player1).getRole().getRole()))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Player> getPlayersInCamp(CampType type) {
+        return Bukkit.getOnlinePlayers().stream()
+                .filter(player -> UHC.getGameManager().getPlayers().contains(player.getUniqueId()))
+                .filter(player -> ((CampType.MUCamp) UPlayer.get(player).getCamp()).getCampType() == type)
                 .collect(Collectors.toList());
     }
 }
