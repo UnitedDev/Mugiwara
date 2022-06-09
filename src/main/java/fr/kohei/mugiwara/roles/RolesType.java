@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.impl.marine.CobyRole;
+import fr.kohei.mugiwara.roles.impl.marine.CommandantRole;
 import fr.kohei.mugiwara.roles.impl.marine.GarpRole;
 import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
@@ -43,7 +44,7 @@ public enum RolesType {
     DRAKE("X Drake", CampType.MARINE, XDrakeRole.class),
 
 
-    COMMANDANT("Commandant", CampType.MARINE, null),
+    COMMANDANT("Commandant", CampType.MARINE, CommandantRole.class),
     LIEUTENANT("Lieutenant", CampType.MARINE, LieutenantRole.class),
     MIHAWK("Mihawk", CampType.MARINE, null),
     SMOKER("Smoker", CampType.MARINE, null),
