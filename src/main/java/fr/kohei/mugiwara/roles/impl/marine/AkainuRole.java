@@ -1,7 +1,6 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
 import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.power.impl.BlazePower;
 import fr.kohei.mugiwara.power.impl.FiolePower;
 import fr.kohei.mugiwara.power.impl.FirePower;
@@ -19,16 +18,15 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Getter
 @Setter
-public class KizaruRole extends RolesType.MURole {
+public class AkainuRole extends RolesType.MURole {
     private int inWater = 5;
     private int seconds = 0;
     private boolean fire = false;
 
-    public KizaruRole() {
+    public AkainuRole() {
         super(Arrays.asList(
                 new FiolePower(),
                 new BlazePower(),
