@@ -35,7 +35,6 @@ public enum RolesType {
     PIRATE("Pirate", CampType.MUGIWARA_HEART, PirateRole.class),
 
 
-
     GARP("Monkey D. Garp", CampType.MARINE, GarpRole.class),
     COBY("Coby ", CampType.MARINE, CobyRole.class),
     DRAKE("X Drake", CampType.MARINE, XDrakeRole.class),
@@ -46,12 +45,12 @@ public enum RolesType {
     MIHAWK("Mihawk", CampType.MARINE, null),
     SMOKER("Smoker", CampType.MARINE, SmokerRole.class),
     HANCOCK("Boa Hancock", CampType.MARINE, null),
-    KIZARU("Kizaru", CampType.MARINE, null),
+    KIZARU("Kizaru", CampType.MARINE, KizaruRole.class),
     FUJITORA("Amiral Fujitora", CampType.MARINE, null),
     AKAINU("Chef Akainu", CampType.MARINE, null),
     SENGOKU("Sengoku", CampType.MARINE, null),
     KUMA("Bartholomew Kuma", CampType.MARINE, null),
-    SOLDAT("Soldat", CampType.MARINE, null),
+    SOLDAT("Soldat", CampType.MARINE, SoldatRole.class),
     TSURU("Tsuru", CampType.MARINE, null),
 
 

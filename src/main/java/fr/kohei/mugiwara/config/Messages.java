@@ -141,6 +141,23 @@ public enum Messages {
     SMOKER_GAZ_USE("&fVous avez utilisé votre pouvoir &cSmoke &fsur &c<name>&f."),
     SMOKER_GAZ_TARGET("&cSmoker &fa utilisé son pouvoir &cSmoke &fsur vous."),
 
+    KIZARU_FIOLE_USE("&fVous avez utilisé votre pouvoir &aFiole&f."),
+    KIZARU_FIOLE_END("&fVotre pouvoir &aFiole&f a été &cdésactivé&f."),
+    KIZARU_DAI_USE("&fVous avez utilisé votre pouvoir &aDai&f."),
+    KIZARU_DAI_END("&fVotre pouvoir &aDai&f a été &cdésactivé&f."),
+    KIZARU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
+    KIZARU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
+
+    SOLDAT_CHOICE_ONE_MATERIAL("DIAMOND_SWORD"),
+    SOLDAT_CHOICE_ONE_LORE("ligne 1 \nligne 2"),
+    SOLDAT_CHOICE_ONE_SELECT("&fVous avez &achoisi&f le choix numéro 1."),
+    SOLDAT_CHOICE_TWO_MATERIAL("IRON_CHESTPLATE"),
+    SOLDAT_CHOICE_TWO_LORE("ligne 1 \nligne 2"),
+    SOLDAT_CHOICE_TWO_SELECT("&fVous avez &achoisi&f le choix numéro 2."),
+    SOLDAT_CHOICE_THREE_MATERIAL("PAPER"),
+    SOLDAT_CHOICE_THREE_LORE("ligne 1 \nligne 2"),
+    SOLDAT_CHOICE_THREE_SELECT("&fVous avez &achoisi&f le choix numéro 3."),
+
     ;
 
     @Setter
