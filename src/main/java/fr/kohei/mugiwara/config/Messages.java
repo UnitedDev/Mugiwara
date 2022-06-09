@@ -135,6 +135,12 @@ public enum Messages {
     COMMANDANT_WANTED_SECOND("&fVous obtenez &c2 coeurs&f permanent et l'effet &cforce 1 &fle jour."),
     COMMANDANT_WANTED_THIRD("&fVous obtenez &c2 coeurs&f permanent."),
 
+    SMOKER_WHITESPARKS_USE("&fVous avez utilisé votre pouvoir &aWhitespark&f."),
+    SMOKER_WHITESPARKS_END("&fVotre pouvoir &aWhitespark&f a été &cdésactivé&f."),
+    SMOKER_WHITESPARKS_TARGET("&cSmoker &fa utilisé son pouvoir &aWhitespark&f sur vous."),
+    SMOKER_GAZ_USE("&fVous avez utilisé votre pouvoir &cSmoke &fsur &c<name>&f."),
+    SMOKER_GAZ_TARGET("&cSmoker &fa utilisé son pouvoir &cSmoke &fsur vous."),
+
     ;
 
     @Setter

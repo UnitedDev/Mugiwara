@@ -3,10 +3,7 @@ package fr.kohei.mugiwara.roles;
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
-import fr.kohei.mugiwara.roles.impl.marine.CobyRole;
-import fr.kohei.mugiwara.roles.impl.marine.CommandantRole;
-import fr.kohei.mugiwara.roles.impl.marine.GarpRole;
-import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
+import fr.kohei.mugiwara.roles.impl.marine.*;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
 import fr.kohei.mugiwara.roles.impl.pirates.XDrakeRole;
 import fr.kohei.uhc.module.manager.Camp;
@@ -47,7 +44,7 @@ public enum RolesType {
     COMMANDANT("Commandant", CampType.MARINE, CommandantRole.class),
     LIEUTENANT("Lieutenant", CampType.MARINE, LieutenantRole.class),
     MIHAWK("Mihawk", CampType.MARINE, null),
-    SMOKER("Smoker", CampType.MARINE, null),
+    SMOKER("Smoker", CampType.MARINE, SmokerRole.class),
     HANCOCK("Boa Hancock", CampType.MARINE, null),
     KIZARU("Kizaru", CampType.MARINE, null),
     FUJITORA("Amiral Fujitora", CampType.MARINE, null),
