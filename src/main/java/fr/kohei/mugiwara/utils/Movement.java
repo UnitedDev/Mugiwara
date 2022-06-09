@@ -21,7 +21,6 @@ public class Movement {
 
         player.setWalkSpeed(0F);
         player.sendMessage(ChatUtil.prefix("&fVous avez été &cimmobilisé &fpendant &c" + seconds + " &fsecondes."));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 10, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200, false, false));
 
         final UUID uuid = player.getUniqueId();
