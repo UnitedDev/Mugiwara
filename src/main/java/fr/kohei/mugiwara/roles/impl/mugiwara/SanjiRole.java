@@ -104,6 +104,7 @@ public class SanjiRole extends RolesType.MURole implements Listener {
         if (!power.isUsing()) return;
 
         event.setCancelled(true);
+        player.setAllowFlight(false);
         player.setVelocity(player.getLocation().getDirection().multiply(2).setY(0.5));
     }
 
