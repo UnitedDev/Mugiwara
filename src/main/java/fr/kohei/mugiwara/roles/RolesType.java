@@ -6,7 +6,7 @@ import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.impl.alliance.*;
 import fr.kohei.mugiwara.roles.impl.marine.*;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
-import fr.kohei.mugiwara.roles.impl.pirates.XDrakeRole;
+import fr.kohei.mugiwara.roles.impl.marine.XDrakeRole;
 import fr.kohei.uhc.module.manager.Camp;
 import fr.kohei.uhc.module.manager.Role;
 import fr.kohei.utils.ChatUtil;

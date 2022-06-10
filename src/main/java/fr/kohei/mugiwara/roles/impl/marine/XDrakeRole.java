@@ -1,4 +1,4 @@
-package fr.kohei.mugiwara.roles.impl.pirates;
+package fr.kohei.mugiwara.roles.impl.marine;
 
 import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.power.Power;
