@@ -21,8 +21,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import java.awt.event.KeyAdapter;
-
 @RequiredArgsConstructor
 public class MUListener implements Listener {
 
@@ -175,9 +173,9 @@ public class MUListener implements Listener {
 
         Player player = (Player) event.getEntity();
 
-        Damage.noDamage.keySet().stream()
+        Damage.NO_DAMAGE_CAUSE.keySet().stream()
                 .filter(uuid -> event.getEntity().getUniqueId().equals(uuid))
-                .filter(uuid -> event.getCause() == Damage.noDamage.get(uuid))
+                .filter(uuid -> event.getCause() == Damage.NO_DAMAGE_CAUSE.get(uuid))
                 .forEach(uuid -> event.setCancelled(true));
 
         if (Damage.NO_DAMAGE.contains(player.getUniqueId())) event.setCancelled(true);

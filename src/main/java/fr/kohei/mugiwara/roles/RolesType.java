@@ -58,7 +58,7 @@ public enum RolesType {
     KAIDO("Kaidö", CampType.BIGMOM_KAIDO, null),
     KING("King", CampType.BIGMOM_KAIDO, null),
     QUEEN("Queen", CampType.BIGMOM_KAIDO, null),
-    JACK("Jack", CampType.BIGMOM_KAIDO, null),
+    JACK("Jack", CampType.BIGMOM_KAIDO, JackRole.class),
     KATAKURI("Charlotte Katakuri", CampType.BIGMOM_KAIDO, CharlotteKatakuriRole.class),
     BIG_MOM("Big Mom", CampType.BIGMOM_KAIDO, null),
 

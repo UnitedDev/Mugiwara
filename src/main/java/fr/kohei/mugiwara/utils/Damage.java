@@ -12,12 +12,12 @@ import java.util.UUID;
 
 public class Damage {
 
-    public static final HashMap<UUID, EntityDamageEvent.DamageCause> noDamage = new HashMap<>();
+    public static final HashMap<UUID, EntityDamageEvent.DamageCause> NO_DAMAGE_CAUSE = new HashMap<>();
     public static final List<UUID> NO_DAMAGE = new ArrayList<>();
 
     public static void addTempNoDamage(UUID var1, EntityDamageEvent.DamageCause var2, int var3) {
-        noDamage.put(var1, var2);
-        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> noDamage.remove(var1), var3 * 20L);
+        NO_DAMAGE_CAUSE.put(var1, var2);
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> NO_DAMAGE_CAUSE.remove(var1), var3 * 20L);
     }
 
     public static void addTempNoDamage(Player var1, EntityDamageEvent.DamageCause var2, int var3) {
