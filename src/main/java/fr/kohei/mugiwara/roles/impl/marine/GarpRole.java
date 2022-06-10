@@ -44,7 +44,7 @@ public class GarpRole extends RolesType.MURole {
     public void onDistribute(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, false));
 
-        Damage.noDamage.put(player.getUniqueId(), EntityDamageEvent.DamageCause.ENTITY_EXPLOSION);
+        Damage.NO_DAMAGE_CAUSE.put(player.getUniqueId(), EntityDamageEvent.DamageCause.ENTITY_EXPLOSION);
     }
 
     @EventHandler

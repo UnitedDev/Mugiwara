@@ -164,6 +164,14 @@ public enum Messages {
     SOLDAT_CHOICE_THREE_LORE("ligne 1 \nligne 2"),
     SOLDAT_CHOICE_THREE_SELECT("&fVous avez &achoisi&f le choix numéro 3."),
 
+    JACK_MAMMOUTH_USE("&fVous avez utilisé votre pouvoir &aMammouth&f."),
+    JACK_MAMMOUTH_TARGET("&fVous avez été &cpropulsé&f par &c<name>&f."),
+
+    JACK_EXTERMIN_END("&fVotre pouvoir &aExtermin&f a été &cdésactivé&f."),
+    JACK_EXTERMIN_USE("&fVous avez &aactivé votre pouvoir &aExtermin&f."),
+    JACK_EXTERMIN_TARGET("&fVous êtes rentré dans une zone de &cJack&f."),
+    JACK_EXTERMIN_POISON_TARGET("&fVous avez été empoisonné par &cJack&f."),
+
     ;
 
     @Setter
