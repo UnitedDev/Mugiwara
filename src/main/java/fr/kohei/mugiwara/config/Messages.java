@@ -108,6 +108,12 @@ public enum Messages {
     BROOK_SLOW_ATTACKONME("&cBrook&f a utilisé son pouvoir de &7Slow &fsur vous."),
     BROOK_SLOW_ATTACKONME_END("&cVous perdez la moitié de votre vie."),
 
+    KUMA_BIBLE_PLAYER_USE("kumalala"),
+    KUMA_BIBLE_TELEPORT_TARGET_USE("kumalala"),
+
+    KUMA_VOYAGE_PLAYER_USE("kumalala"),
+    KUMA_VOYAGE_TARGET_TELEPORTED("kumalala"),
+
     JIMBE_SEIKEN_USE("&fVous avez utilisé votre &9Seiken&f sur &c<name>&f."),
     JIMBE_SEIKEN_ONME("&cJimbe &fa utilisé son &9Seiken &fsur vous."),
 
