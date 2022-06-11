@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.roles;
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.game.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.roles.impl.marine.BartholomewKumaRole;
 import fr.kohei.mugiwara.roles.impl.alliance.*;
 import fr.kohei.mugiwara.roles.impl.marine.*;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
@@ -50,7 +51,7 @@ public enum RolesType {
     FUJITORA("Amiral Fujitora", CampType.MARINE, null),
     AKAINU("Chef Akainu", CampType.MARINE, AkainuRole.class),
     SENGOKU("Sengoku", CampType.MARINE, null),
-    KUMA("Bartholomew Kuma", CampType.MARINE, null),
+    KUMA("Bartholomew Kuma", CampType.MARINE, BartholomewKumaRole.class),
     SOLDAT("Soldat", CampType.MARINE, SoldatRole.class),
     TSURU("Tsuru", CampType.MARINE, null),
 
@@ -61,8 +62,6 @@ public enum RolesType {
     JACK("Jack", CampType.BIGMOM_KAIDO, null),
     KATAKURI("Charlotte Katakuri", CampType.BIGMOM_KAIDO, CharlotteKatakuriRole.class),
     BIG_MOM("Big Mom", CampType.BIGMOM_KAIDO, null),
-
-
 
     SABO("Sabo", CampType.SOLO, null),
     TEACH("Marshall D. Teach", CampType.SOLO, null),
