@@ -6,6 +6,7 @@ import fr.kohei.mugiwara.power.ClickPower;
 import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.tasks.CooldownCheckTask;
+import fr.kohei.mugiwara.tasks.PoneglypheTask;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.Module;
 import fr.kohei.uhc.module.manager.Camp;
@@ -54,7 +55,7 @@ public class MUModule extends Module {
 
     @Override
     public void onStart() {
-
+        Mugiwara.getInstance().getPoneglypheManager().onStart();
     }
 
     @Override
@@ -92,6 +93,7 @@ public class MUModule extends Module {
         }.runTaskLater(Mugiwara.getInstance(), 50);
 
         new CooldownCheckTask();
+        new PoneglypheTask();
     }
 
     @Override
