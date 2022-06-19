@@ -18,6 +18,11 @@ public enum Messages {
     COOLDOWN_EXPIRE("&fLe cooldown pour le pouvoir &c<name> &fvient d'expirer."),
     WATER("&cNe restez pas trop longtemps dans l'eau."),
 
+    PONEGLYPHE_SPAWN("&fUn &aponéglyphe &fvient d'apparaître."),
+    PONEGLYPHE_TOOMUCHPLAYERS("&cVous ne pouvez pas lire le ponéglyphe, il y a plus de 5 joueurs autour."),
+    PONEGLYPHE_FAR("&cVous avez arrêté de lire le ponéglyphe numéro <number>, vous êtes parti trop loin."),
+    PONEGLYPHE_CAPTURE("&fVous avez &acapturé le ponéglyphe numéro &f<number>&f."),
+
     LUFFY_GOMUGOMUNOMI("&fVous avez utilisé votre pouvoir &6Gomu Gomu no Mi&f."),
     LUFFY_FIRSTPOWER("&fVous avez utilisé votre premier pouvoir."),
     LUFFY_SECONDPOWER("&fVous avez utilisé votre deuxième pouvoir."),

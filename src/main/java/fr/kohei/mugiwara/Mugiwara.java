@@ -5,6 +5,7 @@ import fr.kohei.mugiwara.config.Messages;
 import fr.kohei.mugiwara.game.MUCommands;
 import fr.kohei.mugiwara.game.MUListener;
 import fr.kohei.mugiwara.game.MUModule;
+import fr.kohei.mugiwara.poneglyphe.PoneglypheManager;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.player.UPlayer;
@@ -25,7 +26,9 @@ public class Mugiwara extends JavaPlugin {
     @Getter
     private static Mugiwara instance;
 
+    private PoneglypheManager poneglypheManager;
     private MUModule module;
+
     private List<UUID> powerBlocked;
     private Map<UUID, Map<String, String>> hotbar;
 
@@ -36,6 +39,7 @@ public class Mugiwara extends JavaPlugin {
         this.powerBlocked = new ArrayList<>();
         this.hotbar = new HashMap<>();
 
+        this.poneglypheManager = new PoneglypheManager();
         UHC.getModuleManager().setModule(module = new MUModule());
 
         Messages.init();

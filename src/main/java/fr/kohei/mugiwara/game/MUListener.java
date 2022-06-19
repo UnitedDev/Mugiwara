@@ -9,6 +9,7 @@ import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.manager.Role;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -121,6 +122,13 @@ public class MUListener implements Listener {
 
     }
 
+    @EventHandler
+    public void onArmorStand(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof ArmorStand)) return;
+
+        event.setCancelled(true);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
@@ -160,7 +168,7 @@ public class MUListener implements Listener {
             event.setCancelled(damagerRole.getRole() != RolesType.USSOP);
         }
 
-        if(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE && damagerRole.getRole() == RolesType.KATAKURI && event.getDamage() < 0.5D) {
+        if (event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE && damagerRole.getRole() == RolesType.KATAKURI && event.getDamage() < 0.5D) {
             player.addPotionEffect(new org.bukkit.potion.PotionEffect(org.bukkit.potion.PotionEffectType.SLOW, 20 * 6, 4));
         }
 
@@ -203,8 +211,6 @@ public class MUListener implements Listener {
             }
         }
     }
-
-
 
 
     @EventHandler(ignoreCancelled = true)
