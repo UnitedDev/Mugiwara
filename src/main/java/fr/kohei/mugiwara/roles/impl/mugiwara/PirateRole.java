@@ -1,9 +1,9 @@
 package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.Damage;
+import fr.kohei.mugiwara.utils.utils.packets.Damage;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.ItemBuilder;
 import org.bukkit.Bukkit;

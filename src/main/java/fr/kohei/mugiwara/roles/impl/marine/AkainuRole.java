@@ -1,6 +1,6 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
-import fr.kohei.mugiwara.config.Messages;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.impl.BlazePower;
 import fr.kohei.mugiwara.power.impl.FiolePower;
 import fr.kohei.mugiwara.power.impl.FirePower;
@@ -12,6 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -21,8 +22,8 @@ import java.util.Arrays;
 
 @Getter
 @Setter
-public class AkainuRole extends RolesType.MURole {
-    private int inWater = 5;
+public class AkainuRole extends RolesType.MURole implements Listener {
+    private int inWater = 0;
     private int seconds = 0;
     private boolean fire = false;
 

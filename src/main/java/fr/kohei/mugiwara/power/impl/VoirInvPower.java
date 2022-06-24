@@ -1,6 +1,6 @@
 package fr.kohei.mugiwara.power.impl;
 
-import fr.kohei.mugiwara.menu.ViewInventoryMenu;
+import fr.kohei.mugiwara.game.menu.ViewInventoryMenu;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;

@@ -2,17 +2,16 @@ package fr.kohei.mugiwara.roles.impl.marine;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.camp.impl.MarineCamp;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.player.UPlayer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,7 +22,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 
-public class CobyRole extends RolesType.MURole {
+public class CobyRole extends RolesType.MURole implements Listener {
     private int phase = 0;
     private int hits = 0;
     private int goal = 20;
@@ -41,7 +40,7 @@ public class CobyRole extends RolesType.MURole {
 
     @Override
     public ItemStack getItem() {
-        return null;
+        return new ItemStack(Material.INK_SACK, 1, (short) 10);
     }
 
     @Override
@@ -91,12 +90,14 @@ public class CobyRole extends RolesType.MURole {
 
         if (phase == 0 && hits >= 20) {
             phase = 1;
+            sendMessageToGarp();
             damager.removePotionEffect(PotionEffectType.WEAKNESS);
             Messages.COBY_PHASE_CHANGE.send(damager, new Replacement("<phase>", phase));
         }
 
         if (phase == 1 && hits >= 45) {
             phase = 2;
+            sendMessageToGarp();
             player.setMaxHealth(player.getMaxHealth() + 4);
             randomDistance = 30;
             killerDistance = 50;
@@ -104,6 +105,7 @@ public class CobyRole extends RolesType.MURole {
 
         if (phase == 2 && hits >= 75) {
             phase = 3;
+            sendMessageToGarp();
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, false));
             randomDistance = 0;
             killerDistance = 75;
@@ -112,6 +114,7 @@ public class CobyRole extends RolesType.MURole {
 
         if (phase == 3 && hits >= 115) {
             phase = 4;
+            sendMessageToGarp();
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, false));
 
             Player luffy = Mugiwara.findRole(RolesType.LUFFY);
@@ -180,5 +183,11 @@ public class CobyRole extends RolesType.MURole {
                 new Replacement("<role>", MUPlayer.get(death).getRole().getName()),
                 new Replacement("<name>", death.getName())
         );
+    }
+
+    private void sendMessageToGarp() {
+        Player garp = Mugiwara.findRole(RolesType.GARP);
+        if (garp == null) return;
+        Messages.GARP_COBY_PHASE.send(garp);
     }
 }

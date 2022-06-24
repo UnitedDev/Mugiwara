@@ -2,8 +2,8 @@ package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.camp.CampType;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.ClimatTactPower;
 import fr.kohei.mugiwara.power.impl.PisterPower;
 import fr.kohei.mugiwara.power.impl.VolPower;
@@ -86,6 +86,8 @@ public class NamiRole extends RolesType.MURole implements Listener {
         if (!(event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE
                 || event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK)) return;
 
+        if(event.getCause() == EntityDamageEvent.DamageCause.LIGHTNING) event.setCancelled(true);
+
         ZeusPower power = this.getPowers().stream().filter(power1 -> power1 instanceof ZeusPower)
                 .map(power1 -> (ZeusPower) power1).findFirst().orElse(null);
         if (power == null) return;
@@ -98,7 +100,7 @@ public class NamiRole extends RolesType.MURole implements Listener {
                     .filter(entity -> entity instanceof Player)
                     .map(entity -> (Player) entity)
                     .collect(Collectors.toList())) {
-                RolesType type = ((RolesType.MURole) MUPlayer.get(target).getRole()).getRole();
+                RolesType type = MUPlayer.get(target).getRole().getRole();
 
                 if (type == RolesType.LUFFY || type == RolesType.KIZARU) continue;
                 if (type.getCampType() == CampType.MUGIWARA_HEART) continue;

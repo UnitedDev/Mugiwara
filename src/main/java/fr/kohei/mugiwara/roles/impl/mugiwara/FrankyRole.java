@@ -1,11 +1,11 @@
 package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.impl.GeneralFrankyPower;
 import fr.kohei.mugiwara.power.impl.VisionPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.ItemBuilder;
 import fr.kohei.utils.Title;

@@ -1,29 +1,21 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.DamagePlayerPower;
-import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * @author Salers
- * made on fr.kohei.mugiwara.power.impl
- */
 public class MorsurePower extends DamagePlayerPower {
 
     @Override
@@ -48,7 +40,7 @@ public class MorsurePower extends DamagePlayerPower {
     }
 
     @Override
-    public boolean onEnable(Player player, Player target) {
+    public boolean onEnable(Player player, Player target, EntityDamageByEntityEvent event) {
         final MUPlayer uPlayer = MUPlayer.get(player);
         final AllosaurusPower allosaurusPower = (AllosaurusPower) uPlayer.getRole().getPowers().stream().filter(power ->
                 power.getName().equalsIgnoreCase("Allosaurus")).findAny().get();

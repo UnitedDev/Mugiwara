@@ -2,11 +2,11 @@ package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.camp.CampType;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.DashPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.utils.ChatUtil;

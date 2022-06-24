@@ -1,9 +1,9 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
@@ -68,6 +68,7 @@ public class DiableJambePower extends RightClickPower {
                     player.removePotionEffect(PotionEffectType.SPEED);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
                     Messages.SANJI_DIABLEJAMBE_END.send(player);
+                    player.setAllowFlight(false);
                     setUsing(false);
                     cancel();
                     return;

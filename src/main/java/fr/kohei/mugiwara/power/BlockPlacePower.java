@@ -9,6 +9,8 @@ public abstract class BlockPlacePower extends ClickPower {
 
     public static BlockPlacePower findPower(RolesType.MURole role, ItemStack item) {
         BlockPlacePower power = null;
+        if(role == null) return null;
+        if(item == null) return null;
 
         for (Power rolePower : role.getPowers()) {
             if (!(rolePower instanceof BlockPlacePower)) continue;

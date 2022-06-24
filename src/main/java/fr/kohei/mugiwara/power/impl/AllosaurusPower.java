@@ -1,7 +1,7 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.utils.ChatUtil;
 import lombok.Getter;
@@ -12,15 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.metadata.MetadataValueAdapter;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-/**
- * @author Salers
- * made on fr.kohei.mugiwara.power.impl
- */
 
 @Getter
 public class AllosaurusPower extends RightClickPower {

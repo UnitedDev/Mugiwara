@@ -2,15 +2,13 @@ package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.camp.impl.MugiwaraHeartCamp;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.utils.ChatUtil;
-import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;

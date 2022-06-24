@@ -1,7 +1,6 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.impl.AllosaurusPower;
 import fr.kohei.mugiwara.power.impl.MorsurePower;
 import fr.kohei.mugiwara.roles.RolesType;
@@ -13,12 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
-import java.util.List;
 
-/**
- * @author Salers
- * made on fr.kohei.mugiwara.roles.impl.pirates
- */
 public class XDrakeRole extends RolesType.MURole {
 
     private int inWater;
@@ -37,7 +31,7 @@ public class XDrakeRole extends RolesType.MURole {
 
     @Override
     public ItemStack getItem() {
-        return null;
+        return new ItemStack(Material.ROTTEN_FLESH);
     }
 
     @Override

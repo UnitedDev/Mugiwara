@@ -1,10 +1,10 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.power.CommandPower;
-import fr.kohei.mugiwara.utils.MathUtil;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.utils.ChatUtil;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;

@@ -1,8 +1,8 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
 import fr.kohei.mugiwara.camp.impl.MarineCamp;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.YasakaniPower;
 import fr.kohei.mugiwara.power.impl.YataPower;
 import fr.kohei.mugiwara.roles.RolesType;
@@ -12,6 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -21,7 +22,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 
-public class KizaruRole extends RolesType.MURole {
+public class KizaruRole extends RolesType.MURole implements Listener {
     private float speed = 0.2F;
 
     private int inWater = 0;

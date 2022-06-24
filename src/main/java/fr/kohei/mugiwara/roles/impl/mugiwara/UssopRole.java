@@ -1,12 +1,12 @@
 package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.Cooldown;
-import fr.kohei.mugiwara.utils.Movement;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.Cooldown;
+import fr.kohei.mugiwara.utils.utils.packets.Movement;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

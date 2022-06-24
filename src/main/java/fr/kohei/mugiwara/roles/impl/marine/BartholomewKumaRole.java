@@ -1,17 +1,15 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
-import fr.kohei.mugiwara.config.Messages;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.impl.BiblePower;
 import fr.kohei.mugiwara.power.impl.VoyagePower;
 import fr.kohei.mugiwara.roles.RolesType;
 import lombok.Getter;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;

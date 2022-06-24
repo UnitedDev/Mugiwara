@@ -1,8 +1,8 @@
 package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.DiableJambePower;
 import fr.kohei.mugiwara.power.impl.OSobaMaskPower;
 import fr.kohei.mugiwara.roles.RolesType;
@@ -163,7 +163,7 @@ public class SanjiRole extends RolesType.MURole implements Listener {
             }
         }
 
-        if (player.isOnGround()) {
+        if (player.isOnGround() || player.getLocation().clone().add(0, -1, 0).getBlock().getType() != Material.AIR) {
             RolesType.MURole role = (RolesType.MURole) MUPlayer.get(player).getRole();
 
             DiableJambePower power = role.getPowers().stream()

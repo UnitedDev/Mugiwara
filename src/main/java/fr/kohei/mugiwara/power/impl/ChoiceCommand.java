@@ -1,7 +1,7 @@
 package fr.kohei.mugiwara.power.impl;
 
-import fr.kohei.mugiwara.game.MUPlayer;
-import fr.kohei.mugiwara.menu.ChoiceMenu;
+import fr.kohei.mugiwara.game.player.MUPlayer;
+import fr.kohei.mugiwara.game.menu.ChoiceMenu;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.roles.impl.marine.SoldatRole;
 import fr.kohei.utils.ChatUtil;

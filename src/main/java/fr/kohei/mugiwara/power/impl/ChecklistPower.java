@@ -1,12 +1,11 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.Arrow;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.Arrow;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.ChatUtil;
 import lombok.Getter;

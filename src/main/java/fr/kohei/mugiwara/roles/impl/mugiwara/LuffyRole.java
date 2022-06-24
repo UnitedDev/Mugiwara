@@ -1,8 +1,8 @@
 package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.GearFourthPower;
 import fr.kohei.mugiwara.power.impl.GomuNoMiLeftPower;
 import fr.kohei.mugiwara.power.impl.GomuNoMiRightPower;

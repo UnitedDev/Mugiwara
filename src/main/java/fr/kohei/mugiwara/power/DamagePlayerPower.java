@@ -2,6 +2,7 @@ package fr.kohei.mugiwara.power;
 
 import fr.kohei.mugiwara.roles.RolesType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class DamagePlayerPower extends ClickPower {
@@ -24,6 +25,6 @@ public abstract class DamagePlayerPower extends ClickPower {
         return power;
     }
 
-    public abstract boolean onEnable(Player player, Player target);
+    public abstract boolean onEnable(Player player, Player target, EntityDamageByEntityEvent damage);
 
 }

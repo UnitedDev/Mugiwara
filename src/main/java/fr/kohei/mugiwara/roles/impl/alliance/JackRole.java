@@ -1,8 +1,8 @@
 package fr.kohei.mugiwara.roles.impl.alliance;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.power.impl.ExterminPowerLeft;
 import fr.kohei.mugiwara.power.impl.ExterminPowerRight;
 import fr.kohei.mugiwara.power.impl.MammouthPower;
@@ -14,6 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -26,7 +27,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class JackRole extends RolesType.MURole {
+public class JackRole extends RolesType.MURole implements Listener {
     // variable called inwater
     private int inWater;
     private Block first;

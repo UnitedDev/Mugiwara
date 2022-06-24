@@ -1,8 +1,8 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.GazPower;
 import fr.kohei.mugiwara.power.impl.WhiteSparksPower;
 import fr.kohei.mugiwara.roles.RolesType;

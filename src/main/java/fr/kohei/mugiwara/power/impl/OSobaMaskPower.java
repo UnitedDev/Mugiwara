@@ -1,13 +1,13 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUPlayer;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.MathUtil;
-import fr.kohei.mugiwara.utils.PacketUtil;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
+import fr.kohei.mugiwara.utils.utils.packets.PacketUtil;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;

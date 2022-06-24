@@ -1,11 +1,11 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
+import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.utils.Damage;
-import fr.kohei.mugiwara.utils.MathUtil;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.packets.Damage;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
@@ -125,7 +125,10 @@ public class GearFourthPower extends RightClickPower {
         Damage.addTempNoDamage(player, EntityDamageEvent.DamageCause.FALL, seconds);
         player.setAllowFlight(true);
 
-        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> setUsing(false), seconds * 20L);
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
+            player.setAllowFlight(false);
+            setUsing(false);
+        }, seconds * 20L);
     }
 
     private void spawnParticles(Player player, int seconds) {

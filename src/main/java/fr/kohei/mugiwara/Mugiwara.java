@@ -1,12 +1,13 @@
 package fr.kohei.mugiwara;
 
 import fr.kohei.BukkitAPI;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.game.MUCommands;
-import fr.kohei.mugiwara.game.MUListener;
-import fr.kohei.mugiwara.game.MUModule;
-import fr.kohei.mugiwara.poneglyphe.PoneglypheManager;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.commands.MUCommands;
+import fr.kohei.mugiwara.game.listener.MUListener;
+import fr.kohei.mugiwara.game.module.MUModule;
+import fr.kohei.mugiwara.game.poneglyphe.PoneglypheManager;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.arrow.BowAimbot;
 import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.utils.ChatUtil;
@@ -35,6 +36,7 @@ public class Mugiwara extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        this.saveConfig();
 
         this.powerBlocked = new ArrayList<>();
         this.hotbar = new HashMap<>();
@@ -45,6 +47,7 @@ public class Mugiwara extends JavaPlugin {
         Messages.init();
         this.getServer().getPluginManager().registerEvents(new MUListener(this), this);
         BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
+        new BowAimbot(this);
     }
 
     @Nullable

@@ -1,10 +1,9 @@
 package fr.kohei.mugiwara.roles.impl.alliance;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
-import fr.kohei.mugiwara.game.MUPlayer;
-import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;
@@ -17,12 +16,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
-import java.util.List;
 
-/**
- * @author Salers
- * made on fr.kohei.mugiwara.roles.impl.alliance
- */
 public class CharlotteKatakuriRole extends RolesType.MURole {
 
     private int inWater;
@@ -85,7 +79,7 @@ public class CharlotteKatakuriRole extends RolesType.MURole {
 
     @Override
     public ItemStack getItem() {
-        return null;
+        return new ItemStack(Material.SNOW_BALL);
     }
 
     @Override

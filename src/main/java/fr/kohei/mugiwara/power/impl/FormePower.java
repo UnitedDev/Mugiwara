@@ -1,7 +1,7 @@
 package fr.kohei.mugiwara.power.impl;
 
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.menu.ChooseFormeMenu;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.game.menu.ChooseFormeMenu;
 import fr.kohei.mugiwara.power.CommandPower;
 import lombok.Getter;
 import org.bukkit.Material;

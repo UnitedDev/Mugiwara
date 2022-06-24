@@ -1,11 +1,11 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.config.Messages;
-import fr.kohei.mugiwara.config.Replacement;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.utils.Movement;
-import fr.kohei.mugiwara.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.packets.Movement;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import fr.kohei.utils.ReflectionUtils;
 import org.bukkit.Bukkit;
