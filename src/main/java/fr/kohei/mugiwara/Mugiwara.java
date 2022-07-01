@@ -1,6 +1,9 @@
 package fr.kohei.mugiwara;
 
 import fr.kohei.BukkitAPI;
+import fr.kohei.mugiwara.game.denmushi.DenMushiManager;
+import fr.kohei.mugiwara.game.fruit.FruitDuDemonManager;
+import fr.kohei.mugiwara.game.onepiece.OnePieceManager;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.game.commands.MUCommands;
 import fr.kohei.mugiwara.game.listener.MUListener;
@@ -23,11 +26,13 @@ import java.util.*;
 @Getter
 @Setter
 public class Mugiwara extends JavaPlugin {
-
     @Getter
     private static Mugiwara instance;
 
+    private DenMushiManager denMushiManager;
+    private OnePieceManager onePieceManager;
     private PoneglypheManager poneglypheManager;
+    private FruitDuDemonManager fruitDuDemonManager;
     private MUModule module;
 
     private List<UUID> powerBlocked;
@@ -41,7 +46,10 @@ public class Mugiwara extends JavaPlugin {
         this.powerBlocked = new ArrayList<>();
         this.hotbar = new HashMap<>();
 
-        this.poneglypheManager = new PoneglypheManager();
+        this.denMushiManager = new DenMushiManager(this);
+        this.onePieceManager = new OnePieceManager(this);
+        this.poneglypheManager = new PoneglypheManager(this);
+        this.fruitDuDemonManager = new FruitDuDemonManager(this);
         UHC.getModuleManager().setModule(module = new MUModule());
 
         Messages.init();

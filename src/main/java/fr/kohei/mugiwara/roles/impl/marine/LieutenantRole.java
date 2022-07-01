@@ -7,6 +7,7 @@ import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,8 @@ import java.util.*;
 @Getter
 public class LieutenantRole extends RolesType.MURole implements Listener {
     private boolean canAnalyse = false;
+    private UUID lastKiller;
+    private UUID strength;
 
     public LieutenantRole() {
         super(Arrays.asList(
@@ -73,7 +76,7 @@ public class LieutenantRole extends RolesType.MURole implements Listener {
 
         final Map<Player, RolesType> playerRolesTypeMap = new HashMap<>();
 
-        for (Player players : Bukkit.getOnlinePlayers()) {
+        for (Player players : Utils.getPlayers()) {
             if (rolesTypes.contains(MUPlayer.get(players).getRole().getRole()))
                 playerRolesTypeMap.put(player, MUPlayer.get(players).getRole().getRole());
         }
@@ -87,6 +90,8 @@ public class LieutenantRole extends RolesType.MURole implements Listener {
     public void onDeath(PlayerDeathEvent event) {
         Player lieutenant = getPlayer();
         Player player = event.getEntity();
+        if(player.getKiller() != null) lastKiller = player.getKiller().getUniqueId();
+
         if (lieutenant == null) return;
 
         if (!(MUPlayer.get(player).getRole() instanceof CommandantRole)) return;
@@ -99,5 +104,16 @@ public class LieutenantRole extends RolesType.MURole implements Listener {
     public void onEpisode(Player player) {
         canAnalyse = true;
         Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> canAnalyse = false, 120 * 20L);
+    }
+
+    @Override
+    public void onSecond(Player player) {
+        Player target = Bukkit.getPlayer(strength);
+        if (target == null) return;
+
+        if(target.getLocation().distance(player.getLocation()) <= 15) {
+            player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20, 0, false, false));
+        }
     }
 }

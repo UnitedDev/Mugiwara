@@ -9,6 +9,7 @@ import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
@@ -36,7 +37,8 @@ public class VolPower extends CommandPower {
         int inventoryApples = Utils.getItemAmount(player, Material.GOLDEN_APPLE);
         if (apples > inventoryApples) apples = inventoryApples;
 
-        Utils.removeItem(player, Material.GOLDEN_APPLE, apples);
+        player.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE, apples));
+        Utils.removeItem(target, Material.GOLDEN_APPLE, apples);
         Messages.NAMI_VOL_USE.send(player,
                 new Replacement("<amount>", "" + apples),
                 new Replacement("<name>", target.getName())

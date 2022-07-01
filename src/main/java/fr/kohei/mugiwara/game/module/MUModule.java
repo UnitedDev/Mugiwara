@@ -9,6 +9,7 @@ import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.game.tasks.CooldownCheckTask;
 import fr.kohei.mugiwara.game.tasks.PoneglypheTask;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.Module;
 import fr.kohei.uhc.module.manager.Camp;
@@ -82,7 +83,7 @@ public class MUModule extends Module {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                for (Player onlinePlayer : Utils.getPlayers()) {
                     RolesType.MURole role = (RolesType.MURole) UPlayer.get(onlinePlayer).getRole();
 
                     onlinePlayer.setHealth(onlinePlayer.getMaxHealth());
@@ -93,6 +94,8 @@ public class MUModule extends Module {
                         }
                     }
                 }
+
+                Mugiwara.getInstance().getFruitDuDemonManager().init();
             }
         }.runTaskLater(Mugiwara.getInstance(), 50);
 

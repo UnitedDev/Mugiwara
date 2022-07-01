@@ -9,6 +9,7 @@ import fr.kohei.uhc.game.GameManager;
 import fr.kohei.uhc.game.player.UPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,7 +33,7 @@ public class Utils {
     }
 
     public static String itemFormat(String name) {
-        return "&8❘ &c&l" + name + " &8(&7Clic-droit&8)";
+        return "&8❘ &c&l" + name + " &8(&7Clic&8)";
     }
 
     public static String notClickItem(String name) {
@@ -52,7 +53,7 @@ public class Utils {
 
     public static void removeItem(Player player, Material material, int remove) {
         if (player.getInventory().getItem(player.getInventory().first(material)).getAmount() <= remove) {
-            player.getInventory().removeItem(player.getInventory().getItem(player.getInventory().first(material)));
+            player.getInventory().remove(player.getInventory().getItem(player.getInventory().first(material)));
             return;
         }
         player.getInventory().getItem(player.getInventory().first(material)).setAmount(player.getInventory().getItem(player.getInventory().first(material)).getAmount() - remove);
@@ -69,7 +70,7 @@ public class Utils {
 
     }
 
-    public static List<Player> getNearPlayers(Player player, int radius) {
+    public static List<Player> getNearPlayers(Entity player, int radius) {
         return player.getNearbyEntities(radius, radius, radius).stream()
                 .filter(entity -> entity instanceof Player)
                 .map(entity -> (Player) entity)

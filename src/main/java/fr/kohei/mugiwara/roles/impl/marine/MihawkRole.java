@@ -1,12 +1,17 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
+import com.lunarclient.bukkitapi.LunarClientAPI;
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.power.impl.YoruPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.utils.utils.Cooldown;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.utils.Cuboid;
 import fr.kohei.utils.ItemBuilder;
+import lombok.Getter;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,6 +22,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -33,7 +39,9 @@ public class MihawkRole extends RolesType.MURole implements Listener {
     private final Cooldown swordCooldown = new Cooldown("Epee");
 
     public MihawkRole() {
-        super(Arrays.asList());
+        super(Arrays.asList(
+                new YoruPower()
+        ));
     }
 
     @Override
@@ -48,8 +56,22 @@ public class MihawkRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onDistribute(Player player) {
-        player.getInventory().addItem(new ItemBuilder(Material.DIAMOND_SWORD).setName("&5&lYoru")
+        player.getInventory().addItem(new ItemBuilder(Material.DIAMOND_SWORD).setName(Utils.notClickItem("&5&lYoru"))
                 .addEnchant(Enchantment.DAMAGE_ALL, 4).toItemStack());
+    }
+
+    @Override
+    public void onSecond(Player player) {
+        for (Player onlinePlayer : Utils.getPlayers()) {
+            LunarClientAPI.getInstance().overrideNametag(onlinePlayer, Arrays.asList(
+                    "§f(&c" + percentage(onlinePlayer) + "§f)",
+                    onlinePlayer.getName()
+            ), player);
+        }
+    }
+
+    private int percentage(Player player) {
+        return (int) (player.getHealth() / player.getMaxHealth() * 100);
     }
 
     @Override
@@ -77,7 +99,7 @@ public class MihawkRole extends RolesType.MURole implements Listener {
         Player player = event.getPlayer();
         if (player.getItemInHand() == null || !player.getItemInHand().getType().name().contains("SWORD")) return;
         if (!isRole(player)) return;
-        if (swordCooldown.isCooldown(player)) return;
+        if (swordCooldown.isCooldownNoMessage(player)) return;
         if (event.getAction().name().contains("LEFT")) return;
 
         final Location initialLocation = player.getLocation();
@@ -172,5 +194,35 @@ public class MihawkRole extends RolesType.MURole implements Listener {
                 timer--;
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 2);
+    }
+
+    @EventHandler
+    public void onHit(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
+
+        Player damager = (Player) event.getDamager();
+        Player player = (Player) event.getEntity();
+
+        YoruPower yoruPower = (YoruPower) getPowers().stream().filter(power -> power instanceof YoruPower).findFirst().orElse(null);
+        if (yoruPower == null) return;
+
+
+        if (yoruPower.isUsing()) {
+            if (!isRole(player)) return;
+
+            yoruPower.setDamage((int) (yoruPower.getDamage() + event.getFinalDamage()));
+        }
+
+        if (yoruPower.isTheHit()) {
+            if (!isRole(damager)) return;
+
+            player.damage(yoruPower.getDamage());
+            Messages.MIHAWK_YORU_THEHIT.send(damager,
+                    new Replacement("<damage>", yoruPower.getDamage() + ""),
+                    new Replacement("<name>", player.getName())
+            );
+            yoruPower.setTheHit(false);
+        }
     }
 }

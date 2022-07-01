@@ -2,7 +2,9 @@ package fr.kohei.mugiwara.power.impl;
 
 import com.lunarclient.bukkitapi.LunarClientAPI;
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
+import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.utils.utils.Utils;
@@ -37,7 +39,7 @@ public class RecherchePower extends CommandPower {
         for (Player player1 : players) {
             builder.append(player1.getName()).append("&f, &c0");
             LunarClientAPI.getInstance().overrideNametag(player1, Arrays.asList(
-                    "&cAvancement: &f0/60",
+                    "§cAvancement: §f0/60",
                     player1.getName()
             ), player);
         }
@@ -63,10 +65,23 @@ public class RecherchePower extends CommandPower {
                     avancement++;
 
                     LunarClientAPI.getInstance().overrideNametag(player1, Arrays.asList(
-                            "&cAvancement: &f" + avancement + "/60",
+                            "§cAvancement: §f" + avancement + "/60",
                             player1.getName()
                     ), player);
                     rechercheTargets.put(player1.getUniqueId(), avancement);
+
+                    LieutenantRole role = (LieutenantRole) MUPlayer.get(player).getRole();
+
+                    if(avancement == 60) {
+                        cancel();
+
+                        if(role.getLastKiller() != null && role.getLastKiller().equals(player1.getUniqueId())) {
+                            Messages.LIEUTENANT_RECHERCHE_KILLER.send(player);
+                            role.setStrength(player1.getUniqueId());
+                        } else {
+                            Messages.LIEUTENANT_RECHERCHE_NOTKILLER.send(player);
+                        }
+                    }
                 });
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 20);

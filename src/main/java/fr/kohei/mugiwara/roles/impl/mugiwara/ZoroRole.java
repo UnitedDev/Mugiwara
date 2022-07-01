@@ -66,9 +66,9 @@ public class ZoroRole extends RolesType.MURole implements Listener {
     public static void randomRole(Player player) {
         List<RolesType> roles = Arrays.asList(RolesType.SANJI, RolesType.LAW, RolesType.EUSTASS, RolesType.PIRATE);
 
-        List<RolesType> players = Bukkit.getOnlinePlayers().stream()
+        List<RolesType> players = Utils.getPlayers().stream()
                 .filter(p -> UHC.getGameManager().getPlayers().contains(p.getUniqueId()))
-                .filter(p -> MUPlayer.get(player).getRole() instanceof RolesType.MURole)
+                .filter(p -> MUPlayer.get(player).getRole() != null)
                 .map(p -> ((RolesType.MURole) MUPlayer.get(player).getRole()).getRole())
                 .filter(rolesType -> !roles.contains(rolesType))
                 .collect(Collectors.toList());
@@ -128,7 +128,6 @@ public class ZoroRole extends RolesType.MURole implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if (!hits.contains(player.getUniqueId())) return;
         Player killer = getPlayer();
         ItemStack item = killer.getItemInHand();
 

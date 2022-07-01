@@ -127,7 +127,7 @@ public class SanjiRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onKill(Player death, Player killer) {
-        RolesType.MURole role = (RolesType.MURole) MUPlayer.get(death).getRole();
+        RolesType.MURole role = MUPlayer.get(death).getRole();
 
         if (isFemale(role)) {
             Messages.SANJI_KILLEDFEMALE.send(killer);
@@ -146,7 +146,7 @@ public class SanjiRole extends RolesType.MURole implements Listener {
                 .filter(entity -> entity instanceof Player)
                 .map(entity -> (Player) entity)
                 .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
-                .filter(player1 -> isFemale((RolesType.MURole) MUPlayer.get(player1).getRole()))
+                .filter(player1 -> isFemale(MUPlayer.get(player1).getRole()))
                 .collect(Collectors.toList())) {
             if (player1.getLocation().distance(player.getLocation()) <= 15) {
                 next.put(player1.getUniqueId(), next.getOrDefault(player1.getUniqueId(), 0) + 1);
@@ -155,16 +155,17 @@ public class SanjiRole extends RolesType.MURole implements Listener {
                     player.setHealth(player.getHealth() - 2);
                     Messages.SANJI_STAYED1MINUTE.send(player);
                 }
-            } else if (player1.getLocation().distance(player.getLocation()) <= 25) {
-                if (!foundZoro && ((RolesType.MURole) MUPlayer.get(player1).getRole()).getRole() == RolesType.ZORO) {
-                    Mugiwara.knowsRole(player, RolesType.ZORO);
-                    foundZoro = true;
-                }
             }
+        }
+        
+        Player zoro = Mugiwara.findRole(RolesType.ZORO);
+        if(zoro != null && zoro.getLocation().distance(player.getLocation()) <= 25 && !foundZoro) {
+            Mugiwara.knowsRole(player, RolesType.ZORO);
+            foundZoro = true;
         }
 
         if (player.isOnGround() || player.getLocation().clone().add(0, -1, 0).getBlock().getType() != Material.AIR) {
-            RolesType.MURole role = (RolesType.MURole) MUPlayer.get(player).getRole();
+            RolesType.MURole role = MUPlayer.get(player).getRole();
 
             DiableJambePower power = role.getPowers().stream()
                     .filter(power1 -> power1 instanceof DiableJambePower)

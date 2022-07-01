@@ -2,6 +2,7 @@ package fr.kohei.mugiwara.power;
 
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.utils.Cooldown;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.game.player.UPlayer;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -18,7 +19,7 @@ public abstract class Power {
     }
 
     public static void onUse(Player player) {
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+        for (Player onlinePlayer : Utils.getPlayers()) {
             RolesType.MURole role = (RolesType.MURole) UPlayer.get(onlinePlayer).getRole();
 
             if (role == null) continue;

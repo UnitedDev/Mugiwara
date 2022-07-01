@@ -4,7 +4,9 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
+import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.Cuboid;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,15 +32,17 @@ public class PoneglypheManager {
     private Poneglyphe thirdPoneglyphe;
     private Poneglyphe fourthPoneglyphe;
 
+    private Integer removed;
     private final HashMap<UUID, Integer> captures;
     private final List<Location> cantBreak;
 
-    public PoneglypheManager() {
+    public PoneglypheManager(Plugin plugin) {
         this.firstPoneglyphe = new Poneglyphe(1, null, null, 35 * 60);
         this.secondPoneglyphe = new Poneglyphe(2, null, null, 45 * 60);
         this.thirdPoneglyphe = new Poneglyphe(3, null, null, 65 * 60);
         this.fourthPoneglyphe = new Poneglyphe(4, null, null, 75 * 60);
 
+        this.removed = null;
         this.captures = new HashMap<>();
         this.cantBreak = new ArrayList<>();
     }
@@ -55,12 +60,13 @@ public class PoneglypheManager {
     }
 
     private void startTask(Poneglyphe poneglyphe) {
-        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> spawn(poneglyphe), poneglyphe.getTimer() /** 20L*/);
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> spawn(poneglyphe, true), poneglyphe.getTimer() /** 20L*/);
     }
 
-    private void spawn(Poneglyphe poneglyphe) {
-        Bukkit.getOnlinePlayers().forEach(Messages.PONEGLYPHE_SPAWN::send);
-        Bukkit.broadcastMessage(poneglyphe.getInitialLocation() + "");
+    public void spawn(Poneglyphe poneglyphe, boolean broadcast) {
+        if (broadcast)
+            Utils.getPlayers().forEach(Messages.PONEGLYPHE_SPAWN::send);
+        System.out.println(poneglyphe.getInitialLocation() + "");
 
         Cuboid cuboid = poneglyphe.getCuboid();
         cuboid.getBlockList().forEach(block -> {
@@ -73,6 +79,20 @@ public class PoneglypheManager {
         armorStand.setCustomName("§c§lRoad Ponéglyphe " + poneglyphe.getId());
         armorStand.setCustomNameVisible(true);
         armorStand.setGravity(false);
+
+        Utils.getPlayers().forEach(player -> {
+            RolesType rolesType = MUPlayer.get(player).getRole().getRole();
+            if (rolesType == RolesType.TEACH) {
+                final UUID uuid = player.getUniqueId();
+                Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
+                    Bukkit.getPlayer(uuid).sendMessage(ChatUtil.prefix("&fCoordonnées du &aponéglyphe: " +
+                            "&a" + poneglyphe.getInitialLocation().getBlockX() + "&f, " +
+                            "&a" + poneglyphe.getInitialLocation().getBlockY() + "&f, " +
+                            "&a" + poneglyphe.getInitialLocation().getBlockZ()
+                    ));
+                }, 4 + (int) (Math.random() * 4) * 60 * 20);
+            }
+        });
     }
 
     private Location getRandomLocation(Poneglyphe poneglyphe) {

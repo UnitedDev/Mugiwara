@@ -143,6 +143,7 @@ public class MUListener implements Listener {
         UPlayer uDamager = UPlayer.get(damager);
         RolesType.MURole damagerRole = (RolesType.MURole) uDamager.getRole();
 
+        if (Damage.CANNOT_DAMAGE.contains(damager.getUniqueId())) event.setCancelled(true);
         if (Damage.NO_DAMAGE.contains(damager.getUniqueId())) event.setCancelled(true);
 
         if (role == null || !uPlayer.isAlive()) return;
@@ -215,7 +216,7 @@ public class MUListener implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
-        if(Mugiwara.getInstance().getPoneglypheManager().getCantBreak().contains(event.getBlock().getLocation())) {
+        if (Mugiwara.getInstance().getPoneglypheManager().getCantBreak().contains(event.getBlock().getLocation())) {
             event.setCancelled(true);
         }
     }

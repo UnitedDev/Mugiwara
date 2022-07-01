@@ -54,7 +54,7 @@ public class UssopRole extends RolesType.MURole implements Listener {
     public void onDistribute(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0, false, false));
         player.getInventory().addItem(this.bow =
-                new ItemBuilder(Material.BOW).setInfinityDurability().setName(Utils.notClickItem("&a&lKabuto")).addEnchant(Enchantment.ARROW_DAMAGE, 1).toItemStack()
+                new ItemBuilder(Material.BOW).setInfinityDurability().setName(Utils.notClickItem("&a&lKabuto")).addEnchant(Enchantment.ARROW_DAMAGE, 4).toItemStack()
         );
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
 
@@ -92,7 +92,7 @@ public class UssopRole extends RolesType.MURole implements Listener {
     private void tryAllEffects(Player player, Player shooter) {
         int random = (int) (Math.random() * 5);
 
-        if (this.arrowCooldown.isCooldown(player)) return;
+        if (this.arrowCooldown.isCooldown(shooter)) return;
 
         if (random == 0)
             this.tryPoison(player, shooter);
@@ -104,7 +104,9 @@ public class UssopRole extends RolesType.MURole implements Listener {
             this.tryExplosion(player, shooter);
         else
             this.tryBlindness(player, shooter);
+
         this.arrowCooldown.setCooldown(10);
+        this.arrowCooldown.task();
     }
 
     private void tryPoison(Player player, Player damager) {

@@ -35,6 +35,11 @@ public class XDrakeRole extends RolesType.MURole {
     }
 
     @Override
+    public void onDistribute(Player player) {
+        player.setWalkSpeed(0.21F);
+    }
+
+    @Override
     public void onSecond(Player player) {
 
         final Block block = player.getLocation().getBlock();
@@ -47,14 +52,16 @@ public class XDrakeRole extends RolesType.MURole {
             Messages.WATER.send(player);
             this.inWater = 0;
         }
-
-
-
-
     }
 
     @Override
-    public void onDistribute(Player player) {
+    public double getStrengthBuffer() {
+        return 1.05F;
+    }
+
+    @Override
+    public double getResistanceBuffer() {
+        return 0.95F;
     }
 
     @Override

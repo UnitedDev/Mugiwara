@@ -97,11 +97,11 @@ public class RoomPower extends RightClickPower {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 60 * 20, 0, false, false));
         Damage.addTempNoDamage(player, EntityDamageEvent.DamageCause.FALL, 60);
         new BukkitRunnable() {
-            private int seconds = 60;
+            private int seconds = 120;
 
             @Override
             public void run() {
-                if (seconds == 0) {
+                    if (seconds == 0) {
                     inZone = null;
                     radius = 50;
                     center = null;

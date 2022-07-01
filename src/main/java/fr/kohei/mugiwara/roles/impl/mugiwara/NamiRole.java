@@ -9,8 +9,11 @@ import fr.kohei.mugiwara.power.impl.PisterPower;
 import fr.kohei.mugiwara.power.impl.VolPower;
 import fr.kohei.mugiwara.power.impl.ZeusPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.uhc.UHC;
 import lombok.Getter;
+import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -68,7 +71,7 @@ public class NamiRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onSecond(Player player) {
-        for (Player target : Bukkit.getOnlinePlayers().stream()
+        for (Player target : Utils.getPlayers().stream()
                 .filter(p -> p.getLocation().distance(player.getLocation()) <= 15)
                 .filter(p -> !seenPlayers.contains(p.getUniqueId()))
                 .filter(p -> p.getGameMode() == GameMode.SURVIVAL)
@@ -104,6 +107,9 @@ public class NamiRole extends RolesType.MURole implements Listener {
 
                 if (type == RolesType.LUFFY || type == RolesType.KIZARU) continue;
                 if (type.getCampType() == CampType.MUGIWARA_HEART) continue;
+
+                MathUtil.sendCircleParticle(EnumParticle.SMOKE_LARGE,
+                        target.getLocation().clone().add(0, 2, 0), 0.3F, 10);
 
                 Messages.NAMI_ZEUS_LIGHTNING.send(player);
                 target.getWorld().strikeLightning(target.getLocation());

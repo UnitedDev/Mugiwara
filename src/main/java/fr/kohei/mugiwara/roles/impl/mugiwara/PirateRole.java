@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.roles.impl.mugiwara;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.Damage;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.ItemBuilder;
@@ -46,7 +47,7 @@ public class PirateRole extends RolesType.MURole {
 
     @Override
     public void onDistribute(Player player) {
-        List<Player> players = Bukkit.getOnlinePlayers().stream()
+        List<Player> players = Utils.getPlayers().stream()
                 .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
                 .filter(this::isSpecialRole)
                 .collect(Collectors.toList());

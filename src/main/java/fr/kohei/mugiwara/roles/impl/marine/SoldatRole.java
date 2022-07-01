@@ -10,6 +10,7 @@ import fr.kohei.mugiwara.utils.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -22,12 +23,21 @@ import java.util.List;
 @Getter
 @Setter
 public class SoldatRole extends RolesType.MURole {
+    private boolean transformed;
+    private int inWater = 0;
     private Choices choice = null;
 
     public SoldatRole() {
         super(Arrays.asList(
                 new ChoiceCommand()
         ));
+    }
+
+    public void onTransformation(Player kaido, Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60 * 20, 9, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 60 * 20, 4, false, false));
+
+        transformed = true;
     }
 
     @Override
@@ -67,6 +77,21 @@ public class SoldatRole extends RolesType.MURole {
                 }
             }
         }.runTaskLater(Mugiwara.getInstance(), 5 * 60 * 20);
+    }
+
+    @Override
+    public void onSecond(Player player) {
+        Block block = player.getLocation().getBlock();
+        if(!transformed) return;
+
+        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater += 1;
+        else this.inWater = 0;
+
+        if (this.inWater >= 5) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
+            Messages.WATER.send(player);
+            this.inWater = 0;
+        }
     }
 
     public void onSelect(Player player, Choices choice) {

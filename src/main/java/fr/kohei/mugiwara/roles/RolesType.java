@@ -8,6 +8,9 @@ import fr.kohei.mugiwara.roles.impl.alliance.*;
 import fr.kohei.mugiwara.roles.impl.marine.*;
 import fr.kohei.mugiwara.roles.impl.mugiwara.*;
 import fr.kohei.mugiwara.roles.impl.marine.XDrakeRole;
+import fr.kohei.mugiwara.roles.impl.solo.BigMomRole;
+import fr.kohei.mugiwara.roles.impl.solo.SaboRole;
+import fr.kohei.mugiwara.roles.impl.solo.TeachRole;
 import fr.kohei.uhc.module.manager.Camp;
 import fr.kohei.uhc.module.manager.Role;
 import fr.kohei.utils.ChatUtil;
@@ -16,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -48,24 +52,23 @@ public enum RolesType {
     SMOKER("Smoker", CampType.MARINE, SmokerRole.class),
     HANCOCK("Boa Hancock", CampType.MARINE, HancockRole.class),
     KIZARU("Kizaru", CampType.MARINE, KizaruRole.class),
-    FUJITORA("Amiral Fujitora", CampType.MARINE, null),
+    FUJITORA("Amiral Fujitora", CampType.MARINE, FujitoraRole.class),
     AKAINU("Chef Akainu", CampType.MARINE, AkainuRole.class),
-    SENGOKU("Sengoku", CampType.MARINE, null),
+    SENGOKU("Sengoku", CampType.MARINE, SengokuRole.class),
     KUMA("Bartholomew Kuma", CampType.MARINE, BartholomewKumaRole.class),
     SOLDAT("Soldat", CampType.MARINE, SoldatRole.class),
-    TSURU("Tsuru", CampType.MARINE, null),
+    TSURU("Tsuru", CampType.MARINE, TsuruRole.class),
 
 
     KAIDO("Kaidö", CampType.BIGMOM_KAIDO, null),
-    KING("King", CampType.BIGMOM_KAIDO, null),
+    KING("King", CampType.BIGMOM_KAIDO, KingRole.class),
     QUEEN("Queen", CampType.BIGMOM_KAIDO, null),
-    JACK("Jack", CampType.BIGMOM_KAIDO, JackRole.class),
+    JACK("Jack", CampType.BIGMOM_KAIDO, JackRole.class), // TODO NOT FINISHED ON THE DOC
     KATAKURI("Charlotte Katakuri", CampType.BIGMOM_KAIDO, CharlotteKatakuriRole.class),
-    BIG_MOM("Big Mom", CampType.BIGMOM_KAIDO, null),
+    BIG_MOM("Big Mom", CampType.BIGMOM_KAIDO, BigMomRole.class),
 
-    SABO("Sabo", CampType.SOLO, null),
-    TEACH("Marshall D. Teach", CampType.SOLO, null),
-
+    SABO("Sabo", CampType.SOLO, SaboRole.class),
+    TEACH("Marshall D. Teach", CampType.SOLO, TeachRole.class),
 
     ;
 
@@ -80,7 +83,7 @@ public enum RolesType {
         private List<Power> powers;
 
         public MURole(List<Power> powers) {
-            this.powers = powers;
+            this.powers = new ArrayList<>(powers);
         }
 
         public abstract RolesType getRole();

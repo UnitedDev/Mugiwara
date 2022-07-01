@@ -14,6 +14,12 @@ public class Damage {
 
     public static final HashMap<UUID, EntityDamageEvent.DamageCause> NO_DAMAGE_CAUSE = new HashMap<>();
     public static final List<UUID> NO_DAMAGE = new ArrayList<>();
+    public static final List<UUID> CANNOT_DAMAGE = new ArrayList<>();
+
+    public static void addCantDamageTemp(Player player, int seconds) {
+        CANNOT_DAMAGE.add(player.getUniqueId());
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> CANNOT_DAMAGE.remove(player.getUniqueId()), seconds * 20L);
+    }
 
     public static void addTempNoDamage(UUID var1, EntityDamageEvent.DamageCause var2, int var3) {
         NO_DAMAGE_CAUSE.put(var1, var2);

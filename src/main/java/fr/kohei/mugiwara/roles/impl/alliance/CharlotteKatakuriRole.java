@@ -32,8 +32,8 @@ public class CharlotteKatakuriRole extends RolesType.MURole {
         player.setMaxHealth(28);
         player.getInventory().addItem(new ItemBuilder(Material.SNOW_BALL).setAmount(12).setName(ChatUtil.translate("&6Mochi")).toItemStack());
 
-        for(MUPlayer muPlayers : MUPlayer.players.values()) {
-            if(muPlayers.getRole().getRole() == RolesType.BIG_MOM) {
+        for (MUPlayer muPlayers : MUPlayer.players.values()) {
+            if (muPlayers.getRole().getRole() == RolesType.BIG_MOM) {
                 Messages.KATAKURI_ROLES_REVEAL.send(player, new Replacement("<name>", muPlayers.getPlayer().
                         getName()), new Replacement("<role>", muPlayers.getRole().getRole().getName()));
             }
@@ -56,7 +56,7 @@ public class CharlotteKatakuriRole extends RolesType.MURole {
         final int amountOfSnowballs = player.getInventory().getItem(player.getInventory().first(Material.SNOW_BALL)).getAmount();
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Mugiwara.getInstance(), () -> {
-            if(amountOfSnowballs < 12) {
+            if (amountOfSnowballs < 12) {
                 player.getInventory().getItem(player.getInventory().first(Material.SNOW_BALL)).setAmount(amountOfSnowballs + 1);
 
             }
@@ -65,11 +65,18 @@ public class CharlotteKatakuriRole extends RolesType.MURole {
 
     @Override
     public void onKill(Player death, Player killer) {
-        if(MUPlayer.get(killer).getRole().getRole() == RolesType.KATAKURI) {
+        if (MUPlayer.get(killer).getRole().getRole() == RolesType.KATAKURI) {
             final int amountOfSnowballs = killer.getInventory().getItem(killer.getInventory().first(Material.SNOW_BALL)).getAmount();
             final int diff = 12 - amountOfSnowballs;
             killer.getInventory().getItem(killer.getInventory().first(Material.SNOW_BALL)).setAmount(amountOfSnowballs + diff);
         }
+    }
+
+    @Override
+    public void onDeath(Player player, Player killer) {
+        final Player p = Mugiwara.findRole(RolesType.BIG_MOM);
+        if (p == null) return;
+        p.setHealth(p.getHealth() - 4);
     }
 
     @Override

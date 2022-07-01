@@ -4,10 +4,12 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -68,21 +70,14 @@ public class DiableJambePower extends RightClickPower {
                     player.removePotionEffect(PotionEffectType.SPEED);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
                     Messages.SANJI_DIABLEJAMBE_END.send(player);
-                    player.setAllowFlight(false);
                     setUsing(false);
+                    player.setAllowFlight(false);
                     cancel();
                     return;
                 }
 
                 Location location = player.getLocation();
-                for (int degree = 0; degree < 360; degree++) {
-                    double radians = Math.toRadians(degree);
-                    double x = Math.cos(radians);
-                    double z = Math.sin(radians);
-                    location.add(x, 0, z);
-                    location.getWorld().playEffect(location, Effect.FLAME, 1);
-                    location.subtract(x, 0, z);
-                }
+                MathUtil.sendCircleParticle(EnumParticle.FLAME, location, 1, 10);
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 10);
         return true;

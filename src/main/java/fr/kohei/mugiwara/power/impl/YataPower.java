@@ -33,7 +33,7 @@ public class YataPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
-        Player target = Bukkit.getOnlinePlayers().stream()
+        Player target = Utils.getPlayers().stream()
                 .filter(p -> p.getLocation().distance(player.getLocation()) <= 50)
                 .filter(p -> ReflectionUtils.getLookingAt(player, p))
                 .findFirst().orElse(null);

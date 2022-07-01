@@ -97,7 +97,7 @@ public class FrankyRole extends RolesType.MURole implements Listener {
 
             @Override
             public void run() {
-                List<Player> nearPlayers = Bukkit.getOnlinePlayers().stream()
+                List<Player> nearPlayers = Utils.getPlayers().stream()
                         .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
                         .filter(player1 -> player1.getLocation().distance(location) <= 15)
                         .collect(Collectors.toList());

@@ -50,7 +50,7 @@ public class FlowerPower extends RightClickPower {
             return false;
         }
 
-        Player target = Bukkit.getOnlinePlayers().stream()
+        Player target = Utils.getPlayers().stream()
                 .filter(p -> p.getLocation().distance(player.getLocation()) <= 15)
                 .filter(p -> ReflectionUtils.getLookingAt(player, p))
                 .findFirst().orElse(null);

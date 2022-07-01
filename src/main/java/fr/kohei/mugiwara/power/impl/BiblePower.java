@@ -19,7 +19,7 @@ public class BiblePower extends RightClickPower {
 
     @Override
     public ItemStack getItem() {
-        return new ItemBuilder(Material.ENCHANTED_BOOK).setName(Utils.itemFormat("Bible")).toItemStack();
+        return new ItemBuilder(Material.ENCHANTED_BOOK).setName(Utils.itemFormat("&d&lBible")).toItemStack();
     }
 
     @Override

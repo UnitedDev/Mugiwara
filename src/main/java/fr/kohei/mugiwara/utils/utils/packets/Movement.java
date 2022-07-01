@@ -11,6 +11,12 @@ import java.util.UUID;
 
 public class Movement {
 
+    public static void unfreeze(Player player) {
+        player.setWalkSpeed(0.2F);
+        player.removePotionEffect(PotionEffectType.BLINDNESS);
+        player.removePotionEffect(PotionEffectType.JUMP);
+    }
+
     public static void freeze(Player player, int seconds) {
         float walkSpeed = player.getWalkSpeed();
         PotionEffect jumpBoost = player.getActivePotionEffects()

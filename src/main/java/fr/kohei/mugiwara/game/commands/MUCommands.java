@@ -2,15 +2,28 @@ package fr.kohei.mugiwara.game.commands;
 
 import fr.kohei.command.Command;
 import fr.kohei.command.param.Param;
+import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.power.ClickPower;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.power.impl.KaishinPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.uhc.UHC;
 import fr.kohei.uhc.game.GameManager;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.uhc.module.manager.Camp;
 import fr.kohei.utils.ChatUtil;
+import fr.kohei.utils.Cuboid;
+import lombok.SneakyThrows;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MUCommands {
 
@@ -30,6 +43,30 @@ public class MUCommands {
 
         if (uPlayer.getRole() instanceof RolesType.MURole) {
             ((RolesType.MURole) uPlayer.getRole()).onClaim();
+        }
+    }
+
+    @SneakyThrows
+    @Command(names = {"setrole"})
+    public static void setRole(Player player, @Param(name = "player") Player target, @Param(name = "role") String roleName) {
+        RolesType role = Arrays.stream(RolesType.values()).filter(rolesType -> rolesType.name().equalsIgnoreCase(roleName))
+                .findFirst().orElse(null);
+
+        UPlayer uPlayer = UPlayer.get(target);
+        RolesType.MURole muRole = role.getRoleClass().newInstance();
+
+        uPlayer.setRole(muRole);
+        uPlayer.setCamp(role.getCampType().getCamp());
+
+        muRole.onDistribute(player);
+        if(muRole instanceof Listener) {
+            Bukkit.getPluginManager().registerEvents((Listener) muRole, Mugiwara.getInstance());
+        }
+        target.setHealth(target.getMaxHealth());
+        for (Power power : muRole.getPowers()) {
+            if (power instanceof ClickPower && ((ClickPower) power).isGive()) {
+                target.getInventory().addItem(((ClickPower) power).getItem());
+            }
         }
     }
 
@@ -94,6 +131,23 @@ public class MUCommands {
         }
 
         sender.sendMessage(ChatUtil.prefix("&fLe rôle de &a" + target.getName() + " &fest &c" + uPlayer.getRole().getName()));
+    }
+
+    @Command(names = {"mu op"})
+    public static void showOnePiece(Player player) {
+
+        if (!Mugiwara.getInstance().getOnePieceManager().getCoordinates().containsKey(player.getUniqueId())) {
+            player.sendMessage(ChatUtil.prefix("&cVous n'avez pas capturé 4 ponéglyphes."));
+            return;
+        }
+        List<Location> locations = Mugiwara.getInstance().getOnePieceManager().getCoordinates().get(player.getUniqueId());
+        player.sendMessage(ChatUtil.translate("&7&l-----------------------------------"));
+        locations.forEach(location -> player.sendMessage(ChatUtil.prefix(" &f&l» " +
+                "&a" + location.getBlockX() + "&f, " +
+                "&a" + location.getBlockY() + "&f, " +
+                "&a" + location.getBlockZ()
+        )));
+        player.sendMessage(ChatUtil.translate("&7&l-----------------------------------"));
     }
 
     @Command(names = {"mu roles", "mu compo"})

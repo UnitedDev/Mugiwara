@@ -7,6 +7,7 @@ import fr.kohei.mugiwara.power.impl.ClutchPower;
 import fr.kohei.mugiwara.power.impl.OeilsPower;
 import fr.kohei.mugiwara.power.impl.VoirInvPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.PlayerUtils;
 import fr.kohei.uhc.UHC;
 import lombok.Getter;
@@ -77,7 +78,7 @@ public class RobinRole extends RolesType.MURole implements Listener {
         }
 
         blocks.forEach(block1 -> {
-            for (Player player1 : Bukkit.getOnlinePlayers().stream()
+            for (Player player1 : Utils.getPlayers().stream()
                     .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
                     .collect(Collectors.toList())) {
                 if (!inZone.get(block1).contains(player1.getUniqueId()) && player1.getLocation().distance(block1.getLocation()) <= 25) {
@@ -86,10 +87,6 @@ public class RobinRole extends RolesType.MURole implements Listener {
                     List<UUID> list = inZone.get(block1);
                     list.add(player1.getUniqueId());
                     inZone.put(block1, list);
-
-                    if (player1.getUniqueId().equals(player.getUniqueId())) {
-                        PlayerUtils.makePlayerSeePlayersHealthAboveHead(player1);
-                    }
                 } else if (inZone.get(block1).contains(player1.getUniqueId()) && player1.getLocation().distance(block1.getLocation()) > 25) {
                     List<UUID> list = inZone.get(block1);
                     list.remove(player1.getUniqueId());

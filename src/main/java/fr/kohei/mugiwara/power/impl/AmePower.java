@@ -36,7 +36,7 @@ public class AmePower extends CommandPower {
 
         player.setGameMode(GameMode.SPECTATOR);
         player.teleport(loc.add(0.0, 5.0, 0.0));
-        Bukkit.getOnlinePlayers().forEach(player1 -> player1.hidePlayer(player));
+        Utils.getPlayers().forEach(player1 -> player1.hidePlayer(player));
         Spectator.CANNOT_SPECTATE.add(player.getUniqueId());
 
         Messages.BROOK_AME_USE.send(player);
@@ -55,7 +55,7 @@ public class AmePower extends CommandPower {
                 Player player = Bukkit.getPlayer(uuid);
                 if (player == null) return;
 
-                Bukkit.getOnlinePlayers().forEach(player1 -> player1.hidePlayer(player));
+                Utils.getPlayers().forEach(player1 -> player1.hidePlayer(player));
                 if (timer == 0) {
                     stop(player);
                     cancel();
@@ -69,7 +69,7 @@ public class AmePower extends CommandPower {
         player.teleport(entity);
         entity.remove();
         entity = null;
-        Bukkit.getOnlinePlayers().forEach(player1 -> player1.showPlayer(player));
+        Utils.getPlayers().forEach(player1 -> player1.showPlayer(player));
         player.setGameMode(GameMode.SURVIVAL);
         Spectator.CANNOT_SPECTATE.remove(player.getUniqueId());
         Messages.BROOK_AME_END.send(player);

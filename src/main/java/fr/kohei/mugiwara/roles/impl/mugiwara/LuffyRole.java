@@ -1,35 +1,45 @@
 package fr.kohei.mugiwara.roles.impl.mugiwara;
 
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.power.impl.VivreCardPower;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.GearFourthPower;
 import fr.kohei.mugiwara.power.impl.GomuNoMiLeftPower;
 import fr.kohei.mugiwara.power.impl.GomuNoMiRightPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Arrow;
+import fr.kohei.mugiwara.utils.utils.Utils;
+import fr.kohei.uhc.utils.LocationUtils;
+import fr.kohei.utils.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import static fr.kohei.mugiwara.roles.RolesType.*;
 
 public class LuffyRole extends RolesType.MURole implements Listener {
     private int inWater = 0;
+    public static final ItemBuilder LUFFY_VIVE_CARD = new ItemBuilder(Material.PAPER).setName(Utils.notClickItem("&c&lLuffy Card"));
 
     public LuffyRole() {
         super(Arrays.asList(
                 new GearFourthPower(),
                 new GomuNoMiRightPower(),
-                new GomuNoMiLeftPower()
+                new GomuNoMiLeftPower(),
+                new VivreCardPower()
         ));
     }
 
@@ -54,12 +64,36 @@ public class LuffyRole extends RolesType.MURole implements Listener {
 
         for (RolesType role : new RolesType[]{NAMI, USSOP, SANJI, CHOPPER, ROBIN, FRANKY, BROOK, JIMBE})
             Mugiwara.knowsRole(player, role);
-
     }
 
     @Override
     public void onSecond(Player player) {
         Block block = player.getLocation().getBlock();
+
+        for (Player player1 : Utils.getPlayers()) {
+            if(player1.getItemInHand().isSimilar(LUFFY_VIVE_CARD.toItemStack())) {
+                Player luffy = getPlayer();
+                if(luffy == null) continue;
+
+                String distance = new DecimalFormat("#.#").format(player1.getLocation().distance(luffy.getLocation()));
+                String arrow = LocationUtils.getArrow(player1.getLocation(), luffy.getLocation());
+
+                String targetName = "&cLuffy";
+                String display = "&6" + targetName + " &7" + arrow + "&f " + distance;
+                Mugiwara.getInstance().addActionBar(player1, display, "luffy_vive_card");
+            } else {
+                Mugiwara.getInstance().removeActionBar(player1, "luffy_vive_card");
+            }
+        }
+
+        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater += 1;
+        else this.inWater = 0;
+
+        if (this.inWater >= 5) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
+            Messages.WATER.send(player);
+            this.inWater = 0;
+        }
 
         if (player.isOnGround() || player.getLocation().clone().add(0, -1, 0).getBlock().getType() != Material.AIR) {
             RolesType.MURole role = MUPlayer.get(player).getRole();
@@ -71,17 +105,7 @@ public class LuffyRole extends RolesType.MURole implements Listener {
 
             if (power == null) return;
 
-            if (power.isUsing()) player.setAllowFlight(true);
-            else player.setAllowFlight(false);
-        }
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater += 1;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
-            Messages.WATER.send(player);
-            this.inWater = 0;
+            player.setAllowFlight(power.isUsing());
         }
     }
 
@@ -115,5 +139,35 @@ public class LuffyRole extends RolesType.MURole implements Listener {
         event.setCancelled(true);
         player.setAllowFlight(false);
         player.setVelocity(player.getLocation().getDirection().multiply(2).setY(0.5));
+    }
+
+    @Override
+    public void onDeath(Player player, Player killer) {
+        for (Player player1 : Utils.getPlayers()) {
+            player1.getInventory().remove(LUFFY_VIVE_CARD.toItemStack());
+            Messages.VIVECARD_LUFFY_DEATH.send(player1);
+        }
+    }
+
+    @EventHandler
+    public void onDrop(PlayerDropItemEvent event) {
+        if (event.getItemDrop().getItemStack().isSimilar(LUFFY_VIVE_CARD.toItemStack())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onVivreCard(EntityDamageEvent event) {
+        if(!(event.getEntity() instanceof Player)) return;
+
+        Player player = (Player) event.getEntity();
+        if(!isRole(player)) return;
+        if(player.getHealth() >= 10) return;
+
+        for (Player player1 : Utils.getPlayers()) {
+            if(player1.getInventory().contains(LUFFY_VIVE_CARD.toItemStack())) {
+                Messages.VIVECARD_LUFFY_HEALTH.send(player1);
+            }
+        }
     }
 }

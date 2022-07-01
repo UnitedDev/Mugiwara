@@ -5,6 +5,7 @@ import fr.kohei.mugiwara.power.impl.*;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.utils.Cooldown;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.mugiwara.utils.utils.arrow.BowAimbot;
 import fr.kohei.utils.ChatUtil;
@@ -17,6 +18,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -27,7 +29,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 
-public class LawRole extends RolesType.MURole {
+public class LawRole extends RolesType.MURole implements Listener {
     private int inWater = 0;
     private final Cooldown healCooldown = new Cooldown("Heal");
     private int healUses = 0;
@@ -137,7 +139,7 @@ public class LawRole extends RolesType.MURole {
         Player player = event.getPlayer();
         if (!isRole(player)) return;
 
-        Player target = Bukkit.getOnlinePlayers().stream()
+        Player target = Utils.getPlayers().stream()
                 .filter(p -> p.getLocation().distance(player.getLocation()) <= 5)
                 .filter(p -> ReflectionUtils.getLookingAt(player, p))
                 .findFirst().orElse(null);

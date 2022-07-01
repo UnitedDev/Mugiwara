@@ -1,6 +1,8 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.game.player.MUPlayer;
+import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.power.RightClickPower;
@@ -37,16 +39,20 @@ public class ClimatTactPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
-        Player target = Bukkit.getOnlinePlayers().stream()
+        Player target = Utils.getPlayers().stream()
                 .filter(p -> p.getLocation().distance(player.getLocation()) <= 15)
                 .filter(p -> ReflectionUtils.getLookingAt(player, p))
                 .findFirst().orElse(null);
         if (target == null) return false;
 
-        target.setMaxHealth(target.getMaxHealth() - 6);
-        Movement.freeze(target, 1);
-        target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5 * 20, 4, false, false));
-        target.getWorld().strikeLightningEffect(target.getLocation());
+        RolesType role = MUPlayer.get(target).getRole().getRole();
+
+        if (role != RolesType.LUFFY) {
+            target.setMaxHealth(target.getMaxHealth() - 6);
+            Movement.freeze(target, 1);
+            target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5 * 20, 4, false, false));
+            target.getWorld().strikeLightningEffect(target.getLocation());
+        }
 
         final UUID targetUUID = target.getUniqueId();
 
@@ -54,7 +60,9 @@ public class ClimatTactPower extends RightClickPower {
             Player targetUpdated = Bukkit.getPlayer(targetUUID);
             if (targetUpdated == null) return;
 
-            targetUpdated.setMaxHealth(targetUpdated.getMaxHealth() + 6);
+            if (role != RolesType.LUFFY) {
+                targetUpdated.setMaxHealth(targetUpdated.getMaxHealth() + 6);
+            }
         }, 60 * 20);
 
         Messages.NAMI_CLIMATTACT_USE.send(player,

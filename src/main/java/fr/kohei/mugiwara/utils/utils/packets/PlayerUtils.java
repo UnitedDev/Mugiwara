@@ -1,6 +1,7 @@
 package fr.kohei.mugiwara.utils.utils.packets;
 
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -50,7 +51,7 @@ public class PlayerUtils {
                 if (connected == null) return;
 
                 // all players dont see connected anymore
-                Bukkit.getOnlinePlayers().forEach(p -> p.hidePlayer(connected));
+                Utils.getPlayers().forEach(p -> p.hidePlayer(connected));
                 --this.cooldown;
             }
         }.runTaskTimer(Mugiwara.getInstance(), 20L, 20L);

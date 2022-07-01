@@ -6,6 +6,7 @@ import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.Heads;
+import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class ZeusPower extends RightClickPower {
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(Material.WOOL);
+        return new ItemBuilder(Material.WOOL).setName(Utils.itemFormat("Zeus")).toItemStack();
     }
 
     @Override

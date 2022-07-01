@@ -49,8 +49,20 @@ public class ChopperRole extends RolesType.MURole {
         player.getInventory().addItem(new ItemStack(Material.POTION, 2, (short) 16421));
         player.getInventory().addItem(new ItemStack(Material.POTION, 1, (short) 8193));
 
+        player.setWalkSpeed(0.21F);
+
         int random = (int) (Math.random() * 3);
         if (random == 1) ZoroRole.randomRole(player);
+    }
+
+    @Override
+    public double getStrengthBuffer() {
+        return 1.05F;
+    }
+
+    @Override
+    public double getResistanceBuffer() {
+        return 0.95F;
     }
 
     @Override

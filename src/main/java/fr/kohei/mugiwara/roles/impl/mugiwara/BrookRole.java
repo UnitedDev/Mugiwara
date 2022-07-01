@@ -6,7 +6,10 @@ import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.power.impl.AmePower;
 import fr.kohei.mugiwara.power.impl.SlowPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.Damage;
+import fr.kohei.mumble.api.LinkAPI;
+import fr.kohei.mumble.api.mumble.IUser;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.TimeUtil;
 import lombok.Setter;
@@ -81,6 +84,9 @@ public class BrookRole extends RolesType.MURole implements Listener {
         player.setGameMode(GameMode.SPECTATOR);
         Messages.BROOK_DEATH.send(player);
 
+        IUser user = LinkAPI.getApi().getMumbleManager().getUserFromName(player.getName());
+        if(user != null) user.muteUser();
+
         final Location death = player.getLocation();
         final UUID uuid = player.getUniqueId();
         new BukkitRunnable() {
@@ -103,14 +109,17 @@ public class BrookRole extends RolesType.MURole implements Listener {
                 if (player.getLocation().distance(death) > 50) {
                     player.teleport(death);
                 }
-                Bukkit.getOnlinePlayers().forEach(player1 -> player1.hidePlayer(player));
+                Utils.getPlayers().forEach(player1 -> player1.hidePlayer(player));
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 20L);
     }
 
     private void handleRespawn(Player player) {
-        Bukkit.getOnlinePlayers().forEach(player1 -> player1.showPlayer(player));
+        Utils.getPlayers().forEach(player1 -> player1.showPlayer(player));
         Mugiwara.getInstance().removeActionBar(player, "respawn");
+
+        IUser user = LinkAPI.getApi().getMumbleManager().getUserFromName(player.getName());
+        if(user != null) user.unmuteUser();
 
         int x = (int) (Math.random() * UHC.getGameManager().getUhcWorld().getWorldBorder().getSize() / 2);
         int z = (int) (Math.random() * UHC.getGameManager().getUhcWorld().getWorldBorder().getSize() / 2);

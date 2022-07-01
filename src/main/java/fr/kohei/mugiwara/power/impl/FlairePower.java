@@ -65,29 +65,28 @@ public class FlairePower extends CommandPower {
 
     private String getDisplay(PotionEffectType type) {
         if (type == SPEED) return "&bSpeed";
-        if (type == SLOW) return "&7Slowness";
-        if (type == FAST_DIGGING) return "&eHaste";
-        if (type == SLOW_DIGGING) return "&7Mining Fatigue";
-        if (type == INCREASE_DAMAGE) return "&cForce";
-        if (type == HEAL) return "&cInstant Health";
-        if (type == HARM) return "&9Instant Damage";
-        if (type == JUMP) return "&aJump Boost";
-        if (type == CONFUSION) return "&2Nausée";
-        if (type == REGENERATION) return "&dRégénération";
-        if (type == DAMAGE_RESISTANCE) return "&8Résistance";
-        if (type == FIRE_RESISTANCE) return "&6Fire Résistance";
-        if (type == WATER_BREATHING) return "&9Water Breathing";
-        if (type == INVISIBILITY) return "&7Invisibilitée";
-        if (type == BLINDNESS) return "&0Blindness";
-        if (type == NIGHT_VISION) return "&2Night Vision";
-        if (type == HUNGER) return "&2Hunger";
-        if (type == WEAKNESS) return "&7Weakness";
-        if (type == POISON) return "&2Poison";
-        if (type == WITHER) return "&0Wither";
-        if (type == HEALTH_BOOST) return "&eHealth Boost";
-        if (type == ABSORPTION) return "&eAbsorption";
-        if (type == SATURATION) return "&7Saturation";
-
-        return "&cUnknown";
+        else if (type == SLOW) return "&7Slowness";
+        else if (type == FAST_DIGGING) return "&eHaste";
+        else if (type == SLOW_DIGGING) return "&7Mining Fatigue";
+        else if (type == INCREASE_DAMAGE) return "&cForce";
+        else if (type == HEAL) return "&cInstant Health";
+        else if (type == HARM) return "&9Instant Damage";
+        else if (type == JUMP) return "&aJump Boost";
+        else if (type == CONFUSION) return "&2Nausée";
+        else if (type == REGENERATION) return "&dRégénération";
+        else if (type == DAMAGE_RESISTANCE) return "&8Résistance";
+        else if (type == FIRE_RESISTANCE) return "&6Fire Résistance";
+        else if (type == WATER_BREATHING) return "&9Water Breathing";
+        else if (type == INVISIBILITY) return "&7Invisibilitée";
+        else if (type == BLINDNESS) return "&0Blindness";
+        else if (type == NIGHT_VISION) return "&2Night Vision";
+        else if (type == HUNGER) return "&2Hunger";
+        else if (type == WEAKNESS) return "&7Weakness";
+        else if (type == POISON) return "&2Poison";
+        else if (type == WITHER) return "&0Wither";
+        else if (type == HEALTH_BOOST) return "&eHealth Boost";
+        else if (type == ABSORPTION) return "&eAbsorption";
+        else if (type == SATURATION) return "&7Saturation";
+        else return "&cUnknown";
     }
 }

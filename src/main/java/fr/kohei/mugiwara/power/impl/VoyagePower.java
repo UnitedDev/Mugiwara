@@ -17,7 +17,7 @@ public class VoyagePower extends DamagePlayerPower {
 
     @Override
     public ItemStack getItem() {
-        return new ItemBuilder(Material.PRISMARINE_SHARD).setName(Utils.itemFormat("Voyage")).toItemStack();
+        return new ItemBuilder(Material.PRISMARINE_SHARD).setName(Utils.itemFormat("&3&lVoyage")).toItemStack();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class VoyagePower extends DamagePlayerPower {
 
     @Override
     public boolean onEnable(Player player, Player target, EntityDamageByEntityEvent event) {
-        if(maxUses < 2) {
+        if(maxUses >= 2) {
             player.sendMessage(ChatUtil.prefix("&cVous avez atteint la limite d'utilisation pour ce pouvoir !"));
             return false;
         }
@@ -40,14 +40,13 @@ public class VoyagePower extends DamagePlayerPower {
         maxUses++;
         Messages.KUMA_VOYAGE_PLAYER_USE.send(player);
 
-        int x = (int) (target.getWorld().getWorldBorder().getSize() * Math.random());
-        int z = (int) (target.getWorld().getWorldBorder().getSize() * Math.random());
+        int x = (int) ((target.getWorld().getWorldBorder().getSize() / 2) * Math.random());
+        int z = (int) ((target.getWorld().getWorldBorder().getSize() / 2) * Math.random());
         int y = target.getWorld().getHighestBlockAt(x, z).getY();
         Location location = new Location(target.getWorld(), x, y, z);
         target.teleport(location);
         Messages.KUMA_VOYAGE_TARGET_TELEPORTED.send(target);
         player.sendMessage(ChatUtil.prefix("Vous venez de téléporter &c" + target.getName() + " aux coordonnées X&7: &a" + location.getBlockX() + " Y&7: &a" + location.getBlockY() + " Z&7: &a" + location.getBlockZ()));
-
         return true;
     }
 }

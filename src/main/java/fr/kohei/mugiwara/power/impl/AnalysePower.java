@@ -1,8 +1,10 @@
 package fr.kohei.mugiwara.power.impl;
 
+import fr.kohei.mugiwara.game.menu.AnalysePowerMenu;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -28,16 +30,17 @@ public class AnalysePower extends CommandPower {
         }
 
         lieutenantRole.setCanAnalyse(false);
+        new AnalysePowerMenu().openMenu(player);
         return true;
     }
 
     @Override
     public String getName() {
-        return null;
+        return "Analyse";
     }
 
     @Override
     public Integer getCooldownAmount() {
-        return null;
+        return Utils.getTimeBeforeEpisode();
     }
 }

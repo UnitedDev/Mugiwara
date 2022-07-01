@@ -1,12 +1,17 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
+import com.google.common.base.Joiner;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.camp.impl.MarineCamp;
+import fr.kohei.mugiwara.power.impl.DenDenMushiPower;
+import fr.kohei.mugiwara.power.impl.DenDenMushiSeePower;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.uhc.game.player.UPlayer;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -21,7 +26,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
+import java.util.UUID;
 
+@Setter
+@Getter
 public class CobyRole extends RolesType.MURole implements Listener {
     private int phase = 0;
     private int hits = 0;
@@ -29,8 +37,13 @@ public class CobyRole extends RolesType.MURole implements Listener {
     private int randomDistance = 50;
     private int killerDistance;
 
+    private UUID dendenMushiTarget;
+
     public CobyRole() {
-        super(Arrays.asList());
+        super(Arrays.asList(
+                new DenDenMushiSeePower(),
+                new DenDenMushiPower()
+        ));
     }
 
     @Override

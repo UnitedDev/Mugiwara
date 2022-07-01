@@ -39,7 +39,7 @@ public class DashPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
-        Player target = Bukkit.getOnlinePlayers().stream()
+        Player target = Utils.getPlayers().stream()
                 .filter(p -> p.getLocation().distance(player.getLocation()) <= 15)
                 .filter(p -> ReflectionUtils.getLookingAt(player, p))
                 .findFirst().orElse(null);
@@ -51,6 +51,7 @@ public class DashPower extends RightClickPower {
                 player.getLocation().clone().add(0, -1, 0),
                 EntityType.ARMOR_STAND
         );
+        armorStand.setVisible(false);
         List<UUID> damaged = new ArrayList<>();
 
         new BukkitRunnable() {
@@ -71,7 +72,7 @@ public class DashPower extends RightClickPower {
                     return;
                 }
 
-                if (player.getLocation().distance(target.getLocation()) <= 3) {
+                if (player.getLocation().distance(target.getLocation()) <= 1) {
                     cancel();
                     armorStand.remove();
                     return;
@@ -91,7 +92,8 @@ public class DashPower extends RightClickPower {
 
                 GearFourthPower.spawnParticle(player);
 
-                Bukkit.getOnlinePlayers().forEach(player1 -> {
+                Utils.getPlayers().forEach(player1 -> {
+                    if(player1.getUniqueId().equals(playerUUID)) return;
                     if (player1.getLocation().distance(player.getLocation()) <= 2
                             && !damaged.contains(player1.getUniqueId())) {
                         player1.setHealth(player1.getHealth() - 3);

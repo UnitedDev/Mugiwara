@@ -25,7 +25,7 @@ public class AllosaurusPower extends RightClickPower {
         final ItemStack item = new ItemStack(Material.ROTTEN_FLESH);
         final ItemMeta meta = item.getItemMeta();
 
-        item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
+        item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.setDisplayName(ChatUtil.translate("&6Allosaurus"));

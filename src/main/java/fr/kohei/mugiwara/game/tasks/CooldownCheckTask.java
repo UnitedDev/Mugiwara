@@ -5,6 +5,7 @@ import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.Power;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.TimeUtil;
 import fr.kohei.utils.Title;
 import org.bukkit.Bukkit;
@@ -22,7 +23,7 @@ public class CooldownCheckTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
+        Utils.getPlayers().forEach(player -> {
             MUPlayer muPlayer = MUPlayer.get(player);
 
             if (player.getGameMode() == GameMode.SPECTATOR) return;

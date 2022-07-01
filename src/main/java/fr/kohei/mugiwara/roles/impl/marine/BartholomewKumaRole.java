@@ -1,5 +1,6 @@
 package fr.kohei.mugiwara.roles.impl.marine;
 
+import fr.kohei.mugiwara.power.impl.DuoPower;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.impl.BiblePower;
 import fr.kohei.mugiwara.power.impl.VoyagePower;
@@ -24,10 +25,14 @@ import java.util.UUID;
 public class BartholomewKumaRole extends RolesType.MURole implements Listener {
 
     private int inWater;
-    private List<UUID> teleportedPlayers = new ArrayList<>();
+    private final List<UUID> teleportedPlayers = new ArrayList<>();
 
     public BartholomewKumaRole() {
-        super(Arrays.asList(new BiblePower(), new VoyagePower()));
+        super(Arrays.asList(
+                new BiblePower(),
+                new VoyagePower(),
+                new DuoPower()
+        ));
     }
 
     @Override
@@ -70,6 +75,18 @@ public class BartholomewKumaRole extends RolesType.MURole implements Listener {
     public void onDistribute(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0, false, false));
         player.setMaxHealth(24.0);
+
+        player.setWalkSpeed(0.21F);
+    }
+
+    @Override
+    public double getStrengthBuffer() {
+        return 1.05F;
+    }
+
+    @Override
+    public double getResistanceBuffer() {
+        return 0.95F;
     }
 
     @Override
