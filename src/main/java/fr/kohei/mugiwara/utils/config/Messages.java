@@ -1,6 +1,7 @@
 package fr.kohei.mugiwara.utils.config;
 
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.utils.ChatUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -17,6 +22,13 @@ public enum Messages {
 
     COOLDOWN_EXPIRE("&fLe cooldown pour le pouvoir &c<name> &fvient d'expirer."),
     WATER("&cNe restez pas trop longtemps dans l'eau."),
+
+    TRESOR_SPAWN("&fDes &atrésors &fsont apparus sur la carte."),
+
+    SECTION_GIVE_GARP("&fVous avez reçu le badge de section &0&lGarp&f."),
+    SECTION_GIVE_KIZARU("&fVous avez reçu le badge de section &e&lKizaru&f."),
+    SECTION_GIVE_SMOKER("&fVous avez reçu le badge de section &7&lSmoker&f."),
+    SECTION_GIVE_AKAINU("&fVous avez reçu le badge de section &c&lAkainu&f."),
 
     VIVECARD_LUFFY_DEATH("&cLuffy &fest mort, de ce fait vous perdez votre &aVive Card&f."),
     VIVECARD_LUFFY_GIVE("&fVous avez donné votre &cVivre Card&f à &c<name>&f."),
@@ -69,7 +81,7 @@ public enum Messages {
     NAMI_VOL_ONME("&cNami &fvous a volé &6<amount> &fpommes d'ors."),
 
     NAMI_ZEUS_USE("&fVous avez utilisé votre pouvoir &aZeus&f."),
-    NAMI_ZEUS_FINISH("&cVotre pouvoir Zeus a expiré."),
+    NAMI_ZEUS_FINISH("&cVotre pouvoir a expiré."),
     NAMI_ZEUS_LIGHTNING("&fVous avez fait spawn des &aéclairs&f."),
 
     USSOP_KABUTO_POISON_USE("&fVous avez &2empoisonné &6<name>&f."),
@@ -129,8 +141,8 @@ public enum Messages {
     KAIDO_SBIRE_3K_REACHED("&fProgression désormais à 3000 points."),
     KAIDO_SBIRE_BORO_USED("&fVous venez d'utiliser 1 balle de feu."),
 
-    BROOK_DEATH("&fVous êtes mort a allez &arespawn&f dans 5 minutes."),
-    BROOK_RESPAWN("&FHAHAHHAHAH JE VIENS DE RESPWAN EZ HAHAHAHAHAH :slurp:."),
+    BROOK_DEATH("&fVous êtes mort et allez &arespawn&f dans 5 minutes."),
+    BROOK_RESPAWN("&fjviens de respawn"),
     BROOK_AME_USE("&fVous avez utilisé votre pouvoir &aAme&f."),
     BROOK_AME_END("&fVous avez regagné votre forme &cnormale&f."),
     BROOK_AME_DEATH("&fVotre squelette est mort docn tu meurs&f."),
@@ -141,11 +153,11 @@ public enum Messages {
     BROOK_SLOW_ATTACKONME("&cBrook&f a utilisé son pouvoir de &7Slow &fsur vous."),
     BROOK_SLOW_ATTACKONME_END("&cVous perdez la moitié de votre vie."),
 
-    KUMA_BIBLE_PLAYER_USE("kumalala"),
-    KUMA_BIBLE_TELEPORT_TARGET_USE("kumalala"),
+    KUMA_BIBLE_PLAYER_USE("&fVous avez utilisé votre pouvoir &aBible&f."),
+    KUMA_BIBLE_TELEPORT_TARGET_USE("&fVous avez été &atéléporté &fpar &cKuma&f."),
 
-    KUMA_VOYAGE_PLAYER_USE("kumalala"),
-    KUMA_VOYAGE_TARGET_TELEPORTED("kumalala"),
+    KUMA_VOYAGE_PLAYER_USE("&fVous avez utilisé votre pouvoir &aVoyage&f."),
+    KUMA_VOYAGE_TARGET_TELEPORTED("&fVous avez été &atéléporté &fpar &cKuma&f."),
 
     JIMBE_SEIKEN_USE("&fVous avez utilisé votre &9Seiken&f sur &c<name>&f."),
     JIMBE_SEIKEN_ONME("&cJimbe &fa utilisé son &9Seiken &fsur vous."),
@@ -228,6 +240,8 @@ public enum Messages {
     LAW_MES_TARGET("&cLaw &fvous a fait perdre &c3 coeurs &fpermanents."),
     LAW_MES_DEATH("&cLaw &fest mort. De ce fait vous récupérez &c3 coeurs &fpermanents."),
 
+    LAW_ROOM_CREATE("&fVous avez &créé&f une room de &c<block> blocks&f."),
+
     HANCOCK_FEMUR_ONME("&cBoa Hancock&f vous a attaqué avec son &cFemur&f."),
     HANCOCK_FEMUR_TORSE("&fVous avez frappé &c<name>&f avec votre &aFemur&f sur son &aTorse&f."),
     HANCOCK_FEMUR_JAMBES("&fVous avez frappé &c<name>&f avec votre &aFemur&f sur son &aJambe&f."),
@@ -289,11 +303,24 @@ public enum Messages {
 
     FUJITORA_MOKO_USE("&fVous avez utilisé votre pouvoir &aMoko&f."),
     FUJITORA_MOKO_TARGET("&fVous avez été touché par le &aMoko&f de &cFujitora."),
+    FUJITORA_METEORITE_USE("&fVous avez utilisé votre pouvoir &aMeteorite&f."),
+    FUJITORA_METEORITE_TARGET("&fVous avez été touché par le &aMeteorite&f de &cFujitora."),
+    FUJITORA_AURA_BLEU("&fCette personne a une aura &9bleue&f."),
+    FUJITORA_AURA_ROUGE("&fCette personne a une aura &crouge&f."),
 
+    BIGMOM_NAMI_ZEUS("&fVous avez &arécupéré &fle &cZeus &fde Nami."),
+    BIGMOM_SOUL_USE("&fVous avez utilisé votre pouvoir &aSoul&f."),
+    BIGMOM_SOUL_TARGET("&fVous avez été touché par le &aSoul&f de &cBigMom."),
+    BIGMOM_SOULEND_BIGMOM("&fVous avez &asélectionné &fle même &cgateaux &fque &a<name>&f."),
+    BIGMOM_SOULEND_TARGET("&fVous avez &asélectionné &fle même &cgateaux &fque &aBigMom&f."),
+    BIGMOM_SOULEND_BIGMOMDIDNTSELECT("&fBig mom n'a pas selectionné une gateau"),
+    BIGMOM_PROMETHEE_USE("&fVous avez utilisé votre pouvoir &aPromethee&f."),
     ;
 
     @Setter
     private String display;
+
+    public static final HashMap<RolesType, List<String>> DESCRIPTION = new HashMap<>();
 
     @SneakyThrows
     public static void init() {
@@ -301,6 +328,15 @@ public enum Messages {
 
         FileConfiguration config = Mugiwara.getInstance().getConfig();
         config.load(new File(Mugiwara.getInstance().getDataFolder() + "/config.yml"));
+
+        for (RolesType role : RolesType.values()) {
+            if (config.get("roles." + role.name() + ".display") == null) {
+                config.set("roles." + role.name() + ".display", new ArrayList<>(Arrays.asList("&aLigne 1", "&cLigne 2", "&betc")));
+                Mugiwara.getInstance().saveConfig();
+            }
+            List<String> display = config.getStringList("roles." + role.name() + ".display");
+            DESCRIPTION.put(role, display);
+        }
 
         for (Messages value : values()) {
             if (config.get("messages." + value.name().replace("_", ".")) == null) {

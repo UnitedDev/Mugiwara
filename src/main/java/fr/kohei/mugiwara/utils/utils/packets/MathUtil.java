@@ -34,6 +34,13 @@ public class MathUtil {
         }
     }
 
+    public static void sendParticle(final EnumParticle particle, final double x, final double y, final double z, Player... targets) {
+        final PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(particle, true, (float) x, (float) y, (float) z, 0.0f, 0.0f, 0.0f, 0.0f, 10, (int[]) null);
+        for (final Player p : targets) {
+            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+        }
+    }
+
     public static void sendParticle(final List<Player> players, final EnumParticle particle, final double x, final double y, final double z) {
         final PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(particle, true, (float) x, (float) y, (float) z, 0.0f, 0.0f, 0.0f, 0.0f, 10, (int[]) null);
         for (final Player p : players) {
@@ -77,8 +84,18 @@ public class MathUtil {
         }
     }
 
+    public static void sendCircleParticle(final EnumParticle particle, final Location center, final double radius, final int amount, Player... targets) {
+        final double increment = 6.283185307179586 / amount;
+        for (int i = 0; i < amount; ++i) {
+            final double angle = i * increment;
+            final double x = center.getX() + radius * Math.cos(angle);
+            final double z = center.getZ() + radius * Math.sin(angle);
+            sendParticle(particle, x, center.getY() + 0.5, z, targets);
+        }
+    }
+
     public static Set<Vector> getCircle(Double radius, final Integer amount, final Boolean full, final Double space) {
-        final Set<Vector> list = new HashSet<Vector>();
+        final Set<Vector> list = new HashSet<>();
         if (amount <= 0) {
             return list;
         }

@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.roles.impl.mugiwara.FrankyRole;
+import fr.kohei.mugiwara.roles.mugiwara.FrankyRole;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
@@ -44,16 +44,14 @@ public class GeneralFrankyPower extends RightClickPower {
         Messages.FRANKY_GENERAL_USE.send(player);
         using = true;
 
-        if (((int) (Math.random() * 3) == 1)) {
-            int random = (int) (Math.random() * 3);
-            power = FrankyRole.GeneralPowers.values()[random];
+        int random = (int) (Math.random() * 3);
+        power = FrankyRole.GeneralPowers.values()[random];
 
-            player.getInventory().setItem(
-                    player.getInventory().first(getItem()),
-                    power.getToReplace().toItemStack()
-            );
-            power.getMessages().send(player);
-        }
+        player.getInventory().setItem(
+                player.getInventory().first(getItem()),
+                power.getToReplace().toItemStack()
+        );
+        power.getMessages().send(player);
 
         final UUID uuid = player.getUniqueId();
         new BukkitRunnable() {

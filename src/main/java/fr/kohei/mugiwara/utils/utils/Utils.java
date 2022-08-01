@@ -20,16 +20,10 @@ import java.util.stream.Collectors;
 
 public class Utils {
     public static int getTimeBeforeEpisode() {
-        GameManager gameManager = UHC.getGameManager();
+        GameManager gameManager = UHC.getInstance().getGameManager();
         EpisodeManager episodeManager = gameManager.getEpisodeManager();
 
-        int episodeTime = (episodeManager.getEpisode() - 1) * 20 * 60;
-
-        if (episodeManager.getEpisode() == 1) {
-            return 20 * 60 - gameManager.getDuration();
-        }
-
-        return episodeTime - (gameManager.getDuration() - episodeTime);
+        return episodeManager.getTimeBeforeNext();
     }
 
     public static String itemFormat(String name) {
@@ -63,7 +57,7 @@ public class Utils {
     }
 
     public static List<Player> getPlayers() {
-        return UHC.getGameManager().getPlayers().stream()
+        return UHC.getInstance().getGameManager().getPlayers().stream()
                 .filter(uuid -> Bukkit.getPlayer(uuid) != null)
                 .map(Bukkit::getPlayer)
                 .collect(Collectors.toList());
@@ -74,7 +68,7 @@ public class Utils {
         return player.getNearbyEntities(radius, radius, radius).stream()
                 .filter(entity -> entity instanceof Player)
                 .map(entity -> (Player) entity)
-                .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .filter(player1 -> UHC.getInstance().getGameManager().getPlayers().contains(player1.getUniqueId()))
                 .collect(Collectors.toList());
     }
 
@@ -83,7 +77,7 @@ public class Utils {
         return player.getNearbyEntities(radius, radius, radius).stream()
                 .filter(entity -> entity instanceof Player)
                 .map(entity -> (Player) entity)
-                .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .filter(player1 -> UHC.getInstance().getGameManager().getPlayers().contains(player1.getUniqueId()))
                 .filter(player1 -> roles.contains(MUPlayer.get(player1).getRole().getRole()))
                 .collect(Collectors.toList());
     }
@@ -93,14 +87,14 @@ public class Utils {
         return Bukkit.getOnlinePlayers().stream()
                 .filter(Objects::nonNull)
                 .map(entity -> (Player) entity)
-                .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                .filter(player1 -> UHC.getInstance().getGameManager().getPlayers().contains(player1.getUniqueId()))
                 .filter(player1 -> roles.contains(MUPlayer.get(player1).getRole().getRole()))
                 .collect(Collectors.toList());
     }
 
     public static List<Player> getPlayersInCamp(CampType type) {
         return Bukkit.getOnlinePlayers().stream()
-                .filter(player -> UHC.getGameManager().getPlayers().contains(player.getUniqueId()))
+                .filter(player -> UHC.getInstance().getGameManager().getPlayers().contains(player.getUniqueId()))
                 .filter(player -> ((CampType.MUCamp) UPlayer.get(player).getCamp()).getCampType() == type)
                 .collect(Collectors.toList());
     }

@@ -1,8 +1,7 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.power.CommandPower;
-import fr.kohei.mugiwara.roles.impl.mugiwara.LuffyRole;
-import fr.kohei.mugiwara.roles.impl.solo.BigMomRole;
+import fr.kohei.mugiwara.roles.solo.BigMomRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.utils.ChatUtil;

@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.roles.impl.marine.SmokerRole;
+import fr.kohei.mugiwara.roles.marine.SmokerRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
@@ -45,7 +45,7 @@ public class BlazeRodPower extends RightClickPower {
                 .findFirst().orElse(null);
         if (target == null) return false;
 
-        if(MUPlayer.get(target).getRole() instanceof SmokerRole) {
+        if (MUPlayer.get(target).getRole() instanceof SmokerRole) {
             Messages.SABO_BLAZE_SMOKER.send(player);
             return false;
         }
@@ -60,6 +60,7 @@ public class BlazeRodPower extends RightClickPower {
         final UUID targetUUID = target.getUniqueId();
         new BukkitRunnable() {
             int timer = 15 * 10;
+
             @Override
             public void run() {
                 Player player = Bukkit.getPlayer(playerUUID);
@@ -70,12 +71,12 @@ public class BlazeRodPower extends RightClickPower {
                     return;
                 }
 
-                if(timer == 0) cancel();
+                if (timer == 0) cancel();
 
                 timer--;
                 target.setFireTicks(10);
 
-                if(player.getLocation().distance(target.getLocation()) <= 1) {
+                if (player.getLocation().distance(target.getLocation()) <= 1) {
                     armorStand.remove();
                     return;
                 }
@@ -87,7 +88,10 @@ public class BlazeRodPower extends RightClickPower {
                 MathUtil.sendCircleParticle(EnumParticle.FLAME, target.getLocation(), 1, 5);
 
                 Cuboid cuboid = new Cuboid(armorStand.getLocation().clone().add(1, 1, 1), armorStand.getLocation().clone().add(-1, -1, -1));
-                cuboid.getBlockList().forEach(block -> block.setType(Material.AIR));
+                cuboid.getBlockList().forEach(block -> {
+                    if (block.getType() != Material.REDSTONE_BLOCK)
+                        block.setType(Material.AIR);
+                });
                 final Vector vector = player.getLocation().toVector().subtract(target.getLocation().toVector()).normalize().multiply(-1);
                 armorStand.setVelocity(vector);
             }

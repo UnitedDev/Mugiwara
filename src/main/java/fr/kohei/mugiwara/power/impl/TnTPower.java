@@ -21,7 +21,8 @@ public class TnTPower extends BlockPlacePower {
     public boolean onEnable(Player player, Location location) {
         Utils.getNearPlayers(player, 6).forEach(player1 -> {
             Damage.addTempNoDamage(player1, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, 10);
-            player1.setHealth(player1.getHealth() - 6);
+            if(player1.getHealth() - 6 <= 0) player.setHealth(1);
+            else player1.setHealth(player1.getHealth() - 6);
         });
 
         Messages.GARP_TNT_USE.send(player);

@@ -7,7 +7,7 @@ import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.FormePower;
-import fr.kohei.mugiwara.roles.impl.mugiwara.ChopperRole;
+import fr.kohei.mugiwara.roles.mugiwara.ChopperRole;
 import fr.kohei.utils.ItemBuilder;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;

@@ -31,6 +31,6 @@ public class DenDenMushiPower extends RightClickPower {
 
     @Override
     public boolean isGive() {
-        return false;
+        return true;
     }
 }

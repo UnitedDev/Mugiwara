@@ -3,6 +3,8 @@ package fr.kohei.mugiwara.game.commands;
 import fr.kohei.command.Command;
 import fr.kohei.command.param.Param;
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.game.menu.SeePowersMenu;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.ClickPower;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.power.Power;
@@ -24,6 +26,7 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MUCommands {
 
@@ -46,6 +49,27 @@ public class MUCommands {
         }
     }
 
+    @Command(names = {"mu", "mu help"})
+    public static void commandHelp(Player player) {
+        player.sendMessage(ChatUtil.translate("&7&m--------------------------------"));
+        player.sendMessage(ChatUtil.translate("&8┃ &6&lCommandes Utiles"));
+        player.sendMessage(ChatUtil.translate("  &e/mu help &7(&fToutes les Commandes&7)"));
+        player.sendMessage(ChatUtil.translate("  &e/mu me &7(&fVoir son rôle&7)"));
+        player.sendMessage(ChatUtil.translate("  &e/mu roles &7(&fVoir la composition&7)"));
+
+        RolesType.MURole role = MUPlayer.get(player).getRole();
+        if(role != null && role.getPowers().stream().anyMatch(power -> power instanceof CommandPower)) {
+            player.sendMessage(ChatUtil.translate(" "));
+            player.sendMessage(ChatUtil.translate("&8┃ &6&lCommandes de Rôle"));
+            for (Power power : role.getPowers()) {
+                if (!(power instanceof CommandPower)) continue;
+                CommandPower commandPower = (CommandPower) power;
+                player.sendMessage(ChatUtil.translate("  &e/mu " + commandPower.getArgument()));
+            }
+        }
+        player.sendMessage(ChatUtil.translate("&7&m--------------------------------"));
+    }
+
     @SneakyThrows
     @Command(names = {"setrole"})
     public static void setRole(Player player, @Param(name = "player") Player target, @Param(name = "role") String roleName) {
@@ -53,13 +77,18 @@ public class MUCommands {
                 .findFirst().orElse(null);
 
         UPlayer uPlayer = UPlayer.get(target);
+        if (role == null) {
+            player.sendMessage(ChatUtil.prefix("&cCe rôle n'existe pas."));
+            return;
+        }
+
         RolesType.MURole muRole = role.getRoleClass().newInstance();
 
         uPlayer.setRole(muRole);
         uPlayer.setCamp(role.getCampType().getCamp());
 
         muRole.onDistribute(player);
-        if(muRole instanceof Listener) {
+        if (muRole instanceof Listener) {
             Bukkit.getPluginManager().registerEvents((Listener) muRole, Mugiwara.getInstance());
         }
         target.setHealth(target.getMaxHealth());
@@ -119,9 +148,15 @@ public class MUCommands {
         for (String s : uPlayer.getRole().getDescription()) {
             sender.sendMessage(ChatUtil.translate(s));
         }
+
+        if (Mugiwara.getInstance().getKnows().containsKey(sender.getUniqueId())) {
+            for (RolesType rolesType : Mugiwara.getInstance().getKnows().get(sender.getUniqueId())) {
+                Mugiwara.knowsRole(sender, rolesType);
+            }
+        }
     }
 
-    @Command(names = {"mu mod showrole"}, power = 50)
+    @Command(names = {"mu show"}, power = 39)
     public static void modSeeRole(Player sender, @Param(name = "player") Player target) {
         UPlayer uPlayer = UPlayer.get(target);
 
@@ -131,6 +166,38 @@ public class MUCommands {
         }
 
         sender.sendMessage(ChatUtil.prefix("&fLe rôle de &a" + target.getName() + " &fest &c" + uPlayer.getRole().getName()));
+    }
+
+    @Command(names = {"mu list"}, power = 39)
+    public static void listRoles(Player sender) {
+        sender.sendMessage(ChatUtil.translate("&7&m----------------------"));
+        for (Camp value : UHC.getInstance().getModuleManager().getModule().getCamps()) {
+            GameManager gameManager = UHC.getInstance().getGameManager();
+            if (gameManager.getPlayers().stream()
+                    .filter(uuid -> UPlayer.get(uuid).getRole() != null)
+                    .anyMatch(p -> UPlayer.get(p).getCamp() == value)) {
+                sender.sendMessage(ChatUtil.translate("&8❘ " + value.getColor() + value.getName()));
+                gameManager.getPlayers().stream().filter(uuid -> UPlayer.get(uuid).getRole() != null).forEach(uuid -> {
+                    UPlayer uPlayer1 = UPlayer.get(uuid);
+                    if (uPlayer1.getCamp() == value) {
+                        sender.sendMessage(ChatUtil.translate(" &f&l» &c" + uPlayer1.getRole().getName() + " &f(&7" + uPlayer1.getName() + "&f)"));
+                    }
+                });
+            }
+        }
+        sender.sendMessage(ChatUtil.translate("&7&m----------------------"));
+    }
+
+    @Command(names = {"mu powers", "mu items"}, power = 39)
+    public static void seePowers(Player sender, @Param(name = "player") Player target) {
+        UPlayer uPlayer = UPlayer.get(target);
+
+        if (uPlayer.getRole() == null) {
+            sender.sendMessage(ChatUtil.prefix("&cCe joueur n'a pas de rôle."));
+            return;
+        }
+
+        new SeePowersMenu(target).openMenu(sender);
     }
 
     @Command(names = {"mu op"})
@@ -152,14 +219,14 @@ public class MUCommands {
 
     @Command(names = {"mu roles", "mu compo"})
     public static void showComposition(Player sender) {
-        if (UHC.getGameManager().getGameConfiguration().isHideComposition()) {
+        if (UHC.getInstance().getGameManager().getGameConfiguration().isHideComposition()) {
             sender.sendMessage(ChatUtil.prefix("&cLa composition est cachée."));
             return;
         }
 
         sender.sendMessage(ChatUtil.translate("&7&m----------------------"));
-        for (Camp value : UHC.getModuleManager().getModule().getCamps()) {
-            GameManager gameManager = UHC.getGameManager();
+        for (Camp value : UHC.getInstance().getModuleManager().getModule().getCamps()) {
+            GameManager gameManager = UHC.getInstance().getGameManager();
             if (gameManager.getPlayers().stream()
                     .filter(uuid -> UPlayer.get(uuid).getRole() != null)
                     .anyMatch(p -> UPlayer.get(p).getCamp() == value)) {

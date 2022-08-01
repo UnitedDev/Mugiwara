@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
-import fr.kohei.mugiwara.roles.impl.marine.CobyRole;
+import fr.kohei.mugiwara.roles.marine.CobyRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;

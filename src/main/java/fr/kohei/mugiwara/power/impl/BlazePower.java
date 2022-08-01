@@ -40,6 +40,7 @@ public class BlazePower extends RightClickPower {
             return false;
         }
 
+        used = true;
         // send the dai fukai use message to the player
         Messages.AKAINU_DAI_USE.send(player);
 
@@ -70,7 +71,7 @@ public class BlazePower extends RightClickPower {
                 // remove all the water in a 15 block radius around the player using Cuboid class
                 Cuboid cuboid = new Cuboid(player.getLocation().clone().add(-15, -15, -15), player.getLocation().clone().add(15, 15, 15));
                 cuboid.getBlockList().forEach(block1 -> {
-                    if (block1.getType() == Material.WATER) {
+                    if (block1.getType() == Material.WATER || block1.getType() == Material.STATIONARY_WATER) {
                         block1.setType(Material.AIR);
                     }
                 });

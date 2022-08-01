@@ -21,7 +21,7 @@ public class Movement {
         float walkSpeed = player.getWalkSpeed();
         PotionEffect jumpBoost = player.getActivePotionEffects()
                 .stream()
-                .filter(potionEffect -> potionEffect.getType() == PotionEffectType.JUMP)
+                .filter(potionEffect -> potionEffect.getType().equals(PotionEffectType.JUMP))
                 .findFirst()
                 .orElse(null);
 

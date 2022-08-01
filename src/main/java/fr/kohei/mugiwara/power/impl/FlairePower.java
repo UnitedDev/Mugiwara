@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import static org.bukkit.potion.PotionEffectType.*;
 
 public class FlairePower extends CommandPower {
     private int uses;
@@ -40,8 +39,9 @@ public class FlairePower extends CommandPower {
 
         Messages.CHOPPER_FLAIRE_FIRSTLINE.send(player, new Replacement("<name>", target.getName()));
         if (target.getActivePotionEffects().isEmpty())
-            player.sendMessage(ChatUtil.translate("&cCe joueur n'a aucun effet"));
+            player.sendMessage(ChatUtil.prefix("&cCe joueur n'a aucun effet"));
         else for (PotionEffect activePotionEffect : target.getActivePotionEffects()) {
+            Bukkit.broadcastMessage("debug: " + getDisplay(activePotionEffect.getType()));
             Messages.CHOPPER_FLAIRE_FORMAT.sendNP(player,
                     new Replacement("<name>", getDisplay(activePotionEffect.getType())),
                     new Replacement("<amplifier>", "" + activePotionEffect.getAmplifier()),
@@ -64,29 +64,29 @@ public class FlairePower extends CommandPower {
     }
 
     private String getDisplay(PotionEffectType type) {
-        if (type == SPEED) return "&bSpeed";
-        else if (type == SLOW) return "&7Slowness";
-        else if (type == FAST_DIGGING) return "&eHaste";
-        else if (type == SLOW_DIGGING) return "&7Mining Fatigue";
-        else if (type == INCREASE_DAMAGE) return "&cForce";
-        else if (type == HEAL) return "&cInstant Health";
-        else if (type == HARM) return "&9Instant Damage";
-        else if (type == JUMP) return "&aJump Boost";
-        else if (type == CONFUSION) return "&2Nausée";
-        else if (type == REGENERATION) return "&dRégénération";
-        else if (type == DAMAGE_RESISTANCE) return "&8Résistance";
-        else if (type == FIRE_RESISTANCE) return "&6Fire Résistance";
-        else if (type == WATER_BREATHING) return "&9Water Breathing";
-        else if (type == INVISIBILITY) return "&7Invisibilitée";
-        else if (type == BLINDNESS) return "&0Blindness";
-        else if (type == NIGHT_VISION) return "&2Night Vision";
-        else if (type == HUNGER) return "&2Hunger";
-        else if (type == WEAKNESS) return "&7Weakness";
-        else if (type == POISON) return "&2Poison";
-        else if (type == WITHER) return "&0Wither";
-        else if (type == HEALTH_BOOST) return "&eHealth Boost";
-        else if (type == ABSORPTION) return "&eAbsorption";
-        else if (type == SATURATION) return "&7Saturation";
+        if (type.equals(PotionEffectType.SPEED)) return "&bSpeed";
+        else if (type.equals(PotionEffectType.SLOW)) return "&7Slowness";
+        else if (type.equals(PotionEffectType.FAST_DIGGING)) return "&eHaste";
+        else if (type.equals(PotionEffectType.SLOW_DIGGING)) return "&7Mining Fatigue";
+        else if (type.equals(PotionEffectType.INCREASE_DAMAGE)) return "&cForce";
+        else if (type.equals(PotionEffectType.HEAL)) return "&cInstant Health";
+        else if (type.equals(PotionEffectType.HARM)) return "&9Instant Damage";
+        else if (type.equals(PotionEffectType.JUMP)) return "&aJump Boost";
+        else if (type.equals(PotionEffectType.CONFUSION)) return "&2Nausée";
+        else if (type.equals(PotionEffectType.REGENERATION)) return "&dRégénération";
+        else if (type.equals(PotionEffectType.DAMAGE_RESISTANCE)) return "&8Résistance";
+        else if (type.equals(PotionEffectType.FIRE_RESISTANCE)) return "&6Fire Résistance";
+        else if (type.equals(PotionEffectType.WATER_BREATHING)) return "&9Water Breathing";
+        else if (type.equals(PotionEffectType.INVISIBILITY)) return "&7Invisibilitée";
+        else if (type.equals(PotionEffectType.BLINDNESS)) return "&0Blindness";
+        else if (type.equals(PotionEffectType.NIGHT_VISION)) return "&2Night Vision";
+        else if (type.equals(PotionEffectType.HUNGER)) return "&2Hunger";
+        else if (type.equals(PotionEffectType.WEAKNESS)) return "&7Weakness";
+        else if (type.equals(PotionEffectType.POISON)) return "&2Poison";
+        else if (type.equals(PotionEffectType.WITHER)) return "&0Wither";
+        else if (type.equals(PotionEffectType.HEALTH_BOOST)) return "&eHealth Boost";
+        else if (type.equals(PotionEffectType.ABSORPTION)) return "&eAbsorption";
+        else if (type.equals(PotionEffectType.SATURATION)) return "&7Saturation";
         else return "&cUnknown";
     }
 }

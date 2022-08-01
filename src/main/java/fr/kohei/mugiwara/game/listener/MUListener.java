@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.*;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.Damage;
 import fr.kohei.mugiwara.utils.utils.packets.Spectator;
 import fr.kohei.uhc.game.player.UPlayer;
@@ -115,8 +116,9 @@ public class MUListener implements Listener {
             if (item.getItemMeta().getDisplayName().contains("Mochi")) {
                 //give damage resistance potion effect to player
                 player.addPotionEffect(new org.bukkit.potion.PotionEffect(org.bukkit.potion.PotionEffectType.DAMAGE_RESISTANCE, 20 * 30, 0));
-                player.addPotionEffect(new org.bukkit.potion.PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 30, 0));
-
+                player.addPotionEffect(new org.bukkit.potion.PotionEffect(PotionEffectType.SPEED, 20 * 30, 0));
+                event.setCancelled(true);
+                Utils.removeItem(player, Material.SNOW_BALL, 1);
             }
         }
 
@@ -235,6 +237,13 @@ public class MUListener implements Listener {
             return;
         }
         boolean success = blockPower.onEnable(player, event.getBlock().getLocation());
+        event.setCancelled(true);
+        if (player.getItemInHand().getAmount() == 1) player.setItemInHand(new ItemStack(Material.AIR));
+        else {
+            ItemStack is = player.getItemInHand();
+            is.setAmount(player.getItemInHand().getAmount() - 1);
+            player.setItemInHand(is);
+        }
         if (success) {
             if (blockPower.getCooldown() != null)
                 blockPower.getCooldown().setCooldown(blockPower.getCooldownAmount());

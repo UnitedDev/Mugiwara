@@ -39,7 +39,7 @@ public class ChecklistPower extends CommandPower {
         targetUuid = target.getUniqueId();
 
         // if the GameManager duration is not in 60 minutes or 70 minutes inclusive, send a message to the player and return false
-        if (UHC.getGameManager().getDuration() < 60 * 60 || UHC.getGameManager().getDuration() > 70 * 60) {
+        if (UHC.getInstance().getGameManager().getDuration() < 60 * 60 || UHC.getInstance().getGameManager().getDuration() > 70 * 60) {
             player.sendMessage(ChatUtil.prefix("&cVous ne pouvez pas utiliser cette commande dans cette période."));
             return false;
         }

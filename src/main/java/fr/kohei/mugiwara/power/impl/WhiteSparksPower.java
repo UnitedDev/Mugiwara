@@ -61,7 +61,7 @@ public class WhiteSparksPower extends RightClickPower {
         });
 
         // run a task 30 seconds after
-        player.getServer().getScheduler().runTaskLater(player.getServer().getPluginManager().getPlugin("UHC"), () -> {
+        player.getServer().getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
             // send the smoker white sparks end message
             Messages.SMOKER_WHITESPARKS_END.send(player);
         }, 30L * 20L);

@@ -67,7 +67,11 @@ public class MammouthPower extends RightClickPower {
         // create a cuboid of 8 blocks radius
         Cuboid cuboid = new Cuboid(player.getLocation().clone().add(4, 4, 4), player.getLocation().clone().add(-4, -8, -4));
         // remove all blocks (set the material to air)
-        cuboid.getBlockList().forEach(block -> block.setType(Material.AIR));
+        cuboid.getBlockList().forEach(block -> {
+            if (block.getType() != Material.REDSTONE_BLOCK)
+                block.setType(Material.AIR);
+
+        });
 
         uses++;
         return true;

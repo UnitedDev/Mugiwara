@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.kohei.mugiwara.roles.impl.alliance.KaidoRole;
+import fr.kohei.mugiwara.roles.alliance.KaidoRole;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.utils.Utils;
@@ -32,7 +32,7 @@ public class UoPower extends RightClickPower {
 
         using = true;
         use++;
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60 * 2, 2, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60 * 2, 1, false, false));
         final UPlayer uPlayer = UPlayer.get(player);
         final KaidoRole kaidoRole = ((KaidoRole) uPlayer.getRole());
 
@@ -44,10 +44,10 @@ public class UoPower extends RightClickPower {
             kaidoRole.nofall = false;
         }, 20 * 60 * 2);
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 1, false, false));
         Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
             player.removePotionEffect(PotionEffectType.SPEED);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, (60 + 50) * 20, 1, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, (60 + 50) * 20, 0, false, false));
             kaidoRole.nauseaToPlayer = false;
             player.setFlying(false);
         }, 20 * 10);
@@ -71,7 +71,7 @@ public class UoPower extends RightClickPower {
 
     @Override
     public ItemStack getItem() {
-        return new ItemBuilder(Material.NETHER_STAR).setName(Utils.itemFormat("&b&oUo")).toItemStack();
+        return new ItemBuilder(Material.NETHER_STAR).setName(Utils.itemFormat("&b&lUo")).toItemStack();
     }
 
     @Override

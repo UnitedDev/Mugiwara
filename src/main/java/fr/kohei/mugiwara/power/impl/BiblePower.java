@@ -4,7 +4,7 @@ import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.game.menu.KumaBibleMenu;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.roles.impl.marine.BartholomewKumaRole;
+import fr.kohei.mugiwara.roles.marine.BartholomewKumaRole;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;

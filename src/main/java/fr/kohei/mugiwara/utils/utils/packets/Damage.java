@@ -26,6 +26,10 @@ public class Damage {
         Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> NO_DAMAGE_CAUSE.remove(var1), var3 * 20L);
     }
 
+    public static void addNoDamage(UUID var1, EntityDamageEvent.DamageCause var2) {
+        NO_DAMAGE_CAUSE.put(var1, var2);
+    }
+
     public static void addTempNoDamage(Player var1, EntityDamageEvent.DamageCause var2, int var3) {
         addTempNoDamage(var1.getUniqueId(), var2, var3);
     }

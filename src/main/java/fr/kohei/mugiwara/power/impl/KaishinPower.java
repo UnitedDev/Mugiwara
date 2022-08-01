@@ -85,7 +85,7 @@ public class KaishinPower extends RightClickPower {
                     location.clone().add(4, 2, 4),
                     location.clone().add(-4, random, -4)
             );
-            cuboid.getBlockList().stream().filter(block -> block.getType() != Material.BEDROCK)
+            cuboid.getBlockList().stream().filter(block -> block.getType() != Material.BEDROCK && block.getType() != Material.REDSTONE_BLOCK)
                     .forEach(block -> block.setType(Material.AIR));
         }
     }

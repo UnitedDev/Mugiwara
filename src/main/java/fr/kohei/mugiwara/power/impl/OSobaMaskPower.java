@@ -84,7 +84,7 @@ public class OSobaMaskPower extends RightClickPower {
                 Mugiwara.getInstance().addActionBar(player, "&cInvisibilité &8» &f" + TimeUtil.getReallyNiceTime2(timer * 1000L), "soba");
 
                 List<Player> players = Utils.getPlayers().stream()
-                        .filter(player1 -> UHC.getGameManager().getPlayers().contains(player1.getUniqueId()))
+                        .filter(player1 -> UHC.getInstance().getGameManager().getPlayers().contains(player1.getUniqueId()))
                         .filter(player1 -> isTargetRole(player)).collect(Collectors.toList());
                 MathUtil.sendParticle(players, EnumParticle.REDSTONE, player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), 1, 0, 0, 0);
 

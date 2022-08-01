@@ -39,20 +39,20 @@ public class FormePower extends CommandPower {
     @Getter
     public enum FormeTypes {
         ONE("Forme 1", Messages.CHOPPER_FORME_ONE_DESC.getDisplay(), Material.getMaterial(Messages.CHOPPER_FORME_ONE_MATERIAL.getDisplay()),
-                new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 3 * 20, 0, false, false),
-                new PotionEffect(PotionEffectType.SPEED, 3 * 20, 0, false, false)
+                new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 3 * 60 * 20, 0, false, false),
+                new PotionEffect(PotionEffectType.SPEED, 3 * 60 * 20, 0, false, false)
         ),
         TWO("Forme 2", Messages.CHOPPER_FORME_TWO_DESC.getDisplay(), Material.getMaterial(Messages.CHOPPER_FORME_TWO_MATERIAL.getDisplay()),
-                new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 3 * 20, 1, false, false),
-                new PotionEffect(PotionEffectType.SLOW, 3 * 20, 0, false, false)
+                new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 3 * 60 * 20, 1, false, false),
+                new PotionEffect(PotionEffectType.SLOW, 3 * 60 * 20, 0, false, false)
         ),
         THREE("Forme 3", Messages.CHOPPER_FORME_THREE_DESC.getDisplay(), Material.getMaterial(Messages.CHOPPER_FORME_THREE_MATERIAL.getDisplay()),
-                new PotionEffect(PotionEffectType.SPEED, 3 * 20, 2, false, false),
+                new PotionEffect(PotionEffectType.SPEED, 3 * 60 * 20, 2, false, false),
                 new PotionEffect(PotionEffectType.JUMP, 3 * 20, 5, false, false)
         ),
         FOUR("Forme 4", Messages.CHOPPER_FORME_FOUR_DESC.getDisplay(), Material.getMaterial(Messages.CHOPPER_FORME_FOUR_MATERIAL.getDisplay()),
-                new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 3 * 20, 0, false, false),
-                new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 3 * 20, 0, false, false)
+                new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 3 * 60 * 20, 0, false, false),
+                new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 3 * 60 * 20, 0, false, false)
         );
 
         private final String name;

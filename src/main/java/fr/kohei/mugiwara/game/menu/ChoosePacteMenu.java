@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.game.menu;
 import fr.kohei.menu.Button;
 import fr.kohei.menu.pagination.PaginatedMenu;
 import fr.kohei.mugiwara.game.player.MUPlayer;
-import fr.kohei.mugiwara.roles.impl.solo.SaboRole;
+import fr.kohei.mugiwara.roles.solo.SaboRole;
 import fr.kohei.utils.ItemBuilder;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;

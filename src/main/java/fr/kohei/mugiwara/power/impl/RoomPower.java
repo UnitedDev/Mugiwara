@@ -2,6 +2,8 @@ package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.power.RightClickPower;
+import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.utils.utils.packets.Damage;
 import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.mugiwara.utils.utils.Utils;
@@ -30,7 +32,7 @@ public class RoomPower extends RightClickPower {
 
     @Override
     public ItemStack getItem() {
-        return new ItemBuilder(Material.GHAST_TEAR).setName(Utils.itemFormat("Room")).toItemStack();
+        return new ItemBuilder(Material.BRICK).setName(Utils.itemFormat("&6&lShambles")).toItemStack();
     }
 
     @Override
@@ -45,6 +47,10 @@ public class RoomPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
+        if(this.getCenter() != null) {
+            return false;
+        }
+
         new BukkitRunnable() {
 
             public void run() {
@@ -94,6 +100,7 @@ public class RoomPower extends RightClickPower {
 
         center = player.getLocation();
 
+        Messages.LAW_ROOM_CREATE.send(player, new Replacement("<block>", radius));
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 60 * 20, 0, false, false));
         Damage.addTempNoDamage(player, EntityDamageEvent.DamageCause.FALL, 60);
         new BukkitRunnable() {

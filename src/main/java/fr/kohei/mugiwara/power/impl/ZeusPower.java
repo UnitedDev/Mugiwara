@@ -15,6 +15,8 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -50,17 +52,19 @@ public class ZeusPower extends RightClickPower {
         armorStand.setBasePlate(false);
         armorStand.setArms(false);
         armorStand.setSmall(true);
+        armorStand.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0, false, false));
         armorStand.setMarker(false);
         armorStand.setCustomName(ChatUtil.prefix("&6???"));
         armorStand.setHelmet(Heads.LUCKY.toItemStack());
         new BukkitRunnable() {
-            private int timer = 120 * 20;
+            private int timer = 45 * 20;
             @Override
             public void run() {
                 timer--;
                 if(timer <= 0) {
-                    usingPower = false;
                     armorStand.remove();
+                    Messages.NAMI_ZEUS_FINISH.send(player);
+                    usingPower = false;
                     cancel();
                     return;
                 }
@@ -69,7 +73,6 @@ public class ZeusPower extends RightClickPower {
                 if(player == null || armorStand.isDead()) return;
 
                 armorStand.teleport(getLogicLocation(player));
-                Messages.NAMI_ZEUS_FINISH.send(player);
             }
         }.runTaskTimer(Mugiwara.getInstance(), 1, 1);
 

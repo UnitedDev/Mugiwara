@@ -48,6 +48,7 @@ public class ClutchPower extends RightClickPower {
             return false;
         }
 
+        uses++;
         final UUID uuid = target.getUniqueId();
         new BukkitRunnable() {
             int timer = 10;

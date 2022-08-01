@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
-import fr.kohei.mugiwara.roles.impl.mugiwara.RobinRole;
+import fr.kohei.mugiwara.roles.mugiwara.RobinRole;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.entity.Player;
 
@@ -36,11 +36,11 @@ public class OeilsPower extends CommandPower {
 
     @Override
     public String getName() {
-        return "Oeil";
+        return null;
     }
 
     @Override
     public Integer getCooldownAmount() {
-        return 10;
+        return null;
     }
 }

@@ -3,8 +3,8 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.DamagePlayerPower;
-import fr.kohei.mugiwara.roles.impl.mugiwara.LuffyRole;
-import fr.kohei.mugiwara.roles.impl.mugiwara.SanjiRole;
+import fr.kohei.mugiwara.roles.mugiwara.LuffyRole;
+import fr.kohei.mugiwara.roles.mugiwara.SanjiRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.utils.utils.Utils;
@@ -71,7 +71,8 @@ public class FemurSwordPower extends DamagePlayerPower {
             }
             Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
                 for (final Block block : blocks) {
-                    block.setType(Material.AIR);
+                    if (block.getType() != Material.REDSTONE_BLOCK)
+                        block.setType(Material.AIR);
                 }
             }, time * 20);
             target.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 15 * 20, 1, false, false));

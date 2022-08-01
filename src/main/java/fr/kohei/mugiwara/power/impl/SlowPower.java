@@ -4,7 +4,7 @@ import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
-import fr.kohei.mugiwara.roles.impl.mugiwara.BrookRole;
+import fr.kohei.mugiwara.roles.mugiwara.BrookRole;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

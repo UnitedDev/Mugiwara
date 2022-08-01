@@ -1,8 +1,8 @@
 package fr.kohei.mugiwara.power.impl;
 
 import fr.kohei.mugiwara.Mugiwara;
-import fr.kohei.mugiwara.game.poneglyphe.Poneglyphe;
-import fr.kohei.mugiwara.game.poneglyphe.PoneglypheManager;
+import fr.kohei.mugiwara.game.events.poneglyphe.Poneglyphe;
+import fr.kohei.mugiwara.game.events.poneglyphe.PoneglypheManager;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.utils.ChatUtil;
 import org.bukkit.Bukkit;

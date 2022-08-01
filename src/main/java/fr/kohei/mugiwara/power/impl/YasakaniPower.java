@@ -8,6 +8,7 @@ import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -47,7 +48,12 @@ public class YasakaniPower extends RightClickPower {
         used = true;
 
         // add speed 3 for 2 minutes to player
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120 * 20, 2));
+        player.removePotionEffect(PotionEffectType.SPEED);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120 * 20, 2, false, false));
+
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
+        }, 120 * 20 + 5);
 
         // get all players with a 30 blocks radius
         Utils.getNearPlayers(player, 30).forEach(nearPlayer -> {

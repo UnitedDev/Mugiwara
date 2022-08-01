@@ -35,8 +35,6 @@ public class PlayerUtils {
     }
 
     public static void stopSeeHealthHead(final Player player) {
-        final ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-        final Scoreboard scoreboard = player.getScoreboard();
         player.getScoreboard().clearSlot(DisplaySlot.BELOW_NAME);
     }
 
@@ -48,9 +46,14 @@ public class PlayerUtils {
             public void run() {
                 final Player connected = Bukkit.getPlayer(uuid);
 
+                if (cooldown == 0) {
+                    Utils.getPlayers().forEach(p -> p.showPlayer(connected));
+                    cancel();
+                    return;
+                }
+
                 if (connected == null) return;
 
-                // all players dont see connected anymore
                 Utils.getPlayers().forEach(p -> p.hidePlayer(connected));
                 --this.cooldown;
             }

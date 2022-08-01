@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.roles.impl.alliance.KingRole;
+import fr.kohei.mugiwara.roles.alliance.KingRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
@@ -47,7 +47,10 @@ public class FlyPower extends RightClickPower {
         player.setAllowFlight(true);
         player.setFlying(true);
 
-        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> player.setAllowFlight(false), 5 * 20);
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
+            player.setFlying(false);
+            player.setAllowFlight(false);
+        }, 5 * 20);
         return true;
     }
 }

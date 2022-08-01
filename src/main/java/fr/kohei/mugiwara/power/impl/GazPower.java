@@ -61,7 +61,6 @@ public class GazPower extends CommandPower {
                 }
 
                 MathUtil.sendCircleParticle(EnumParticle.CLOUD, target.getLocation(), 2.0, 10);
-
                 timer--;
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 20);

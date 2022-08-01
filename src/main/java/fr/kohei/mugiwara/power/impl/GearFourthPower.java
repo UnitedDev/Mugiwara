@@ -160,6 +160,6 @@ public class GearFourthPower extends RightClickPower {
     }
 
     public static void spawnParticle(Player player) {
-        MathUtil.sendCircleParticle(EnumParticle.SMOKE_LARGE, player.getLocation(), 1, 10);
+        MathUtil.sendCircleParticle(EnumParticle.SMOKE_NORMAL, player.getLocation(), 1, 10);
     }
 }

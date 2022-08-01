@@ -5,8 +5,8 @@ import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
-import fr.kohei.mugiwara.game.poneglyphe.Poneglyphe;
-import fr.kohei.mugiwara.game.poneglyphe.PoneglypheManager;
+import fr.kohei.mugiwara.game.events.poneglyphe.Poneglyphe;
+import fr.kohei.mugiwara.game.events.poneglyphe.PoneglypheManager;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
 import fr.kohei.utils.ChatUtil;
@@ -46,6 +46,7 @@ public class PoneglypheTask extends BukkitRunnable {
         for (Poneglyphe poneglyphe : new Poneglyphe[]{
                 manager.getFirstPoneglyphe(), manager.getSecondPoneglyphe(), manager.getThirdPoneglyphe(), manager.getFourthPoneglyphe()
         }) {
+            if(!poneglyphe.isSpawned()) continue;
             for (Player nearPlayer : getPlayers(poneglyphe.getId())) {
                 if (nearPlayer.getLocation().distance(poneglyphe.getInitialLocation()) > 15) {
                     readingTime.remove(nearPlayer.getUniqueId());
@@ -55,16 +56,18 @@ public class PoneglypheTask extends BukkitRunnable {
                     Mugiwara.getInstance().removeActionBar(nearPlayer, "poneglyphe" + poneglyphe.getId());
                     reading.put(poneglyphe.getId(), readingPlayers);
 
-                    Messages.PONEGLYPHE_FAR.send(nearPlayer, new Replacement("<number>", poneglyphe.getId()));
+                    if(!read.getOrDefault(nearPlayer.getUniqueId(), new ArrayList<>()).contains(poneglyphe.getId())) {
+                        Messages.PONEGLYPHE_FAR.send(nearPlayer, new Replacement("<number>", poneglyphe.getId()));
+                    }
                 }
             }
 
             List<Player> nearPlayers = Utils.getPlayers().stream()
-                    .filter(player -> UHC.getGameManager().getPlayers().contains(player.getUniqueId()))
+                    .filter(player -> UHC.getInstance().getGameManager().getPlayers().contains(player.getUniqueId()))
                     .filter(player -> player.getLocation().distance(poneglyphe.getInitialLocation()) <= 15)
                     .collect(Collectors.toList());
 
-            if (nearPlayers.size() >= 5) {
+            if (nearPlayers.size() > 5) {
                 getPlayers(poneglyphe.getId()).forEach(Messages.PONEGLYPHE_TOOMUCHPLAYERS::send);
                 return;
             }
@@ -86,8 +89,7 @@ public class PoneglypheTask extends BukkitRunnable {
 
                 readingTime.put(nearPlayer.getUniqueId(), i);
                 RolesType role = MUPlayer.get(nearPlayer).getRole().getRole();
-                Mugiwara.getInstance().addActionBar(nearPlayer, "&cLecture &8» &f" + i + "/" +
-                        (role == RolesType.ROBIN ? "30" : "90"), "poneglyphe" + poneglyphe.getId());
+                Mugiwara.getInstance().addActionBar(nearPlayer, "&cLecture &8» &f" + ((role == RolesType.ROBIN ? 30 : 90) - i), "poneglyphe" + poneglyphe.getId());
 
                 if (i >= 90 && role != RolesType.ROBIN) {
                     capture(nearPlayer, poneglyphe);
@@ -165,7 +167,7 @@ public class PoneglypheTask extends BukkitRunnable {
     }
 
     private void falseCoordinates(Player player) {
-        Location falseLoc = new Location(UHC.getGameManager().getUhcWorld(), (int) (Math.random() * 200), (40 + (int) (Math.random() * 10)), (int) (Math.random() * 200));
+        Location falseLoc = new Location(UHC.getInstance().getGameManager().getUhcWorld(), (int) (Math.random() * 200), (40 + (int) (Math.random() * 10)), (int) (Math.random() * 200));
         player.sendMessage(ChatUtil.prefix(" &f&l» " +
                 "&a" + falseLoc.getBlockX() + "&f, " +
                 "&a" + falseLoc.getBlockY() + "&f, " +

@@ -41,7 +41,7 @@ public class YataPower extends RightClickPower {
 
         // teleport player to target and send him the kizaru yata use message with the target name
         player.teleport(target.getLocation());
-        Messages.KIZARU_YATA_USE.send(player, new Replacement("<target>", target.getName()));
+        Messages.KIZARU_YATA_USE.send(player, new Replacement("<name>", target.getName()));
 
         // add speed 2 for 1 minute to the player
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 60 * 20, 1));

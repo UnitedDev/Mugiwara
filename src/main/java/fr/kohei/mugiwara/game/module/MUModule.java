@@ -3,7 +3,9 @@ package fr.kohei.mugiwara.game.module;
 import fr.kohei.menu.Menu;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.camp.CampType;
-import fr.kohei.mugiwara.game.poneglyphe.PoneglypheMenu;
+import fr.kohei.mugiwara.game.events.poneglyphe.PoneglypheMenu;
+import fr.kohei.mugiwara.game.events.SectionManager;
+import fr.kohei.mugiwara.game.menu.TresorMenu;
 import fr.kohei.mugiwara.power.ClickPower;
 import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.RolesType;
@@ -41,7 +43,8 @@ public class MUModule extends Module {
         HashMap<RoleType, Class<? extends Role>> roles = new HashMap<>();
 
         for (RolesType value : RolesType.values()) {
-            roles.put(new RoleType(value.getName(), value.getCampType().getCamp()), value.getRoleClass());
+            if (value.getRoleClass() == null) continue;
+            roles.put(new RoleType(value.getName(), value.getCampType().getCamp(), value.getDisplay()), value.getRoleClass());
         }
 
         return roles;
@@ -61,6 +64,7 @@ public class MUModule extends Module {
     @Override
     public void onStart() {
         Mugiwara.getInstance().getPoneglypheManager().onStart();
+        Mugiwara.getInstance().getTresorManager().onStart();
     }
 
     @Override
@@ -99,18 +103,22 @@ public class MUModule extends Module {
             }
         }.runTaskLater(Mugiwara.getInstance(), 50);
 
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
+            new SectionManager().giveBadge();
+        }, 2 * 20 * 60);
+
         new CooldownCheckTask();
         new PoneglypheTask();
     }
 
     @Override
     public void onDeath(Player player, Player player1) {
-
+        Mugiwara.getInstance().attemptWin();
     }
 
     @Override
     public void onDisconnectDeath(UUID uuid) {
-
+        Mugiwara.getInstance().attemptWin();
     }
 
     @Override
@@ -138,7 +146,17 @@ public class MUModule extends Module {
                         "&fles ponéglyphes.",
                         "",
                         "&f&l» &cCliquez pour y accéder"
-                ).toItemStack(), new PoneglypheMenu());
+                ).toItemStack(), new PoneglypheMenu()
+        );
+        menus.put(
+                new ItemBuilder(Material.CHEST).setName("&cTrésor").setLore(
+                        "&fPermet d'accéder à tous les timers pour",
+                        "&fles trésors.",
+                        "",
+                        "&f&l» &cCliquez pour y accéder"
+                ).toItemStack(), new TresorMenu()
+        );
+
 
         return menus;
     }

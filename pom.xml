@@ -38,7 +38,7 @@
         <dependency>
             <groupId>fr.kohei</groupId>
             <artifactId>uhc</artifactId>
-            <version>1.0.3-alpha3</version>
+            <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

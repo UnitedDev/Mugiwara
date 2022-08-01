@@ -20,7 +20,7 @@ public class MorsurePower extends DamagePlayerPower {
 
     @Override
     public String getName() {
-        return null;
+        return "Morsure";
     }
 
     @Override

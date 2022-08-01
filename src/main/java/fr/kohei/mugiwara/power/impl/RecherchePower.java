@@ -4,7 +4,7 @@ import com.lunarclient.bukkitapi.LunarClientAPI;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
-import fr.kohei.mugiwara.roles.impl.marine.LieutenantRole;
+import fr.kohei.mugiwara.roles.marine.LieutenantRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.utils.utils.Utils;
@@ -30,7 +30,7 @@ public class RecherchePower extends CommandPower {
         List<Player> players = new ArrayList<>();
         rechercheTargets = new HashMap<>();
 
-        Utils.getPlayers().stream().sorted().forEach(player1 -> {
+        Utils.getPlayers().forEach(player1 -> {
             if (players.size() >= 3) return;
             players.add(player1);
         });

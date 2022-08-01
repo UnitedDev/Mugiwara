@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.utils.Utils;
+import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,7 +13,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class MokoPower extends RightClickPower {
+    private int used;
+
     @Override
     public ItemStack getItem() {
         return new ItemBuilder(Material.FIREWORK).setName(Utils.itemFormat("&5&lMoko")).toItemStack();
@@ -30,11 +37,19 @@ public class MokoPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
+        if(used >= 3) {
+            player.sendMessage(ChatUtil.prefix("&cVous avez déjà utilisé 3 fois ce pouvoir."));
+            return false;
+        }
+
         Messages.FUJITORA_MOKO_USE.send(player);
+
+        used++;
 
         new BukkitRunnable() {
             int seconds = 0;
 
+            List<UUID> touched = new ArrayList<>();
             @Override
             public void run() {
                 if(seconds > 30) {
@@ -59,7 +74,10 @@ public class MokoPower extends RightClickPower {
                         nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10 * 20, 3, false, false));
                         nearPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 10 * 20, 3, false, false));
                     }
-                    Messages.FUJITORA_MOKO_TARGET.send(nearPlayer);
+                    if(!touched.contains(nearPlayer.getUniqueId())) {
+                        Messages.FUJITORA_MOKO_TARGET.send(nearPlayer);
+                        touched.add(nearPlayer.getUniqueId());
+                    }
                 });
 
 

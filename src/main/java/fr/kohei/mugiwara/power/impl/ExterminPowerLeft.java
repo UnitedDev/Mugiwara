@@ -4,7 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.RightClickPower;
-import fr.kohei.mugiwara.roles.impl.alliance.JackRole;
+import fr.kohei.mugiwara.roles.alliance.JackRole;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ItemBuilder;
 import org.bukkit.Bukkit;

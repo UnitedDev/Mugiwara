@@ -4,9 +4,11 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.utils.Utils;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.utils.Cuboid;
 import fr.kohei.utils.ItemBuilder;
 import fr.kohei.utils.ReflectionUtils;
+import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -54,13 +56,13 @@ public class DashPower extends RightClickPower {
         armorStand.setVisible(false);
         List<UUID> damaged = new ArrayList<>();
 
+        target.setHealth(target.getHealth() - 4);
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 Player player = Bukkit.getPlayer(playerUUID);
                 Player target = Bukkit.getPlayer(targetUUID);
-
-                if (armorStand == null) return;
 
                 if (armorStand.getPassenger() == null) armorStand.setPassenger(player);
 
@@ -88,13 +90,14 @@ public class DashPower extends RightClickPower {
                 cuboid.getBlockList().stream()
                         .filter(block -> block.getType() != Material.REDSTONE_BLOCK)
                         .filter(block -> !block.getType().name().contains("CHEST"))
+                        .filter(block -> block.getType() != Material.REDSTONE_BLOCK)
                         .forEach(block -> block.setType(Material.AIR));
 
                 GearFourthPower.spawnParticle(player);
 
                 Utils.getPlayers().forEach(player1 -> {
                     if(player1.getUniqueId().equals(playerUUID)) return;
-                    if (player1.getLocation().distance(player.getLocation()) <= 2
+                    if (player1.getLocation().distance(player.getLocation()) <= 4
                             && !damaged.contains(player1.getUniqueId())) {
                         player1.setHealth(player1.getHealth() - 3);
                         Messages.ZORO_DASH_ONWAY.send(player1);
@@ -107,5 +110,9 @@ public class DashPower extends RightClickPower {
 
         Messages.ZORO_DASH.send(player);
         return true;
+    }
+
+    public static void spawnParticle(Player player) {
+        MathUtil.sendCircleParticle(EnumParticle.VILLAGER_HAPPY, player.getLocation(), 1, 20);
     }
 }

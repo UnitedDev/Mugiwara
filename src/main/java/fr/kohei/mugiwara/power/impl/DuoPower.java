@@ -4,7 +4,7 @@ import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.roles.impl.solo.SaboRole;
+import fr.kohei.mugiwara.roles.solo.SaboRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.utils.ChatUtil;

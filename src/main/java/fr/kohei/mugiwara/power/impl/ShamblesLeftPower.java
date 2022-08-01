@@ -47,7 +47,6 @@ public class ShamblesLeftPower extends RightClickPower {
                 .findFirst().orElse(null);
         if(roomPower == null) return false;
         if(roomPower.getCenter() == null) {
-            player.sendMessage(ChatUtil.prefix("&cVous n'êtes pas en train d'utiliser votre pouvoir de room."));
             return false;
         }
 

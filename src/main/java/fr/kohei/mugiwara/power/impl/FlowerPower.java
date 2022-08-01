@@ -45,7 +45,7 @@ public class FlowerPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
-        if(used) {
+        if (used) {
             player.sendMessage(ChatUtil.prefix("&cVous avez déjà utilisé ce pouvoir."));
             return false;
         }
@@ -67,14 +67,20 @@ public class FlowerPower extends RightClickPower {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30 * 20, 2, false, false));
         Movement.freeze(target, 30);
         Damage.addNoDamage(target, 30);
-        Cuboid cuboid = new Cuboid(target.getLocation().clone().add(3, 3, 3), target.getLocation().clone().add(-3, -3, -3));
-        cuboid.getBlockList().forEach(block -> block.setType(Material.STONE));
+        Cuboid cuboid = new Cuboid(target.getLocation().clone().add(1, 1, 1), target.getLocation().clone().add(-1, -1, -1));
+        cuboid.getBlockList().forEach(block -> {
+            if (block.getType() != Material.REDSTONE_BLOCK)
+                block.setType(Material.STONE);
+        });
         Messages.HANCOCK_AMOUR_USE.send(player, new Replacement("<name>", target.getName()));
         Messages.HANCOCK_AMOUR_TARGET.send(target);
 
         // task 30 seconds after
-        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> cuboid.getBlockList().forEach(block -> block.setType(Material.AIR)), 30 * 20);
-        if(role == RolesType.SANJI) {
+        Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> cuboid.getBlockList().forEach(block -> {
+            if (block.getType() != Material.REDSTONE_BLOCK)
+                block.setType(Material.AIR);
+        }), 30 * 20);
+        if (role == RolesType.SANJI) {
             target.setMaxHealth(target.getMaxHealth() - 4);
             Messages.HANCOCK_AMOUR_SANJI.send(target);
         }

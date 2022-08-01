@@ -3,7 +3,7 @@ package fr.kohei.mugiwara.game.menu;
 import fr.kohei.menu.Button;
 import fr.kohei.menu.pagination.PaginatedMenu;
 import fr.kohei.mugiwara.game.player.MUPlayer;
-import fr.kohei.mugiwara.roles.impl.marine.BartholomewKumaRole;
+import fr.kohei.mugiwara.roles.marine.BartholomewKumaRole;
 import fr.kohei.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

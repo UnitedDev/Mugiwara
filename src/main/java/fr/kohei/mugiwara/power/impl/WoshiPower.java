@@ -10,6 +10,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class WoshiPower extends CommandPower {
+    private boolean used;
+
     @Override
     public String getArgument() {
         return "woshi";
@@ -17,6 +19,12 @@ public class WoshiPower extends CommandPower {
 
     @Override
     public boolean onEnable(Player player, String[] args) {
+        if(used) {
+            player.sendMessage(ChatUtil.prefix("&cVous avez déjà utilisé ce pouvoir."));
+            return false;
+        }
+
+        used = true;
         Player target = Bukkit.getPlayer(args[1]);
         if (target == null) {
             player.sendMessage(ChatUtil.prefix("&cCe joueur n'est pas connecté."));

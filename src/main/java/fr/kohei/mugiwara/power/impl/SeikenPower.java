@@ -29,7 +29,7 @@ public class SeikenPower extends DamagePlayerPower {
             for (int z = -1; z <= 1; ++z) {
                 for (int y = 0; y <= 10; ++y) {
                     final Block block = target.getWorld().getBlockAt(loc.getBlockX() + x, loc.getBlockY() + y, loc.getBlockZ() + z);
-                    if (block != null && block.getType() != null && block.getType() != Material.AIR) {
+                    if (block != null && block.getType() != null && block.getType() != Material.AIR && block.getType() != Material.REDSTONE_BLOCK) {
                         block.setType(Material.AIR);
                     }
                 }

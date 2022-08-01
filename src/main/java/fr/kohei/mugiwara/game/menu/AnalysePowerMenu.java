@@ -4,7 +4,6 @@ import fr.kohei.menu.Button;
 import fr.kohei.menu.pagination.PaginatedMenu;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.roles.impl.marine.XDrakeRole;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;

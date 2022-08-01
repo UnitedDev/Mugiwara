@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class ShamblesRightPower extends RightClickPower {
     @Override
     public ItemStack getItem() {
-        return new ItemBuilder(Material.GHAST_TEAR).setName(Utils.itemFormat("&6&lShambles")).toItemStack();
+        return new ItemBuilder(Material.BRICK).setName(Utils.itemFormat("&6&lShambles")).toItemStack();
     }
 
     @Override
@@ -43,7 +43,6 @@ public class ShamblesRightPower extends RightClickPower {
                 .findFirst().orElse(null);
         if(roomPower == null) return false;
         if(roomPower.getCenter() == null) {
-            player.sendMessage(ChatUtil.prefix("&cVous n'êtes pas en train d'utiliser votre pouvoir de room."));
             return false;
         }
 
@@ -54,5 +53,10 @@ public class ShamblesRightPower extends RightClickPower {
         target.teleport(playerLocation);
 
         return true;
+    }
+
+    @Override
+    public boolean isGive() {
+        return false;
     }
 }
