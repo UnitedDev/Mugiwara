@@ -1,31 +1,56 @@
 package fr.kohei.mugiwara.roles.marine;
 
 import fr.kohei.mugiwara.Mugiwara;
+import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.IcePower;
+import fr.kohei.mugiwara.power.impl.IceRightPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.Cooldown;
 import fr.kohei.utils.Cuboid;
+import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Getter
 @Setter
-public class KuzanRole extends RolesType.MURole {
+public class KuzanRole extends RolesType.MURole implements Listener {
+
+    private int coup = 0;
+    private boolean isSaberMode = false;
+
     private int inWater = 0;
     private int timer = 0;
     private int endurence = 0;
     private boolean ice;
+    private Player lastHit;
+    private List<Location> domeLocation = new ArrayList<>();
+    private final Cooldown domeCooldown = new Cooldown("domeCooldown");
+
+    private ItemStack iceSaber = new ItemBuilder(Material.DIAMOND_SWORD).setName("§bIce Saber").addEnchant(Enchantment.DAMAGE_ALL, 4).toItemStack();
 
     public KuzanRole() {
         super(Arrays.asList(
-                new IcePower()
+                new IcePower(),
+                new IceRightPower()
         ));
+        Bukkit.getPluginManager().registerEvents(this, Mugiwara.getInstance());
     }
 
     @Override
@@ -48,7 +73,7 @@ public class KuzanRole extends RolesType.MURole {
         else this.inWater = 0;
 
         if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 0, false, false));
             //Messages.WATER.send(player);
             this.inWater = 0;
         }
@@ -62,6 +87,10 @@ public class KuzanRole extends RolesType.MURole {
                 endurence++;
         }
 
+        if (timer % 5 == 0) {
+            lastHit = null;
+        }
+
         if (isIce()) {
             Cuboid cuboid = new Cuboid(
                     player.getLocation().clone().add(2, -1, 2),
@@ -71,5 +100,67 @@ public class KuzanRole extends RolesType.MURole {
                 block.setType(Material.PACKED_ICE);
             });
         }
+
+        if (domeCooldown.isCooldownNoMessage(player)) return;
+
+        for (Location domeLoc : domeLocation) {
+            Block domeBlock = domeLoc.getBlock();
+            if (domeBlock.getType() != Material.BEDROCK) {
+                domeBlock.setType(Material.AIR);
+            }
+        }
+
     }
+
+    public void incrementCoup() {
+        if (!isSaberMode) return;
+        coup++;
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e) {
+        if (!(e.getEntity() instanceof Player)) return;
+        if (!(e.getDamager() instanceof Player)) return;
+
+        Player damager = (Player) e.getDamager();
+        Player player = (Player) e.getEntity();
+
+        MUPlayer muDamager = MUPlayer.get(damager);
+        MUPlayer muPlayer = MUPlayer.get(player);
+
+        if(muPlayer.getRole() instanceof KuzanRole){
+
+            KuzanRole kuzanRole = (KuzanRole) muPlayer.getRole();
+
+            kuzanRole.setLastHit(damager);
+
+        }
+
+        if(!(muDamager.getRole() instanceof KuzanRole)) return;
+
+        KuzanRole kuzanRole = (KuzanRole) muDamager.getRole();
+
+        kuzanRole.incrementCoup();
+
+        if (kuzanRole.getCoup() == 30) {
+            damager.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+            damager.getInventory().remove(getIceSaber());
+            kuzanRole.setSaberMode(false);
+            kuzanRole.setCoup(0);
+        }
+
+        if (!(damager.getItemInHand().isSimilar(getIceSaber()) || kuzanRole.isSaberMode())) return;
+
+        if (Math.random() < 0.16D) {
+
+            player.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.PACKED_ICE);
+
+        }
+
+
+        return;
+
+
+    }
+
 }

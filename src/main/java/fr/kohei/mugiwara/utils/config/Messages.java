@@ -211,6 +211,12 @@ public enum Messages {
     AKAINU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
     AKAINU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
 
+    KUZAN_LAST_HIT_NULL("§cAucune §fpersonne ne vous a touché les §c5 dernière secondes§f."),
+    KUZAN_IS_IN_SABER_MODE("§fVotre capacité §cIce Saber §fest déjà §cactivé§f."),
+    KUZAN_ICE_AGE_USE("§fVous avez utilisé votre pouvoir §bIce Age§f."),
+    KUZAN_ICE_SABER_USE("§fVous avez utilisé votre pouvoir §bIce Saber§f."),
+    KUZAN_HAS_NOT_OF_ENDURENCE("§cVous ne possédez pas assez d'endurence !"),
+
     KIZARU_YATA_USE("&fVous avez utilisé votre pouvoir &aYata&f sur &c<name>&f."),
     KIZARU_YASAKANI_USE("&fVous avez utilisé votre pouvoir &aYasakani&f."),
     KIZARU_YASAKANI_END("&fVotre pouvoir &aYasakani&f a été &cdésactivé&f."),
