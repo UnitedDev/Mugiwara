@@ -87,7 +87,7 @@ public class MUCommands {
         uPlayer.setRole(muRole);
         uPlayer.setCamp(role.getCampType().getCamp());
 
-        muRole.onDistribute(player);
+        muRole.onDistribute(target);
         if (muRole instanceof Listener) {
             Bukkit.getPluginManager().registerEvents((Listener) muRole, Mugiwara.getInstance());
         }

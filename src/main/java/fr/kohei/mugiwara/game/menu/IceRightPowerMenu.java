@@ -68,7 +68,7 @@ public class IceRightPowerMenu extends Menu {
 
             KuzanRole kuzanRole = (KuzanRole) muPlayer.getRole();
 
-            if(slot == 2){
+            if(type == IceCapacityType.ICE_AGE){
 
                 if(kuzanRole.getEndurence() < 45){
                     Messages.KUZAN_HAS_NOT_OF_ENDURENCE.send(player);
@@ -108,7 +108,7 @@ public class IceRightPowerMenu extends Menu {
                 return;
             }
 
-            if(slot == 4){
+            if(type == IceCapacityType.ICE_SABER){
 
                 if(kuzanRole.getEndurence() < 35){
                     Messages.KUZAN_HAS_NOT_OF_ENDURENCE.send(player);
@@ -130,7 +130,7 @@ public class IceRightPowerMenu extends Menu {
                 return;
             }
 
-            if(slot == 6){
+            if(type == IceCapacityType.ICE_TIME_CAPSULE){
 
                 if(kuzanRole.getDomeCooldown().isCooldown(player)) return;
 
