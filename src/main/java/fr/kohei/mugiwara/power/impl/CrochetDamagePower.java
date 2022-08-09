@@ -21,11 +21,8 @@ public class CrochetDamagePower extends DamagePlayerPower {
 
     @Override
     public boolean onEnable(Player player, Player target, EntityDamageByEntityEvent damage) {
-
-        if(getCooldown().isCooldownNoMessage(player)) return false;
-
         target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 5 * 20, 1, false, false));
-        Messages.CROCODILE_CROCHET_USE.send(player, new Replacement(target.getName(), "<name>"));
+        Messages.CROCODILE_CROCHET_USE.send(player, new Replacement("<name>", target.getName()));
 
         return true;
     }

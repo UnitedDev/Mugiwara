@@ -1,15 +1,11 @@
 package fr.kohei.mugiwara.roles.marine;
 
-import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.CrochetDamagePower;
 import fr.kohei.mugiwara.power.impl.GroundSeccoRightPower;
 import fr.kohei.mugiwara.roles.RolesType;
-import fr.kohei.mugiwara.utils.utils.Utils;
-import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,7 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Getter @Setter
+@Getter
+@Setter
 public class CrocodileRole extends RolesType.MURole implements Listener {
 
     private boolean isInWater = false;
@@ -33,10 +30,9 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
 
     public CrocodileRole() {
         super(Arrays.asList(
-            new CrochetDamagePower(),
-            new GroundSeccoRightPower()
+                new CrochetDamagePower(),
+                new GroundSeccoRightPower()
         ));
-        Bukkit.getPluginManager().registerEvents(this, Mugiwara.getInstance());
     }
 
     @Override
@@ -46,8 +42,7 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onDay(Player player) {
-        if(player.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
-            player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+        player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
     }
 
     @Override
@@ -57,63 +52,57 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onSecond(Player player) {
-
-        if(player.getLocation().clone().add(0, -1, 0).getBlock().getType() == Material.SAND)
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 3, 1, false, false));
+        if (player.getLocation().clone().add(0, -1, 0).getBlock().getType() == Material.SAND)
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 4, 1, false, false));
 
         isInWater = false;
 
-        if(isInWater(player)) {
+        if (isInWater(player)) {
             isInWater = true;
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30 * 20, 0, false, false));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 30 * 20, 0, false, false));
         }
 
-        if(isUseGroundSecco && timer < 11){
-
-            if(!checkCoord(player) || timer == 10){
-
+        if (isUseGroundSecco && timer < 11) {
+            if (!checkCoord(player) || timer == 10) {
                 replaceAllBlocks(player, (timer * 5));
 
                 isUseGroundSecco = false;
                 timer = 0;
                 return;
             }
-
             timer++;
         }
-
-
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent e){
-        if(!(e.getDamager() instanceof Player || e.getEntity() instanceof Player)) return;
+    public void onDamage(EntityDamageByEntityEvent e) {
+        if (!(e.getDamager() instanceof Player || e.getEntity() instanceof Player)) return;
 
         Player damager = (Player) e.getDamager();
         Player player = (Player) e.getEntity();
 
         MUPlayer muDamager = MUPlayer.get(damager);
 
-        if(!(muDamager.getRole() instanceof CrocodileRole)) return;
+        if (!(muDamager.getRole() instanceof CrocodileRole)) return;
 
-        if(damager.getItemInHand().getType().name().contains("SWORD")){
+        if (damager.getItemInHand().getType().name().contains("SWORD")) {
             player.setFoodLevel(player.getFoodLevel() - 1);
         }
     }
 
-    public boolean isInWater(Player player){
+    public boolean isInWater(Player player) {
         return player.getLocation().clone().getBlock().getType().name().contains("WATER") || player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("WATER");
     }
 
-    public boolean checkCoord(Player player){
+    public boolean checkCoord(Player player) {
         int x = player.getLocation().getBlockX();
         int y = player.getLocation().getBlockY();
         int z = player.getLocation().getBlockZ();
         return (x == getLocation().getBlockX() && y == getLocation().getBlockY() && z == getLocation().getBlockZ());
     }
 
-    private void replaceAllBlocks(Player player, int radius){
+    private void replaceAllBlocks(Player player, int radius) {
 
         List<Location> sphereLocation = getSphere(player.getLocation(), radius);
 
@@ -121,8 +110,6 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
                 .filter(location -> location.getBlock().getType() != Material.BEDROCK)
                 .filter(location -> location.getBlock().getType() != Material.AIR)
                 .forEach(location -> location.getBlock().setType(Material.SAND));
-
-
 
 
     }

@@ -29,10 +29,6 @@ public class GroundSeccoRightPower extends RightClickPower {
 
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
-
-        if(!rightClick) return false;
-        if(getCooldown().isCooldown(player)) return false;
-
         MUPlayer muPlayer = MUPlayer.get(player);
 
         CrocodileRole crocodileRole = (CrocodileRole) muPlayer.getRole();
