@@ -80,7 +80,11 @@ public class IceRightPowerMenu extends Menu {
 
                 for(Location sphere : getSphere(player.getLocation(), 30)){
                     Block block = sphere.getBlock();
-                    Bukkit.getOnlinePlayers().stream().filter(players -> UPlayer.get(players.getUniqueId()).isAlive() && player != players && players.getLocation().distance(player.getLocation()) <= 30).forEach(players -> {
+                    Bukkit.getOnlinePlayers().stream()
+                            .filter(players -> UPlayer.get(players.getUniqueId()).isAlive())
+                            .filter(players -> players != players)
+                            .filter(players -> players.getLocation().distance(player.getLocation()) <= 30)
+                            .forEach(players -> {
 
                         players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 15 * 20, 2, false, false));
                         players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 15 * 20, 1, false, false));

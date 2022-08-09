@@ -60,6 +60,7 @@ public enum RolesType {
     SOLDAT("Soldat", CampType.MARINE, SoldatRole.class, new ItemStack(Material.IRON_INGOT)),
     TSURU("Tsuru", CampType.MARINE, TsuruRole.class, new ItemStack(Material.SUGAR)),
     KUZAN("Kuzan", CampType.MARINE, KuzanRole.class, new ItemStack(Material.PACKED_ICE)),
+    CROCODILE("Crocodile", CampType.MARINE, CrocodileRole.class, new ItemStack(Material.INK_SACK, 1, (short)4)),
 
 
     KAIDO("Kaidö", CampType.BIGMOM_KAIDO, KaidoRole.class, new ItemStack(Material.STONE_AXE)),

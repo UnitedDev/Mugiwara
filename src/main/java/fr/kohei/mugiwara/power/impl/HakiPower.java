@@ -44,7 +44,7 @@ public class HakiPower extends CommandPower {
     private boolean hasAuraRed(final Player target) {
         final RolesType.MURole role = MUPlayer.get(target).getRole();
         if (role instanceof KuzanRole) return false;
-        return !(role.getStartCamp() instanceof MarineCamp) || role.getRole() == RolesType.DRAKE || role.getRole() == RolesType.HANCOCK || role.getRole() == RolesType.KUMA || role.getRole() == RolesType.SMOKER || role.getRole() == RolesType.MIHAWK;
+        return !(role.getStartCamp() instanceof MarineCamp) || role.getRole() == RolesType.DRAKE || role.getRole() == RolesType.HANCOCK || role.getRole() == RolesType.KUMA || role.getRole() == RolesType.SMOKER || role.getRole() == RolesType.MIHAWK || role.getRole() == RolesType.CROCODILE;
     }
 
     @Override

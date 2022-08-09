@@ -2,6 +2,7 @@ package fr.kohei.mugiwara.roles.marine;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
+import fr.kohei.mugiwara.power.impl.NanashakuJittePower;
 import fr.kohei.mugiwara.power.impl.WhiteSparksPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import org.bukkit.Material;
@@ -26,7 +27,8 @@ public class SmokerRole extends RolesType.MURole implements Listener {
 
     public SmokerRole() {
         super(Arrays.asList(
-                new WhiteSparksPower()
+                new WhiteSparksPower(),
+                new NanashakuJittePower()
         ));
     }
 
