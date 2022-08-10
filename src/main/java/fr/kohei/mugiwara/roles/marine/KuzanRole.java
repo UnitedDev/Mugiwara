@@ -103,12 +103,9 @@ public class KuzanRole extends RolesType.MURole implements Listener {
 
         if (domeCooldown.isCooldownNoMessage(player)) return;
 
-        for (Location domeLoc : domeLocation) {
-            Block domeBlock = domeLoc.getBlock();
-            if (domeBlock.getType() != Material.BEDROCK) {
-                domeBlock.setType(Material.AIR);
-            }
-        }
+        domeLocation.stream()
+                .filter(domeLoc -> domeLoc.getBlock().getType() != Material.BEDROCK)
+                .forEach(domeLoc -> domeLoc.getBlock().setType(Material.AIR));
 
     }
 
@@ -123,6 +120,9 @@ public class KuzanRole extends RolesType.MURole implements Listener {
         if (!(e.getDamager() instanceof Player)) return;
 
         Player damager = (Player) e.getDamager();
+
+        if(damager != getPlayer()) return;
+
         Player player = (Player) e.getEntity();
 
         MUPlayer muDamager = MUPlayer.get(damager);
@@ -156,9 +156,6 @@ public class KuzanRole extends RolesType.MURole implements Listener {
             player.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.PACKED_ICE);
 
         }
-
-
-        return;
 
 
     }

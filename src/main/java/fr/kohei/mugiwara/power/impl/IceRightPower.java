@@ -28,8 +28,6 @@ public class IceRightPower extends RightClickPower {
     @Override
     public boolean onEnable(Player player, boolean rightClick) {
 
-        if(!rightClick) return false;
-
         new IceRightPowerMenu().openMenu(player);
 
         return false;

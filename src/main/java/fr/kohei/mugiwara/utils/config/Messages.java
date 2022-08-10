@@ -217,8 +217,10 @@ public enum Messages {
     KUZAN_ICE_SABER_USE("&fVous avez utilisé votre pouvoir &bIce Saber&f."),
     KUZAN_HAS_NOT_OF_ENDURENCE("&cVous ne possédez pas assez d'endurence !"),
 
-    CROCODILE_CROCHET_USE("&fVous venez d'infligé &cPoison II §fpendant 5 secondes à &c<name>&f."),
+    CROCODILE_CROCHET_USE("&fVous venez d'infligé &cPoison I §fpendant 10 secondes à &c<name>&f."),
+    CROCODILE_CROCHET_HIT("&fVous avez été &ctouché &fpar le &ccrochet&f."),
     CROCODILE_GROUND_SECCO_USE("&fVous venez d'utilisé &cGround Secco&f."),
+    CROCODILE_GROUND_SECCO_REPLACE("&fTous les blocs dans un rayon de &c<radius> blocs&f ont été remplacés&f."),
     CROCODILE_GROUND_SECCO_WATER("&cVous ne pouvez pas utiliser Ground Secco dans l'eau."),
 
     KIZARU_YATA_USE("&fVous avez utilisé votre pouvoir &aYata&f sur &c<name>&f."),

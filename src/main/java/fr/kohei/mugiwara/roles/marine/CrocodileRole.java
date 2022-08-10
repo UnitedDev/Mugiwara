@@ -4,6 +4,7 @@ import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.impl.CrochetDamagePower;
 import fr.kohei.mugiwara.power.impl.GroundSeccoRightPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
@@ -24,9 +25,7 @@ import java.util.List;
 public class CrocodileRole extends RolesType.MURole implements Listener {
 
     private boolean isInWater = false;
-    private Location location = null;
-    private boolean isUseGroundSecco = false;
-    private int timer = 0;
+    private int inWater = 0;
 
     public CrocodileRole() {
         super(Arrays.asList(
@@ -52,39 +51,46 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onSecond(Player player) {
-        if (player.getLocation().clone().add(0, -1, 0).getBlock().getType() == Material.SAND)
+        if (player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("SAND"))
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 4, 1, false, false));
 
-        isInWater = false;
-
         if (isInWater(player)) {
-            isInWater = true;
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30 * 20, 0, false, false));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 30 * 20, 0, false, false));
+            this.inWater++;
+        } else {
+            this.isInWater = false;
+            this.inWater = 0;
         }
 
-        if (isUseGroundSecco && timer < 11) {
-            if (!checkCoord(player) || timer == 10) {
-                replaceAllBlocks(player, (timer * 5));
-
-                isUseGroundSecco = false;
-                timer = 0;
-                return;
-            }
-            timer++;
+        if (this.inWater >= 5) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 0, false, false));
+            //Messages.WATER.send(player);
+            this.isInWater = true;
+            this.inWater = 0;
         }
+
+
     }
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
-        if (!(e.getDamager() instanceof Player || e.getEntity() instanceof Player)) return;
+        if (!(e.getDamager() instanceof Player)) return;
+        if (!(e.getEntity() instanceof Player)) return;
 
         Player damager = (Player) e.getDamager();
+
+        if (damager != getPlayer()) return;
+
         Player player = (Player) e.getEntity();
 
         MUPlayer muDamager = MUPlayer.get(damager);
+        MUPlayer muPlayer = MUPlayer.get(player);
 
         if (!(muDamager.getRole() instanceof CrocodileRole)) return;
+
+        RolesType rolesType = muPlayer.getRole().getRole();
+
+        if (rolesType == RolesType.FRANKY || rolesType == RolesType.EUSTASS || rolesType == RolesType.KUMA || rolesType == RolesType.QUEEN /**|| rolesType == TODO PACIFISTA*/)
+            return;
 
         if (damager.getItemInHand().getType().name().contains("SWORD")) {
             player.setFoodLevel(player.getFoodLevel() - 1);
@@ -95,39 +101,5 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
         return player.getLocation().clone().getBlock().getType().name().contains("WATER") || player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("WATER");
     }
 
-    public boolean checkCoord(Player player) {
-        int x = player.getLocation().getBlockX();
-        int y = player.getLocation().getBlockY();
-        int z = player.getLocation().getBlockZ();
-        return (x == getLocation().getBlockX() && y == getLocation().getBlockY() && z == getLocation().getBlockZ());
-    }
-
-    private void replaceAllBlocks(Player player, int radius) {
-
-        List<Location> sphereLocation = getSphere(player.getLocation(), radius);
-
-        sphereLocation.stream()
-                .filter(location -> location.getBlock().getType() != Material.BEDROCK)
-                .filter(location -> location.getBlock().getType() != Material.AIR)
-                .forEach(location -> location.getBlock().setType(Material.SAND));
-
-
-    }
-
-    private List<Location> getSphere(Location centerBlock, int radius) {
-        List<Location> circleBlocks = new ArrayList<>();
-        int bX = centerBlock.getBlockX();
-        int bY = centerBlock.getBlockY();
-        int bZ = centerBlock.getBlockZ();
-        for (int x = bX - radius; x <= bX + radius; x++) {
-            for (int y = bY - radius; y <= bY + radius; y++) {
-                for (int z = bZ - radius; z <= bZ + radius; z++) {
-                    Location block = new Location(centerBlock.getWorld(), x, y, z);
-                    circleBlocks.add(block);
-                }
-            }
-        }
-        return circleBlocks;
-    }
 
 }

@@ -80,6 +80,7 @@ public class IceRightPowerMenu extends Menu {
 
                 for(Location sphere : getSphere(player.getLocation(), 30)){
                     Block block = sphere.getBlock();
+
                     Bukkit.getOnlinePlayers().stream()
                             .filter(players -> UPlayer.get(players.getUniqueId()).isAlive())
                             .filter(players -> players != players)
@@ -159,14 +160,15 @@ public class IceRightPowerMenu extends Menu {
                 Location centerDome = new Location(location.getWorld(), location.getX(), location.getY() + 10, location.getZ());
 
                 List<Location> sphereLoc = MathUtil.getSphere(centerDome, 15, true);
-                kuzanRole.setDomeLocation(sphereLoc);
+                kuzanRole.getDomeLocation().clear();
 
-                for(Location locBlock : sphereLoc){
-                    Block block = locBlock.getBlock();
-                    if(block.getType() != Material.BEDROCK){
-                        block.setType(Material.PACKED_ICE);
-                    }
-                }
+                sphereLoc.stream()
+                        .filter(locBlock -> locBlock.getBlock().getType() != Material.BEDROCK)
+                        .filter(locBlock -> locBlock.getBlockX() >= centerDome.getBlockX())
+                        .forEach(locBlock -> {
+                            locBlock.getBlock().setType(Material.PACKED_ICE);
+                            kuzanRole.getDomeLocation().add(locBlock);
+                        });
 
                 player.teleport(new Location(location.getWorld(), location.getX() + 10, location.getY() + 1, location.getZ()));
 
