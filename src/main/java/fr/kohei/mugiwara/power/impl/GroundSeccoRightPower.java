@@ -11,13 +11,17 @@ import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -56,19 +60,18 @@ public class GroundSeccoRightPower extends RightClickPower {
 
         new BukkitRunnable() {
             int radius = 0;
+
             @Override
             public void run() {
 
 
                 if (!checkCoord(player) || radius == 50) {
                     replaceAllBlocks(player, radius);
-                    Mugiwara.getInstance().removeActionBar(player, "radius");
                     cancel();
                     return;
                 }
 
                 radius = radius + 5;
-                Mugiwara.getInstance().addActionBar(player, "&cRadius &8» &f" + radius, "radius");
 
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0L, 10L);
@@ -95,8 +98,25 @@ public class GroundSeccoRightPower extends RightClickPower {
                 .filter(location -> !location.getBlock().getType().name().contains("SAND"))
                 .forEach(location -> location.getBlock().setType(Material.SANDSTONE));
 
+        Bukkit.getOnlinePlayers().stream()
+                .filter(players -> players != player)
+                .filter(players -> location.getWorld() == players.getWorld())
+                .filter(players -> players.getLocation().distance(location) <= radius)
+                .filter(players -> players.getLocation().distance(location) > 0)
+                .forEach(players -> {
+                    players.setFoodLevel(0);
+                    for (ItemStack itemStack : players.getInventory().getContents()) {
+                        if (players.getInventory().contains(Material.WATER_BUCKET)) {
+                            if (itemStack.getType() == Material.WATER_BUCKET) {
+                                itemStack.setType(Material.BUCKET);
+                            }
+                        }
+                    }
+                });
+
         Messages.CROCODILE_GROUND_SECCO_REPLACE.send(player, new Replacement("<radius>", radius));
 
 
     }
+
 }
