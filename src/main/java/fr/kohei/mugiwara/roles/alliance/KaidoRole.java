@@ -5,7 +5,6 @@ import fr.kohei.mugiwara.camp.CampType;
 import fr.kohei.mugiwara.camp.impl.MarineCamp;
 import fr.kohei.mugiwara.camp.impl.MugiwaraHeartCamp;
 import fr.kohei.mugiwara.camp.impl.SaboKumaCamp;
-import fr.kohei.mugiwara.roles.marine.SoldatRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.uhc.game.player.UPlayer;
 import fr.kohei.mugiwara.power.impl.BoroPower;
@@ -145,9 +144,9 @@ public class KaidoRole extends RolesType.MURole implements Listener {
                 }
             }
 
-            if (muRole.getRole() == RolesType.SOLDAT) {
+            /*if (muRole.getRole() == RolesType.SOLDAT) {
                 ((SoldatRole) muRole).onTransformation(player, sbirePlayer);
-            }
+            }*/
 
             sbirePlayer = null;
             progression = 0;

@@ -175,11 +175,6 @@ public enum Messages {
     XDRAKE_ALLOSAURUS_ACTIVATE("&fVous avez activé votre pouvoir &aAllosaurus&f."),
     XDRAKE_MORSURE_VICTIM("&c<name>, &fvous avez été mordu par &cX-Drake&f."),
 
-    LIEUTENANT_COMMANDANT_DEATH("&fLe &acommandant &fvient de mourir. Vous obtenez &cRésistance&f."),
-    LIEUTENANT_RECHERCHE_TARGETS("&fVoici la liste des 3 pseudos: &c<names>&f."),
-    LIEUTENANT_RECHERCHE_KILLER("&fCe joueur &cn'est pas &fle tueur du dernier mort."),
-    LIEUTENANT_RECHERCHE_NOTKILLER("&fCe joueur &aest &fle tueur du dernier mort."),
-
     KATAKURI_ROLES_REVEAL("&fLe rôle de <name> est : &a<role>&f."),
 
     COBY_PHASE_CHANGE("&fVous êtes passé à la phase &c<phase>&f."),
@@ -189,14 +184,6 @@ public enum Messages {
     COBY_DENDENMUSHI_ENABLE("&fUn joueur vient d'utiliser son pouvoir de &aDenDen Mushi&f en &c<x>&f, &c<y>&f, &c<z>&f."),
     COBY_DENDENMUSHI_SEE("&a&l[VOIR LA CONVERSATION]"),
     COBY_DENDENMUSHI_WILLSEE("&fVous allez voir la conversation du &cjoueur&f."),
-
-    COMMANDANT_GUERRE_USE("&fVous avez utilisé votre pouvoir &aGuerre&f."),
-    COMMANDANT_GUERRE_COORDINATES("&cCommandant &fse trouve aux coordonnées &c<x>&f, &c<y>&f, &c<z>&f."),
-    COMMANDANT_WANTED_TARGET("&fVous avez été recherché par le &cCommandant&f."),
-    COMMANDANT_WANTED_NOTPIRATE("&fVotre joueur recherché n'est pas un pirate. Vous perdez &c2 coeurs&f."),
-    COMMANDANT_WANTED_FIRST("&fVous obtenez &c3 coeurs&f permanent et l'effet &cforce 1 &fpermament."),
-    COMMANDANT_WANTED_SECOND("&fVous obtenez &c2 coeurs&f permanent et l'effet &cforce 1 &fle jour."),
-    COMMANDANT_WANTED_THIRD("&fVous obtenez &c2 coeurs&f permanent."),
 
     SMOKER_WHITESPARKS_USE("&fVous avez utilisé votre pouvoir &aWhitespark&f."),
     SMOKER_WHITESPARKS_END("&fVotre pouvoir &aWhitespark&f a été &cdésactivé&f."),
@@ -217,6 +204,17 @@ public enum Messages {
     KUZAN_ICE_SABER_USE("&fVous avez utilisé votre pouvoir &bIce Saber&f."),
     KUZAN_HAS_NOT_OF_ENDURENCE("&cVous ne possédez pas assez d'endurence !"),
 
+    PACIFISTA_ANALYSE_SYNTAX("&cSyntax : /mu analyse <pseudo>"),
+    PACIFISTA_ANALYSE_NEAR("&cVous n'êtes pas assez proche de <name>."),
+    PACIFISTA_ANALYSE_USE("&fVous venez d'utilisé &cAnalyse &fsur &c<name>&f."),
+    PACIFISTA_ANALYSE_CAN("&fVous pouvez de nouveau utiliser &cAnalyse&f."),
+    PACIFISTA_ANALYSE_CANT("&fVous ne pouvez plus utiliser &cAnalyse&f."),
+    PACIFISTA_ANALYSE_KILL("&c<name> &fpossède en ce moment &c<kill> kills&f."),
+    PACIFISTA_ANALYSE_EFFETS("&c<name> &fpossède les effets &c<effets>&f."),
+    PACIFISTA_ANALYSE_APPLE("&fVous voyez dès maintenant les &cpommes d'or &fque possède &c<name>&f."),
+    PACIFISTA_ANALYSE_HEALTH("&fVous voyez dès maintenant les &ccoeurs &fde &c<name>&f."),
+    PACIFISTA_ANALYSE_PRIME("&c<name> &fpossède une prime de &c<prime>&f."),
+
     CROCODILE_CROCHET_USE("&fVous venez d'infligé &cPoison I §fpendant 10 secondes à &c<name>&f."),
     CROCODILE_CROCHET_HIT("&fVous avez été &ctouché &fpar le &ccrochet&f."),
     CROCODILE_GROUND_SECCO_USE("&fVous venez d'utilisé &cGround Secco&f."),
@@ -226,16 +224,6 @@ public enum Messages {
     KIZARU_YATA_USE("&fVous avez utilisé votre pouvoir &aYata&f sur &c<name>&f."),
     KIZARU_YASAKANI_USE("&fVous avez utilisé votre pouvoir &aYasakani&f."),
     KIZARU_YASAKANI_END("&fVotre pouvoir &aYasakani&f a été &cdésactivé&f."),
-
-    SOLDAT_CHOICE_ONE_MATERIAL("DIAMOND_SWORD"),
-    SOLDAT_CHOICE_ONE_LORE("ligne 1 \nligne 2"),
-    SOLDAT_CHOICE_ONE_SELECT("&fVous avez &achoisi&f le choix numéro 1."),
-    SOLDAT_CHOICE_TWO_MATERIAL("IRON_CHESTPLATE"),
-    SOLDAT_CHOICE_TWO_LORE("ligne 1 \nligne 2"),
-    SOLDAT_CHOICE_TWO_SELECT("&fVous avez &achoisi&f le choix numéro 2."),
-    SOLDAT_CHOICE_THREE_MATERIAL("PAPER"),
-    SOLDAT_CHOICE_THREE_LORE("ligne 1 \nligne 2"),
-    SOLDAT_CHOICE_THREE_SELECT("&fVous avez &achoisi&f le choix numéro 3."),
 
     JACK_MAMMOUTH_USE("&fVous avez utilisé votre pouvoir &aMammouth&f."),
     JACK_MAMMOUTH_TARGET("&fVous avez été &cpropulsé&f par &c<name>&f."),

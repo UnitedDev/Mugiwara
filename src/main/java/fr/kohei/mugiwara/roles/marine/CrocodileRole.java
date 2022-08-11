@@ -89,7 +89,7 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
 
         RolesType rolesType = muPlayer.getRole().getRole();
 
-        if (rolesType == RolesType.FRANKY || rolesType == RolesType.EUSTASS || rolesType == RolesType.KUMA || rolesType == RolesType.QUEEN /**|| rolesType == TODO PACIFISTA*/)
+        if (rolesType == RolesType.FRANKY || rolesType == RolesType.EUSTASS || rolesType == RolesType.KUMA || rolesType == RolesType.QUEEN || rolesType == RolesType.PACIFISTA)
             return;
 
         if (damager.getItemInHand().getType().name().contains("SWORD")) {

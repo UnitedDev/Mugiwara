@@ -47,8 +47,6 @@ public enum RolesType {
     GARP("Monkey D. Garp", CampType.MARINE, GarpRole.class, new ItemStack(Material.TNT)),
     COBY("Coby ", CampType.MARINE, CobyRole.class, new ItemStack(Material.INK_SACK, 1, (short) 10)),
     DRAKE("X Drake", CampType.MARINE, XDrakeRole.class, new ItemStack(Material.ROTTEN_FLESH)),
-    COMMANDANT("Commandant", CampType.MARINE, CommandantRole.class, new ItemStack(Material.DIAMOND)),
-    LIEUTENANT("Lieutenant", CampType.MARINE, LieutenantRole.class, new ItemStack(Material.IRON_INGOT)),
     MIHAWK("Mihawk", CampType.MARINE, MihawkRole.class, new ItemStack(Material.DIAMOND_SWORD)),
     SMOKER("Smoker", CampType.MARINE, SmokerRole.class, new ItemStack(Material.INK_SACK, 1, (short) 0)),
     HANCOCK("Boa Hancock", CampType.MARINE, HancockRole.class, new ItemStack(Material.YELLOW_FLOWER, 1)),
@@ -57,10 +55,10 @@ public enum RolesType {
     AKAINU("Chef Akainu", CampType.MARINE, AkainuRole.class, new ItemStack(Material.LAVA_BUCKET)),
     SENGOKU("Sengoku", CampType.MARINE, null, new ItemStack(Material.BONE)),
     KUMA("Bartholomew Kuma", CampType.MARINE, BartholomewKumaRole.class, new ItemStack(Material.ANVIL)),
-    SOLDAT("Soldat", CampType.MARINE, SoldatRole.class, new ItemStack(Material.IRON_INGOT)),
     TSURU("Tsuru", CampType.MARINE, TsuruRole.class, new ItemStack(Material.SUGAR)),
     KUZAN("Kuzan", CampType.MARINE, KuzanRole.class, new ItemStack(Material.PACKED_ICE)),
     CROCODILE("Crocodile", CampType.MARINE, CrocodileRole.class, new ItemStack(Material.INK_SACK, 1, (short)4)),
+    PACIFISTA("Pacifista", CampType.MARINE, PacifistaRole.class, new ItemStack(Material.INK_SACK)),
 
 
     KAIDO("Kaidö", CampType.BIGMOM_KAIDO, KaidoRole.class, new ItemStack(Material.STONE_AXE)),
