@@ -62,11 +62,11 @@ public class LazerLeftPower extends RightClickPower {
         int timer = lazerRightPower.getTimer();
 
         if (timer <= 2) {
-            removeHealthDamage(player,1.5);
+            removeHealthDamage(player, 3);
         } else if (timer == 3 || timer == 2) {
-            removeHealthDamage(player, 2.5);
+            removeHealthDamage(player, 5);
         } else if (timer == 5) {
-            removeHealthDamage(player, 3.5);
+            removeHealthDamage(player, 7);
         }
 
         Mugiwara.getInstance().removeActionBar(player, "chargement");
@@ -87,6 +87,12 @@ public class LazerLeftPower extends RightClickPower {
         player.getWorld().createExplosion(location, 3.5F, false);
         Bukkit.getOnlinePlayers().stream()
                 .filter(players -> players.getLocation().distance(location) <= 5)
-                .forEach(players -> players.damage(health));
+                .forEach(players -> {
+                    players.setHealth(players.getHealth() - health);
+                    players.setVelocity(player.getLocation().subtract(players.getLocation()).toVector().multiply(3.6));
+                    /**
+                     * TODO EDIT
+                     */
+                });
     }
 }

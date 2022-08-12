@@ -513,6 +513,24 @@ public enum ParticleEffect {
         }
     }
 
+    public static void makeParticleLine(Location from, Location to, int red, int green, int blue) {
+
+        from.subtract(to);
+
+        double distance = from.distance(to);
+        Vector direction = from.subtract(to).toVector();
+
+        for (double i = 0; i < distance; i += 0.1) {
+            Location particle = from.add(direction.normalize().multiply(i));
+
+            float r = (float) red / 255;
+            float g = (float) green / 255;
+            float b = (float) blue / 255;
+
+            particle.getWorld().spigot().playEffect(particle, Effect.COLOURED_DUST, 0, 1, r, g, b, 1, 0, 30);
+        }
+    }
+
     /**
      * Returns the name of this particle effect
      *

@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.power.RightClickPower;
 import fr.kohei.mugiwara.utils.config.Messages;
+import fr.kohei.mugiwara.utils.particle.ParticleEffect;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.mugiwara.utils.utils.packets.MathUtil;
 import fr.kohei.utils.ItemBuilder;
@@ -10,6 +11,7 @@ import fr.kohei.utils.TimeUtil;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.server.v1_8_R3.EnumParticle;
+import org.apache.commons.lang.enums.Enum;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -64,8 +66,7 @@ public class LazerRightPower extends RightClickPower {
 
                 timer++;
                 Mugiwara.getInstance().addActionBar(player, "&cChargement &8» &f " + TimeUtil.getReallyNiceTime2(timer * 1000L), "chargement");
-
-                MathUtil.sendLineParticle(EnumParticle.SLIME, player.getLocation(), player.getTargetBlock((Set<Material>) null, 30).getLocation(), 1, player);
+                MathUtil.sendLineParticle(EnumParticle.LAVA, player.getLocation(), player.getTargetBlock((Set<Material>) null, 30).getLocation(), 1, player);
 
                 if (timer >= 6) {
                     timer = 0;
