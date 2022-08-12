@@ -50,7 +50,7 @@ public class CrochetDamagePower extends DamagePlayerPower {
                     return;
                 }
 
-                target.setVelocity(vector.multiply(1.2).setY(0.3));
+                target.setVelocity(vector.multiply(1.2).setY(0.5));
 
                 time--;
 

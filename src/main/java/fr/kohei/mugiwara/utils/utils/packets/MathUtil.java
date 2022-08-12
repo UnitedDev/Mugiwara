@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 
 import java.text.DecimalFormat;
@@ -116,6 +117,30 @@ public class MathUtil {
             }
         }
         return list;
+    }
+
+    public static void sendLineParticle(EnumParticle particle, Location from, Location to, double space) {
+        double distance = from.distance(to);
+        Vector vFrom = from.toVector();
+        Vector vTo = to.toVector();
+        Vector vector = vTo.clone().subtract(vFrom).normalize().multiply(space);
+        double length = 0;
+        for (; length < distance; vFrom.add(vector)) {
+            sendParticle(particle, vFrom.getX(), vFrom.getY(), vFrom.getZ());
+            length += space;
+        }
+    }
+
+    public static void sendLineParticle(EnumParticle particle, Location from, Location to, double space, Player... players) {
+        double distance = from.distance(to);
+        Vector vFrom = from.toVector();
+        Vector vTo = to.toVector();
+        Vector vector = vTo.clone().subtract(vFrom).normalize().multiply(space);
+        double length = 0;
+        for (; length < distance; vFrom.add(vector)) {
+            sendParticle(particle, vFrom.getX(), vFrom.getY(), vFrom.getZ(), players);
+            length += space;
+        }
     }
 
     private static Set<Vector> getSphereAbove(final Double radius, final Integer amount, final Boolean full, final Double space) {

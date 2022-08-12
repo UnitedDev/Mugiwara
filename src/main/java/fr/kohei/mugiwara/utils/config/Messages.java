@@ -208,12 +208,14 @@ public enum Messages {
     PACIFISTA_ANALYSE_NEAR("&cVous n'êtes pas assez proche de <name>."),
     PACIFISTA_ANALYSE_USE("&fVous venez d'utilisé &cAnalyse &fsur &c<name>&f."),
     PACIFISTA_ANALYSE_CAN("&fVous pouvez de nouveau utiliser &cAnalyse&f."),
-    PACIFISTA_ANALYSE_CANT("&fVous ne pouvez plus utiliser &cAnalyse&f."),
+    PACIFISTA_ANALYSE_CANT("&cVous ne pouvez plus utiliser Analyse."),
     PACIFISTA_ANALYSE_KILL("&c<name> &fpossède en ce moment &c<kill> kills&f."),
     PACIFISTA_ANALYSE_EFFETS("&c<name> &fpossède les effets &c<effets>&f."),
     PACIFISTA_ANALYSE_APPLE("&fVous voyez dès maintenant les &cpommes d'or &fque possède &c<name>&f."),
     PACIFISTA_ANALYSE_HEALTH("&fVous voyez dès maintenant les &ccoeurs &fde &c<name>&f."),
     PACIFISTA_ANALYSE_PRIME("&c<name> &fpossède une prime de &c<prime>&f."),
+
+    PACIFISTA_LAZER_CANT("&cVous ne pouvez plus utiliser Lazer."),
 
     CROCODILE_CROCHET_USE("&fVous venez d'infligé &cPoison I §fpendant 10 secondes à &c<name>&f."),
     CROCODILE_CROCHET_HIT("&fVous avez été &ctouché &fpar le &ccrochet&f."),

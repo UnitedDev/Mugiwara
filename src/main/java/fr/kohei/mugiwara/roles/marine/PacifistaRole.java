@@ -2,6 +2,8 @@ package fr.kohei.mugiwara.roles.marine;
 
 import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.power.impl.AnalysePower;
+import fr.kohei.mugiwara.power.impl.LazerLeftPower;
+import fr.kohei.mugiwara.power.impl.LazerRightPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
 import org.bukkit.entity.Player;
@@ -9,13 +11,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class PacifistaRole extends RolesType.MURole {
 
     public PacifistaRole() {
         super(Arrays.asList(
-                new AnalysePower()
+                new AnalysePower(),
+                new LazerRightPower(),
+                new LazerLeftPower()
         ));
     }
 
