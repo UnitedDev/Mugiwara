@@ -214,8 +214,8 @@ public enum Messages {
     PACIFISTA_ANALYSE_APPLE("&fVous voyez dès maintenant les &cpommes d'or &fque possède &c<name>&f."),
     PACIFISTA_ANALYSE_HEALTH("&fVous voyez dès maintenant les &ccoeurs &fde &c<name>&f."),
     PACIFISTA_ANALYSE_PRIME("&c<name> &fpossède une prime de &c<prime>&f."),
-
     PACIFISTA_LAZER_CANT("&cVous ne pouvez plus utiliser Lazer."),
+    PACIFISTA_LAZER_USE("&fVous venez d'utilisé &cLazer&f."),
 
     CROCODILE_CROCHET_USE("&fVous venez d'infligé &cPoison I §fpendant 10 secondes à &c<name>&f."),
     CROCODILE_CROCHET_HIT("&fVous avez été &ctouché &fpar le &ccrochet&f."),

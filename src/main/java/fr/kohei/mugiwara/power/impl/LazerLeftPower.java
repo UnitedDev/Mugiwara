@@ -70,6 +70,7 @@ public class LazerLeftPower extends RightClickPower {
         }
 
         Mugiwara.getInstance().removeActionBar(player, "chargement");
+        Messages.PACIFISTA_LAZER_USE.send(player);
         lazerRightPower.setUsed(false);
         lazerRightPower.setTimer(0);
 
