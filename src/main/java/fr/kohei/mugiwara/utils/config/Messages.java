@@ -198,6 +198,12 @@ public enum Messages {
     AKAINU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
     AKAINU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
 
+    AKAINU_INUGAMI_CANT("&cVous ne possédez plus d'utilisation."),
+    AKAINU_INUGAMI_NULL("&cVous ne visez aucun joueur."),
+    AKAINU_INUGAMI_USE("&fVous venez d'utilisé &cInugami Guren &fsur &c<name>&f."),
+    AKAINU_INUGAMI_TARGET("&cAkainu &fa utilisé son pouvoir &6Inugami Guren &fsur vous."),
+    AKAINU_INUGAMI_NEAR("&cVous n'êtes pas assez proche de <name>."),
+
     KUZAN_LAST_HIT_NULL("&cAucune &fpersonne ne vous a touché les &c5 dernière secondes&f."),
     KUZAN_IS_IN_SABER_MODE("&fVotre capacité &cIce Saber &fest déjà &cactivé&f."),
     KUZAN_ICE_AGE_USE("&fVous avez utilisé votre pouvoir &bIce Age&f."),

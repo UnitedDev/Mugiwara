@@ -72,6 +72,7 @@ public class LazerRightPower extends RightClickPower {
                     timer = 0;
                     isUsed = false;
                     player.getWorld().createExplosion(player.getLocation(), 3.5F, false);
+                    player.setHealth(player.getHealth() - 8);
                     Mugiwara.getInstance().removeActionBar(player, "chargement");
                     cancel();
                 }
