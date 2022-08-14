@@ -36,6 +36,10 @@ public class ConvPower extends CommandPower {
 
         String message = stringBuilder.toString().replaceFirst(args[0], "");
 
+        /**
+         * TODO EDIT
+         */
+
         Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
 
             if(muPlayer.getRole() instanceof AkainuRole){
