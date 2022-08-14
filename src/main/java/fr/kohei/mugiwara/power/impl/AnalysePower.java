@@ -37,6 +37,8 @@ public class AnalysePower extends CommandPower {
 
         Player target = Bukkit.getPlayer(args[1]);
 
+        if(player == target) return false;
+
         if (!this.isCanUse) {
             Messages.PACIFISTA_ANALYSE_CANT.send(player);
             return false;

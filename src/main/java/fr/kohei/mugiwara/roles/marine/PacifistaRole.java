@@ -7,6 +7,7 @@ import fr.kohei.mugiwara.power.impl.LazerRightPower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -55,4 +56,5 @@ public class PacifistaRole extends RolesType.MURole {
         Messages.PACIFISTA_ANALYSE_CAN.send(getPlayer());
 
     }
+
 }

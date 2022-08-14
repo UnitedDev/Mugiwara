@@ -1,14 +1,18 @@
 package fr.kohei.mugiwara.roles.marine;
 
+import fr.kohei.mugiwara.power.impl.ConvPower;
 import fr.kohei.mugiwara.power.impl.EbullitionPower;
+import fr.kohei.mugiwara.power.impl.FirePower;
 import fr.kohei.mugiwara.power.impl.InugamiGurenPower;
 import fr.kohei.mugiwara.roles.RolesType;
+import fr.kohei.mugiwara.utils.config.Messages;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -20,19 +24,24 @@ import java.util.Arrays;
 
 @Getter
 @Setter
-public class AkainuRole extends RolesType.MURole {
+public class AkainuRole extends RolesType.MURole implements Listener {
+
     private int inWater = 0;
+    private int inFire = 0;
+    private boolean isFire = false;
 
     public AkainuRole() {
         super(Arrays.asList(
                 new EbullitionPower(),
-                new InugamiGurenPower()
+                new InugamiGurenPower(),
+                new FirePower(),
+                new ConvPower()
         ));
     }
 
     @Override
     public RolesType getRole() {
-        return RolesType.KIZARU;
+        return RolesType.AKAINU;
     }
 
     @Override
@@ -69,6 +78,55 @@ public class AkainuRole extends RolesType.MURole {
             //Messages.WATER.send(player);
             this.inWater = 0;
         }
+
+        if (player.getFireTicks() > 0) this.inFire++;
+        else this.inFire = 0;
+
+        if (this.inFire >= 6) {
+            player.setHealth(player.getHealth() + 1);
+            this.inFire = 0;
+        }
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e) {
+
+        if (!(e.getEntity() instanceof Player)) return;
+
+        Player player = (Player) e.getEntity();
+
+        if (!isRole(player)) return;
+
+        if(e.getDamager() instanceof Player){
+
+            Player damager = (Player) e.getDamager();
+
+            if(!this.isFire) return;
+
+            damager.setFireTicks(120 * 20);
+
+            return;
+        }
+
+        if(!(e.getDamager() instanceof Arrow)) return;
+
+        Arrow arrow = (Arrow) e.getDamager();
+
+        if(!(arrow.getShooter() instanceof Player && arrow.getShooter() instanceof Skeleton)) return;
+
+        if(Math.random() > 0.50D){
+            e.setCancelled(true);
+            Messages.AKAINU_LOGIA_NODAMAGE.send(player);
+        }
+
+        if(!(arrow.getShooter() instanceof Player)) return;
+
+        Player damager = (Player) arrow.getShooter();
+
+        if(!this.isFire) return;
+
+        damager.setFireTicks(120 * 20);
+
     }
 
 }

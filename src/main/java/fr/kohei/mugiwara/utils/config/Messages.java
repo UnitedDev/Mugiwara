@@ -191,13 +191,13 @@ public enum Messages {
     SMOKER_GAZ_USE("&fVous avez utilisé votre pouvoir &cSmoke &fsur &c<name>&f."),
     SMOKER_GAZ_TARGET("&cSmoker &fa utilisé son pouvoir &cSmoke &fsur vous."),
 
-    AKAINU_FIOLE_USE("&fVous avez utilisé votre pouvoir &aFiole&f."),
-    AKAINU_FIOLE_END("&fVotre pouvoir &aFiole&f a été &cdésactivé&f."),
-    AKAINU_DAI_USE("&fVous avez utilisé votre pouvoir &aDai&f."),
-    AKAINU_DAI_END("&fVotre pouvoir &aDai&f a été &cdésactivé&f."),
+    AKAINU_CONV_SYNTAX("&cSyntax : /mu conv <message>"),
+    AKAINU_CONV_MESSAGE("&cAkainu &f➥ &cSengoku &f: &c<message>"),
+    AKAINU_LOGIA_NODAMAGE("&fVous venez de recevoir &caucun dégât&f."),
+
+    AKAINU_FIRE_SYNTAX("&cSyntax : /mu fire"),
     AKAINU_FIRE_ENABLE("&fVous avez activé votre pouvoir &cFire&f."),
     AKAINU_FIRE_DISABLE("&fVotre pouvoir &cFire&f a été &cdésactivé&f."),
-
     AKAINU_INUGAMI_CANT("&cVous ne possédez plus d'utilisation."),
     AKAINU_INUGAMI_NULL("&cVous ne visez aucun joueur."),
     AKAINU_INUGAMI_USE("&fVous venez d'utilisé &cInugami Guren &fsur &c<name>&f."),
@@ -308,6 +308,7 @@ public enum Messages {
 
     SENGOKU_GARPDEATH_KILLER("&cGarp &fa été tué par &c<name>&f."),
     SENGOKU_GARPDEATH_PVE("&cGarp &fest mort tout seul."),
+    SENGOKU_CONV_MESSAGE("&cSengoku &f➥ &cAkainu  &f: &c<message>"),
 
     FUJITORA_MOKO_USE("&fVous avez utilisé votre pouvoir &aMoko&f."),
     FUJITORA_MOKO_TARGET("&fVous avez été touché par le &aMoko&f de &cFujitora."),
