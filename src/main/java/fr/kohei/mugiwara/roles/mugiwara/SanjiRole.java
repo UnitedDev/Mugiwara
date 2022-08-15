@@ -33,7 +33,7 @@ public class SanjiRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new DiableJambePower(),
                 new OSobaMaskPower()
-        ));
+        ), 330000000L);
     }
 
     @Override

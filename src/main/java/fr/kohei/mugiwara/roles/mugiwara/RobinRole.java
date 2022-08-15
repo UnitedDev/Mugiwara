@@ -36,7 +36,7 @@ public class RobinRole extends RolesType.MURole implements Listener {
                 new VoirInvPower(),
                 new OeilsPower(),
                 new ClutchPower()
-        ));
+        ), 330000000L);
     }
 
     @Override

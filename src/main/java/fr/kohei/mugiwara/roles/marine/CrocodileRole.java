@@ -31,7 +31,7 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new CrochetDamagePower(),
                 new GroundSeccoRightPower()
-        ));
+        ), 81000000L);
     }
 
     @Override

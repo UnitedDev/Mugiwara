@@ -20,7 +20,7 @@ public class PacifistaRole extends RolesType.MURole {
                 new AnalysePower(),
                 new LazerRightPower(),
                 new LazerLeftPower()
-        ));
+        ), 0L);
     }
 
     @Override

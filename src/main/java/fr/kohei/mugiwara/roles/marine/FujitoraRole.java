@@ -36,7 +36,7 @@ public class FujitoraRole extends RolesType.MURole implements Listener {
                 new MokoPower(),
                 new MeteoritePower(),
                 new HakiPower()
-        ));
+        ), 0L);
     }
 
     @Override

@@ -60,7 +60,7 @@ public class SaboRole extends RolesType.MURole implements Listener {
                 new HealLuffyPower(),
                 new BlazeRodPower(),
                 new DuoPower()
-        ));
+        ), 602000000L);
     }
 
     @Override

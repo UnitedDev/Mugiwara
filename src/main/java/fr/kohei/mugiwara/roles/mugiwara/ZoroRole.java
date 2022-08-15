@@ -35,7 +35,7 @@ public class ZoroRole extends RolesType.MURole implements Listener {
     public ZoroRole() {
         super(Arrays.asList(
                 new DashPower()
-        ));
+        ), 320000000L);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class NamiRole extends RolesType.MURole implements Listener {
                 new PisterPower(),
                 new VolPower(),
                 new ZeusPower()
-        ));
+        ), 66000000L);
     }
 
     @Override

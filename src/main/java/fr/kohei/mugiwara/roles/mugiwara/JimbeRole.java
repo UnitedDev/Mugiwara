@@ -18,7 +18,7 @@ public class JimbeRole extends RolesType.MURole {
     public JimbeRole() {
         super(Arrays.asList(
                 new SeikenPower()
-        ));
+        ), 438000000L);
     }
 
     @Override

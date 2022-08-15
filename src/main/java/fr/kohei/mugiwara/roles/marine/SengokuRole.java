@@ -1,14 +1,23 @@
 package fr.kohei.mugiwara.roles.marine;
 
 import fr.kohei.mugiwara.game.player.MUPlayer;
+import fr.kohei.mugiwara.power.impl.HitoHitoNoMiPower;
+import fr.kohei.mugiwara.power.impl.PrimePower;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.config.Replacement;
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -16,11 +25,18 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 
+@Getter
+@Setter
 public class SengokuRole extends RolesType.MURole implements Listener {
+
     private int inWater = 0;
-    
+    private boolean isExplose = false;
+
     public SengokuRole() {
-        super(Arrays.asList());
+        super(Arrays.asList(
+                new HitoHitoNoMiPower(),
+                new PrimePower()
+        ), 0L);
     }
 
     @Override
@@ -29,13 +45,8 @@ public class SengokuRole extends RolesType.MURole implements Listener {
     }
 
     @Override
-    public ItemStack getItem() {
-        return new ItemStack(Material.BONE);
-    }
-
-    @Override
     public void onDistribute(Player player) {
-        player.setWalkSpeed(0.21F);
+        //player.setWalkSpeed(0.21F);
     }
 
     @Override
@@ -50,16 +61,6 @@ public class SengokuRole extends RolesType.MURole implements Listener {
             //Messages.WATER.send(player);
             this.inWater = 0;
         }
-    }
-
-    @Override
-    public double getStrengthBuffer() {
-        return 1.05F;
-    }
-
-    @Override
-    public double getResistanceBuffer() {
-        return 0.95F;
     }
 
     @EventHandler
@@ -77,6 +78,25 @@ public class SengokuRole extends RolesType.MURole implements Listener {
         } else {
             Messages.SENGOKU_GARPDEATH_KILLER.send(sengoku, new Replacement("<name>", killer.getName()));
         }
+
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e){
+        if(!(e.getDamager() instanceof Player)) return;
+        if(!(e.getEntity() instanceof Player)) return;
+
+        Player damager = (Player) e.getDamager();
+
+        if(!isRole(damager)) return;
+
+        Player player = (Player) e.getEntity();
+
+        if(!this.isExplose) return;
+
+        player.getWorld().createExplosion(player.getLocation(), 3.5F, false);
+        player.setHealth(player.getHealth() - 3);
+        this.isExplose = false;
 
     }
 }

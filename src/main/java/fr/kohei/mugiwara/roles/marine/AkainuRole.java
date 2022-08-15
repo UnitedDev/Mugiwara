@@ -36,7 +36,7 @@ public class AkainuRole extends RolesType.MURole implements Listener {
                 new InugamiGurenPower(),
                 new FirePower(),
                 new ConvPower()
-        ));
+        ), 0L);
     }
 
     @Override

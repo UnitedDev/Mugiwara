@@ -56,7 +56,7 @@ public class BigMomRole extends RolesType.MURole implements Listener {
                 new BigMomVivreCardPower(),
                 new SoulPocusPower(),
                 new PrometheePower()
-        ));
+        ), 4388000000L);
     }
 
     @Override

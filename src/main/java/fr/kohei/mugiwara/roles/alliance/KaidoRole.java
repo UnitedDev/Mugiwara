@@ -40,7 +40,7 @@ public class KaidoRole extends RolesType.MURole implements Listener {
                 new UoPower(),
                 new SbirePower(),
                 new BoroPower()
-        ));
+        ), 4611100000L);
     }
 
     @Override

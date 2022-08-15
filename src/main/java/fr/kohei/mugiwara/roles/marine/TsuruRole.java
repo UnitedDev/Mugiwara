@@ -34,7 +34,7 @@ public class TsuruRole extends RolesType.MURole implements Listener {
     public TsuruRole() {
         super(Arrays.asList(
                 new WoshiPower()
-        ));
+        ), 0L);
     }
 
     @Override

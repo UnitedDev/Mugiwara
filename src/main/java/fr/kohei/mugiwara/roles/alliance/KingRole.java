@@ -24,7 +24,7 @@ public class KingRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new PteranodonPower(),
                 new FlyPower()
-        ));
+        ), 1390000000L);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class PirateRole extends RolesType.MURole {
     private boolean jimbe;
 
     public PirateRole() {
-        super(Arrays.asList());
+        super(Arrays.asList(), 0L);
     }
 
     @Override

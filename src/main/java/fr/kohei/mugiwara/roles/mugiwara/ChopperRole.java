@@ -24,7 +24,7 @@ public class ChopperRole extends RolesType.MURole {
         super(Arrays.asList(
                 new FlairePower(),
                 new FormePower()
-        ));
+        ), 100L);
     }
 
     @Override

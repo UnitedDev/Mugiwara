@@ -29,7 +29,7 @@ public class SmokerRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new WhiteSparksPower(),
                 new NanashakuJittePower()
-        ));
+        ), 0L);
     }
 
     @Override

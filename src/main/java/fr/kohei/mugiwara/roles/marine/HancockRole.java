@@ -28,7 +28,7 @@ public class HancockRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new FemurSwordPower(),
                 new FlowerPower()
-        ));
+        ), 80000000L);
     }
 
     @Override

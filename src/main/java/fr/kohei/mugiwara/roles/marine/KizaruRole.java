@@ -30,7 +30,7 @@ public class KizaruRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new YataPower(),
                 new YasakaniPower()
-        ));
+        ), 0L);
     }
 
     @Override

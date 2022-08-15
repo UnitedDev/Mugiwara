@@ -43,7 +43,7 @@ public class FrankyRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new VisionPower(),
                 new GeneralFrankyPower()
-        ));
+        ), 94000000L);
     }
 
     @Override

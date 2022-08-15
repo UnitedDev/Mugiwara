@@ -41,7 +41,7 @@ public class LawRole extends RolesType.MURole implements Listener {
                 new RoomPower(),
                 new ShamblesRightPower(),
                 new ShamblesLeftPower()
-        ));
+        ), 500000000L);
     }
 
     @Override

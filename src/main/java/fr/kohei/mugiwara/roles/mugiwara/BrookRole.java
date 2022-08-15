@@ -41,7 +41,7 @@ public class BrookRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new AmePower(),
                 new SlowPower()
-        ));
+        ), 83000000L);
     }
 
     @Override

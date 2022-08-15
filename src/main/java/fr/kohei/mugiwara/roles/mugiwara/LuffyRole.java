@@ -41,7 +41,7 @@ public class LuffyRole extends RolesType.MURole implements Listener {
                 new GomuNoMiRightPower(),
                 new GomuNoMiLeftPower(),
                 new VivreCardPower()
-        ));
+        ), 1500000000L);
     }
 
     @Override

@@ -53,7 +53,7 @@ public enum RolesType {
     KIZARU("Kizaru", CampType.MARINE, KizaruRole.class, new ItemStack(Material.GLOWSTONE_DUST)),
     FUJITORA("Amiral Fujitora", CampType.MARINE, FujitoraRole.class, new ItemStack(Material.STAINED_GLASS, 1, (short) 11)),
     AKAINU("Chef Akainu", CampType.MARINE, AkainuRole.class, new ItemStack(Material.LAVA_BUCKET)),
-    SENGOKU("Sengoku", CampType.MARINE, null, new ItemStack(Material.BONE)),
+    SENGOKU("Sengoku", CampType.MARINE, SengokuRole.class, new ItemStack(Material.BONE)),
     KUMA("Bartholomew Kuma", CampType.MARINE, BartholomewKumaRole.class, new ItemStack(Material.ANVIL)),
     TSURU("Tsuru", CampType.MARINE, TsuruRole.class, new ItemStack(Material.SUGAR)),
     KUZAN("Kuzan", CampType.MARINE, KuzanRole.class, new ItemStack(Material.PACKED_ICE)),
@@ -83,9 +83,11 @@ public enum RolesType {
     public static abstract class MURole extends Role {
 
         private List<Power> powers;
+        private long prime;
 
-        public MURole(List<Power> powers) {
+        public MURole(List<Power> powers, long prime) {
             this.powers = new ArrayList<>(powers);
+            this.prime = prime;
         }
 
         public abstract RolesType getRole();

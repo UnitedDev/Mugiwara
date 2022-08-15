@@ -32,7 +32,7 @@ public class UssopRole extends RolesType.MURole implements Listener {
     public UssopRole() {
         super(Arrays.asList(
 
-        ));
+        ), 200000000L);
     }
 
     @Override

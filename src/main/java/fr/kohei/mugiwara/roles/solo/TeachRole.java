@@ -27,7 +27,7 @@ public class TeachRole extends RolesType.MURole implements Listener {
                 new KaishinPower(),
                 new BlackHolePower(),
                 new PoneglypheRemovePower()
-        ));
+        ), 2247600000L);
     }
 
     @Override

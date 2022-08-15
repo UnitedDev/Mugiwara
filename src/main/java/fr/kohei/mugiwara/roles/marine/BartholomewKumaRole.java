@@ -31,7 +31,7 @@ public class BartholomewKumaRole extends RolesType.MURole implements Listener {
                 new BiblePower(),
                 new VoyagePower(),
                 new DuoPower()
-        ));
+        ), 296000000L);
     }
 
     @Override
@@ -46,6 +46,7 @@ public class BartholomewKumaRole extends RolesType.MURole implements Listener {
 
     @Override
     public void onSecond(Player player) {
+
         final Block block = player.getLocation().getBlock();
 
         if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;

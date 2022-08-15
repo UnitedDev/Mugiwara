@@ -40,7 +40,7 @@ public class MihawkRole extends RolesType.MURole implements Listener {
     public MihawkRole() {
         super(Arrays.asList(
                 new YoruPower()
-        ));
+        ), 0L);
     }
 
     @Override

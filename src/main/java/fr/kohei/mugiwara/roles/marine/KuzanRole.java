@@ -49,8 +49,7 @@ public class KuzanRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new IcePower(),
                 new IceRightPower()
-        ));
-        Bukkit.getPluginManager().registerEvents(this, Mugiwara.getInstance());
+        ), 0L);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class XDrakeRole extends RolesType.MURole {
         super(Arrays.asList(
                 new AllosaurusPower(),
                 new MorsurePower()
-        ));
+        ), 222000000L);
     }
 
     @Override

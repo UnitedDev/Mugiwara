@@ -23,7 +23,7 @@ public class GarpRole extends RolesType.MURole implements Listener {
     public GarpRole() {
         super(Arrays.asList(
                 new TnTPower()
-        ));
+        ), 0L);
     }
 
     @Override

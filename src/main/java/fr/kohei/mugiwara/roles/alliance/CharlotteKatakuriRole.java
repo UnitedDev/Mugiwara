@@ -22,7 +22,7 @@ public class CharlotteKatakuriRole extends RolesType.MURole {
     public CharlotteKatakuriRole() {
         super(Arrays.asList(
 
-        ));
+        ), 1057000000L);
     }
 
     @Override

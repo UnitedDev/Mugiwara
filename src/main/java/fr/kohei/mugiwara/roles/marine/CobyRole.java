@@ -42,7 +42,7 @@ public class CobyRole extends RolesType.MURole implements Listener {
         super(Arrays.asList(
                 new DenDenMushiSeePower(),
                 new DenDenMushiPower()
-        ));
+        ), 0L);
     }
 
     @Override
