@@ -132,6 +132,7 @@ public class MUCommands {
         if (commandPower.getCooldown() != null && worked) {
             if (commandPower.getCooldown().isCooldown(player)) return;
             commandPower.getCooldown().setCooldown(commandPower.getCooldownAmount());
+            commandPower.getCooldown().task();
         }
         if (worked)
             Power.onUse(player);

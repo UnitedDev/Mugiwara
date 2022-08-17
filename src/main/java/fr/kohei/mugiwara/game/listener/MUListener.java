@@ -77,6 +77,7 @@ public class MUListener implements Listener {
         if (rightClickPlayerPower.getCooldown() != null) {
             if (rightClickPlayerPower.getCooldown().isCooldown(player)) return;
             rightClickPlayerPower.getCooldown().setCooldown(rightClickPlayerPower.getCooldownAmount());
+            rightClickPlayerPower.getCooldown().task();
         }
 
         rightClickPlayerPower.onEnable(player, target);
@@ -107,6 +108,7 @@ public class MUListener implements Listener {
             boolean success = rightClickPower.onEnable(player, right);
             if (success && rightClickPower.getCooldown() != null) {
                 rightClickPower.getCooldown().setCooldown(rightClickPower.getCooldownAmount());
+                rightClickPower.getCooldown().task();
             }
             if (success)
                 Power.onUse(player);
@@ -164,9 +166,10 @@ public class MUListener implements Listener {
             if (damagePower.getCooldown().isCooldown(damager)) return;
 
         boolean success = damagePower.onEnable(damager, player, event);
-        if (success && damagePower.getCooldown() != null)
+        if (success && damagePower.getCooldown() != null) {
             damagePower.getCooldown().setCooldown(damagePower.getCooldownAmount());
-
+            damagePower.getCooldown().task();
+        }
         if (role.getRole() == RolesType.KATAKURI && event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
             event.setCancelled(damagerRole.getRole() != RolesType.USSOP);
         }
@@ -245,8 +248,10 @@ public class MUListener implements Listener {
             player.setItemInHand(is);
         }
         if (success) {
-            if (blockPower.getCooldown() != null)
+            if (blockPower.getCooldown() != null) {
                 blockPower.getCooldown().setCooldown(blockPower.getCooldownAmount());
+                blockPower.getCooldown().task();
+            }
             Power.onUse(player);
             event.getBlock().setType(Material.AIR);
         } else {
