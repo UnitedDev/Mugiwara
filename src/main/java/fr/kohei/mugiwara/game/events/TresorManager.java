@@ -2,10 +2,14 @@ package fr.kohei.mugiwara.game.events;
 
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.menu.BusterCallTresorMenu;
+import fr.kohei.mugiwara.game.player.MUPlayer;
+import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.roles.mugiwara.LuffyRole;
 import fr.kohei.mugiwara.utils.config.Messages;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import fr.kohei.uhc.UHC;
+import fr.kohei.uhc.game.config.timers.impl.Roles;
+import fr.kohei.utils.ChatUtil;
 import fr.kohei.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -89,6 +94,14 @@ public class TresorManager implements Listener {
         ItemStack clickedItem = event.getItem();
 
         if (!clickedItem.isSimilar(getBusterCallItem())) return;
+
+        List<RolesType> canUse = Arrays.asList(RolesType.AKAINU, RolesType.FUJITORA, RolesType.KIZARU, RolesType.SENGOKU, RolesType.KUZAN);
+        RolesType playerRole = MUPlayer.get(event.getPlayer()).getRole().getRole();
+
+        if (!canUse.contains(playerRole)) {
+            event.getPlayer().sendMessage(ChatUtil.prefix("&cVous ne pouvez pas utiliser ce pouvoir."));
+            return;
+        }
 
         event.setCancelled(true);
         new BusterCallTresorMenu().openMenu(event.getPlayer());
