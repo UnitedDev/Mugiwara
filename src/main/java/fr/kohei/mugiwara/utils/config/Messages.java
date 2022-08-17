@@ -24,6 +24,8 @@ public enum Messages {
     WATER("&cNe restez pas trop longtemps dans l'eau."),
 
     TRESOR_SPAWN("&fDes &atrésors &fsont apparus sur la carte."),
+    TRESOR_BUSTERCALL_WARNING("&fUn déluge de &cTnT &ftombera sur vous dans &a5 secondes&f."),
+    TRESOR_BUSTERCALL_USE("&fUn déluge de &cTnT &ftombera &6<name>&f dans &a5 secondes&f."),
 
     SECTION_GIVE_GARP("&fVous avez reçu le badge de section &0&lGarp&f."),
     SECTION_GIVE_KIZARU("&fVous avez reçu le badge de section &e&lKizaru&f."),
