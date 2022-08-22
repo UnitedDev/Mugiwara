@@ -3,6 +3,7 @@ package fr.kohei.mugiwara.power.impl;
 import fr.kohei.mugiwara.Mugiwara;
 import fr.kohei.mugiwara.game.player.MUPlayer;
 import fr.kohei.mugiwara.power.CommandPower;
+import fr.kohei.mugiwara.power.Power;
 import fr.kohei.mugiwara.roles.RolesType;
 import fr.kohei.mugiwara.roles.marine.AkainuRole;
 import fr.kohei.mugiwara.roles.marine.SengokuRole;
@@ -11,6 +12,9 @@ import fr.kohei.mugiwara.utils.config.Replacement;
 import fr.kohei.mugiwara.utils.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConvPower extends CommandPower {
 
@@ -23,11 +27,17 @@ public class ConvPower extends CommandPower {
     public boolean onEnable(Player player, String[] args) {
 
         if(args.length == 1){
-            Messages.AKAINU_CONV_SYNTAX.send(player);
+            Messages.CONV_SYNTAX.send(player);
             return false;
         }
 
-        MUPlayer muPlayer = MUPlayer.get(player);
+        /**
+         * TODO EDIT
+         */
+
+        /*MUPlayer muPlayer = MUPlayer.get(player);
+
+        RolesType.MURole muRole = muPlayer.getRole();
 
         StringBuilder stringBuilder = new StringBuilder();
         for(String arg : args){
@@ -35,10 +45,6 @@ public class ConvPower extends CommandPower {
         }
 
         String message = stringBuilder.toString().replaceFirst(args[0], "");
-
-        /**
-         * TODO EDIT
-         */
 
         Bukkit.getScheduler().runTaskLater(Mugiwara.getInstance(), () -> {
 
@@ -51,7 +57,7 @@ public class ConvPower extends CommandPower {
             }
 
 
-        }, 25 * 20);
+        }, 25 * 20);*/
 
         return true;
     }

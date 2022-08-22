@@ -1,6 +1,8 @@
 package fr.kohei.mugiwara.roles.marine;
 
 import fr.kohei.mugiwara.game.player.MUPlayer;
+import fr.kohei.mugiwara.power.impl.ConvPower;
+import fr.kohei.mugiwara.power.impl.ConvSelectPower;
 import fr.kohei.mugiwara.power.impl.HitoHitoNoMiPower;
 import fr.kohei.mugiwara.power.impl.PrimePower;
 import fr.kohei.mugiwara.roles.RolesType;
@@ -35,6 +37,8 @@ public class SengokuRole extends RolesType.MURole implements Listener {
     public SengokuRole() {
         super(Arrays.asList(
                 new HitoHitoNoMiPower(),
+                new ConvPower(),
+                new ConvSelectPower(),
                 new PrimePower()
         ), 0L);
     }

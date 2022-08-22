@@ -22,6 +22,7 @@ public enum Messages {
 
     COOLDOWN_EXPIRE("&fLe cooldown pour le pouvoir &c<name> &fvient d'expirer."),
     WATER("&cNe restez pas trop longtemps dans l'eau."),
+    CONV_SYNTAX("&cSyntax : /mu conv <message>"),
 
     TRESOR_SPAWN("&fDes &atrésors &fsont apparus sur la carte."),
     TRESOR_BUSTERCALL_WARNING("&fUn déluge de &cTnT &ftombera sur vous dans &a5 secondes&f."),
@@ -193,7 +194,6 @@ public enum Messages {
     SMOKER_GAZ_USE("&fVous avez utilisé votre pouvoir &cSmoke &fsur &c<name>&f."),
     SMOKER_GAZ_TARGET("&cSmoker &fa utilisé son pouvoir &cSmoke &fsur vous."),
 
-    AKAINU_CONV_SYNTAX("&cSyntax : /mu conv <message>"),
     AKAINU_CONV_MESSAGE("&cAkainu &f➥ &cSengoku &f: &c<message>"),
     AKAINU_LOGIA_NODAMAGE("&fVous venez de recevoir &caucun dégât&f."),
 
@@ -311,6 +311,7 @@ public enum Messages {
     SENGOKU_GARPDEATH_KILLER("&cGarp &fa été tué par &c<name>&f."),
     SENGOKU_GARPDEATH_PVE("&cGarp &fest mort tout seul."),
     SENGOKU_CONV_MESSAGE("&cSengoku &f➥ &cAkainu  &f: &c<message>"),
+    SENGOKU_CONV_SELECT("&fVous venez de choisir &c<name> &fpour garder contact."),
 
     FUJITORA_MOKO_USE("&fVous avez utilisé votre pouvoir &aMoko&f."),
     FUJITORA_MOKO_TARGET("&fVous avez été touché par le &aMoko&f de &cFujitora."),
@@ -326,6 +327,8 @@ public enum Messages {
     BIGMOM_SOULEND_TARGET("&fVous avez &asélectionné &fle même &cgateaux &fque &aBigMom&f."),
     BIGMOM_SOULEND_BIGMOMDIDNTSELECT("&fBig mom n'a pas selectionné une gateau"),
     BIGMOM_PROMETHEE_USE("&fVous avez utilisé votre pouvoir &aPromethee&f."),
+
+
     ;
 
     @Setter

@@ -40,7 +40,7 @@ public class JackRole extends RolesType.MURole implements Listener {
                 new MammouthPower(),
                 new ExterminPowerRight(),
                 new ExterminPowerLeft()
-        ));
+        ), 1000000000L);
     }
 
     @Override

@@ -82,7 +82,7 @@ public class BusterCallTresorMenu extends PaginatedMenu {
 
     private void tntDeluge(Player target) {
         for (Location location : MathUtil.getCircle(target.getLocation().clone().add(0, 15, 0), 10, false)) {
-            if (new Random().nextInt(0, 100) < 20) {
+            if (new Random().nextInt(/*0, */100) < 20) {
                 location.getWorld().spawnEntity(location, EntityType.PRIMED_TNT);
             }
         }
