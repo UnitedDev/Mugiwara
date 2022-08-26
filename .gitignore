@@ -21,9 +21,6 @@
 .idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_13_1.xml
 .idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_1.xml
 .idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_yaml_2_13_1.xml
-.idea/libraries/Maven__fr_kohei_bukkitapi_1_1_2.xml
-.idea/libraries/Maven__fr_kohei_common_1_3_7_STABLE.xml
-.idea/libraries/Maven__fr_kohei_uhc_1_0_1.xml
 .idea/libraries/Maven__io_netty_netty_buffer_4_1_74_Final.xml
 .idea/libraries/Maven__io_netty_netty_codec_4_1_74_Final.xml
 .idea/libraries/Maven__io_netty_netty_common_4_1_74_Final.xml
