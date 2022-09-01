@@ -110,10 +110,9 @@ public class BigMomRole extends RolesType.MURole implements Listener {
             if (!content.getItemMeta().getDisplayName().contains("Napoléon")) continue;
 
             int first = killer.getInventory().first(content);
-            ItemStack is = content;
-            is.setDurability((short) (is.getDurability() - 10));
+            content.setDurability((short) (content.getDurability() - 10));
 
-            killer.getInventory().setItem(first, is);
+            killer.getInventory().setItem(first, content);
         }
     }
 
@@ -283,7 +282,7 @@ public class BigMomRole extends RolesType.MURole implements Listener {
                 }
 
                 for (int i = 1; i < 10; i++)
-                    MathUtil.sendCircleParticle(EnumParticle.CLOUD, deathLocation, i, 5, bigMom);
+                    MathUtil.sendCircleParticle(EnumParticle.CLOUD, deathLocation, i, 5);
             }
         }.runTaskTimer(Mugiwara.getInstance(), 0, 10);
     }

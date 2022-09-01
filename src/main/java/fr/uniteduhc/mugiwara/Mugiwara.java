@@ -1,10 +1,7 @@
 package fr.uniteduhc.mugiwara;
 
 import fr.uniteduhc.BukkitAPI;
-import fr.uniteduhc.mugiwara.game.events.DenMushiManager;
-import fr.uniteduhc.mugiwara.game.events.FruitDuDemonManager;
-import fr.uniteduhc.mugiwara.game.events.OnePieceManager;
-import fr.uniteduhc.mugiwara.game.events.TresorManager;
+import fr.uniteduhc.mugiwara.game.events.*;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;
 import fr.uniteduhc.mugiwara.utils.config.Messages;
 import fr.uniteduhc.mugiwara.game.commands.MUCommands;
@@ -37,8 +34,9 @@ public class Mugiwara extends JavaPlugin {
     private DenMushiManager denMushiManager;
     private OnePieceManager onePieceManager;
     private PoneglypheManager poneglypheManager;
-    private FruitDuDemonManager fruitDuDemonManager;
+    private DemonFruitManager fruitDuDemonManager;
     private TresorManager tresorManager;
+    private HakiManager hakiManager;
     private MUModule module;
 
     private List<UUID> powerBlocked;
@@ -57,13 +55,15 @@ public class Mugiwara extends JavaPlugin {
         this.denMushiManager = new DenMushiManager(this);
         this.onePieceManager = new OnePieceManager(this);
         this.poneglypheManager = new PoneglypheManager(this);
-        this.fruitDuDemonManager = new FruitDuDemonManager(this);
+        this.fruitDuDemonManager = new DemonFruitManager(this);
         this.tresorManager = new TresorManager(this);
+        this.hakiManager = new HakiManager(this);
         UHC.getInstance().getModuleManager().setModule(module = new MUModule());
 
         Messages.init();
         this.getServer().getPluginManager().registerEvents(new MUListener(this), this);
-        BukkitAPI.getCommandHandler().registerClass(MUCommands.class);
+        BukkitAPI.getCommandHandler().registerCommands(MUCommands.class);
+        BukkitAPI.getCommandHandler().registerCommands(DenMushiManager.class);
         new BowAimbot(this);
     }
 
