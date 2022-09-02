@@ -7,8 +7,6 @@ import fr.uniteduhc.mugiwara.roles.alliance.CharlotteKatakuriRole;
 import fr.uniteduhc.mugiwara.roles.alliance.KaidoRole;
 import fr.uniteduhc.mugiwara.roles.alliance.KingRole;
 import fr.uniteduhc.mugiwara.roles.marine.*;
-import fr.uniteduhc.mugiwara.roles.alliance.*;
-import fr.uniteduhc.mugiwara.roles.marine.*;
 import fr.uniteduhc.mugiwara.roles.mugiwara.*;
 import fr.uniteduhc.mugiwara.roles.solo.BigMomRole;
 import fr.uniteduhc.mugiwara.roles.solo.SaboRole;
@@ -17,7 +15,6 @@ import fr.uniteduhc.mugiwara.utils.config.Messages;
 import fr.uniteduhc.uhc.module.manager.Camp;
 import fr.uniteduhc.uhc.module.manager.Role;
 import fr.uniteduhc.utils.ChatUtil;
-import fr.uniteduhc.mugiwara.roles.mugiwara.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -43,7 +40,7 @@ public enum RolesType {
     BROOK("Brook", CampType.MUGIWARA_HEART, BrookRole.class, new ItemStack(Material.BONE)),
     JIMBE("Jimbe", CampType.MUGIWARA_HEART, JimbeRole.class, new ItemStack(Material.RAW_FISH, 1, (short) 3)),
     LAW("Trafalgar D. Water Law", CampType.MUGIWARA_HEART, LawRole.class, new ItemStack(Material.SHEARS)),
-    EUSTASS("Eustass Kid", CampType.MUGIWARA_HEART, null, null),
+    EUSTASS("Eustass Kid", CampType.MUGIWARA_HEART, EustassRole.class, null),
     PIRATE("Pirate", CampType.MUGIWARA_HEART, PirateRole.class, new ItemStack(Material.BANNER)),
 
 

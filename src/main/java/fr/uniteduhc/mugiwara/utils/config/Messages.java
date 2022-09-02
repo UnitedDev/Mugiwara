@@ -156,6 +156,9 @@ public enum Messages {
     BROOK_SLOW_ATTACKONME("&cBrook&f a utilisé son pouvoir de &7Slow &fsur vous."),
     BROOK_SLOW_ATTACKONME_END("&cVous perdez la moitié de votre vie."),
 
+    EUSTASS_REPEL_USE("&fVous venez d'utilisé &cRepel&f."),
+    EUSTASS_ASSIGN_USE("&fVous venez d'utilisé &cAssign&f."),
+
     KUMA_BIBLE_PLAYER_USE("&fVous avez utilisé votre pouvoir &aBible&f."),
     KUMA_BIBLE_TELEPORT_TARGET_USE("&fVous avez été &atéléporté &fpar &cKuma&f."),
 
