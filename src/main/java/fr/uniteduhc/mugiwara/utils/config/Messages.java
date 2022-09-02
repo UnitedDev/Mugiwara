@@ -28,6 +28,16 @@ public enum Messages {
     TRESOR_BUSTERCALL_WARNING("&fUn déluge de &cTnT &ftombera sur vous dans &a5 secondes&f."),
     TRESOR_BUSTERCALL_USE("&fUn déluge de &cTnT &ftombera &6<name>&f dans &a5 secondes&f."),
 
+    HAKI_NEW_ONE("&fVotre nouveau haki est &a<haki>&f."),
+    HAKI_POWER_USE("&fVous avez utilisé votre pouvoir &a<haki>&f."),
+    HAKI_POWER_DISABLED("&fVotre pouvoir &a<haki>&f a été &cdésactivé&f."),
+    HAKI_WATER_DISABLED("&fVotre pouvoir haki a été &cdésactivé &fà cause de l'eau"),
+
+    HAKI_FLUIDE_DISABLED("&fVotre &cFluide &fa été désactivé."),
+    HAKI_FLUIDE_TARGET("&fVous avez été &aimmobilisé &fpar un &cFluide Royal&f."),
+    HAKI_FLUIDE_CONTRE("&fUn autre joueur a utilisé son &aFluide&f à côté de vous, il a donc invoqué le &6Contre Royal&f."),
+    HAKI_FLUIDE_UNSTUNED("&fVous avez été &cdésimmobilisé&f."),
+
     SECTION_GIVE_GARP("&fVous avez reçu le badge de section &0&lGarp&f."),
     SECTION_GIVE_KIZARU("&fVous avez reçu le badge de section &e&lKizaru&f."),
     SECTION_GIVE_SMOKER("&fVous avez reçu le badge de section &7&lSmoker&f."),
@@ -66,13 +76,7 @@ public enum Messages {
     LUFFY_SECONDPOWER("&fVous avez utilisé votre deuxième pouvoir."),
     LUFFY_THIRDPOWER("&fVous avez utilisé votre troisième pouvoir."),
 
-    ZORO_FIRSTKILL("&fVous avez obtenu &bSpeed I &fpour votre kill."),
-    ZORO_SECONDKILL("&fVous avez obtenu &bSpeed II &fpour votre kill."),
-    ZORO_THIRDKILL("&fVous avez obtenu &cForce I &fpour votre kill."),
-    ZORO_FOURTHDKILL("&fVous avez obtenu &c1 coeur &fet &6+20% d'enflammer un joueur en le tapant &fpour votre kill."),
-    ZORO_DASH("&fVous avez utilisé votre &6dash&f."),
-    ZORO_DASH_ONWAY("&fLe &cdash &fde zoro est passé &cà côté de vous&f."),
-    ZORO_DASH_ONYOU("&cZoro &fa utilisé son &cdash &fsur vous."),
+    ZORO_SEIGNEUR_USE("&fVous avez &aactivé &fvotre pouvoir du &cSeigneur des Enfers&f."),
 
     NAMI_CLIMATTACT_USE("&fVous avez utilisé votre &bClimat-Tact &fsur &6<name>"),
     NAMI_CLIMATTACT_TARGET("&6Nami &fa utilisé son &6Climat-Tact &fsur vous."),

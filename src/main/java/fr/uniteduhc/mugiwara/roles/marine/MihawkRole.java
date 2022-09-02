@@ -207,7 +207,7 @@ public class MihawkRole extends RolesType.MURole implements Listener {
         if (yoruPower.isUsing()) {
             if (!isRole(player)) return;
 
-            yoruPower.setDamage((int) (yoruPower.getDamage() + event.getFinalDamage()));
+            yoruPower.setDamage((int) (yoruPower.getDamage() + event.getDamage()));
         }
 
         if (yoruPower.isTheHit()) {

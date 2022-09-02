@@ -15,11 +15,11 @@
 
     <repositories>
         <repository>
-            <id>uniteduhc</id>
+            <id>uhc</id>
             <url>https://maven.pkg.github.com/UnitedDev/UHC</url>
         </repository>
         <repository>
-            <id>uniteduhc</id>
+            <id>bukkitapi</id>
             <url>https://maven.pkg.github.com/UnitedDev/BukkitAPI</url>
         </repository>
         <repository>
@@ -37,11 +37,6 @@
         </dependency>
         <dependency>
             <groupId>fr.uniteduhc</groupId>
-            <artifactId>bukkitapi</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>fr.uniteduhc</groupId>
             <artifactId>uhc</artifactId>
             <version>2.0.0</version>
             <scope>provided</scope>
@@ -52,7 +47,11 @@
             <version>v1.0.1</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>fr.uniteduhc</groupId>
+            <artifactId>bukkitapi</artifactId>
+            <version>2.0.2</version>
+        </dependency>
         <dependency>
             <groupId>fr.uniteduhc</groupId>
             <artifactId>mumble</artifactId>

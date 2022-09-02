@@ -1,7 +1,7 @@
 package fr.uniteduhc.mugiwara.game.commands;
 
-import fr.uniteduhc.command.Command;
-import fr.uniteduhc.command.param.Param;
+import fr.uniteduhc.command.annotations.Command;
+import fr.uniteduhc.command.annotations.Param;
 import fr.uniteduhc.mugiwara.Mugiwara;
 import fr.uniteduhc.mugiwara.game.menu.SeePowersMenu;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;

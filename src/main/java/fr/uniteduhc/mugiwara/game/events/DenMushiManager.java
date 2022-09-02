@@ -1,8 +1,8 @@
 package fr.uniteduhc.mugiwara.game.events;
 
 import fr.uniteduhc.BukkitAPI;
-import fr.uniteduhc.command.Command;
-import fr.uniteduhc.command.param.Param;
+import fr.uniteduhc.command.annotations.Command;
+import fr.uniteduhc.command.annotations.Param;
 import fr.uniteduhc.mugiwara.Mugiwara;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;
 import fr.uniteduhc.mugiwara.power.impl.DenDenMushiChatPower;
@@ -43,7 +43,6 @@ public class DenMushiManager implements Listener {
         this.chat = new HashMap<>();
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-        BukkitAPI.getCommandHandler().registerClass(this.getClass());
         this.registerDenDenMushiCraft(plugin);
     }
 

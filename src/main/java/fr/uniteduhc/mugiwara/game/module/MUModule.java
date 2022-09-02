@@ -97,9 +97,10 @@ public class MUModule extends Module {
                             onlinePlayer.getInventory().addItem(((ClickPower) power).getItem());
                         }
                     }
+                    Mugiwara.getInstance().getHakiManager().onRoles(onlinePlayer);
                 }
 
-                Mugiwara.getInstance().getFruitDuDemonManager().init();
+                Mugiwara.getInstance().getFruitDuDemonManager().onRoles();
             }
         }.runTaskLater(Mugiwara.getInstance(), 50);
 
