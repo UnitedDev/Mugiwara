@@ -9,6 +9,7 @@ import fr.uniteduhc.mugiwara.roles.alliance.KingRole;
 import fr.uniteduhc.mugiwara.roles.marine.*;
 import fr.uniteduhc.mugiwara.roles.mugiwara.*;
 import fr.uniteduhc.mugiwara.roles.solo.BigMomRole;
+import fr.uniteduhc.mugiwara.roles.solo.KuzanRole;
 import fr.uniteduhc.mugiwara.roles.solo.SaboRole;
 import fr.uniteduhc.mugiwara.roles.solo.TeachRole;
 import fr.uniteduhc.mugiwara.utils.config.Messages;

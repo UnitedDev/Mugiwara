@@ -15,11 +15,11 @@
 
     <repositories>
         <repository>
-            <id>uhc</id>
+            <id>uniteduhc</id>
             <url>https://maven.pkg.github.com/UnitedDev/UHC</url>
         </repository>
         <repository>
-            <id>bukkitapi</id>
+            <id>uniteduhc</id>
             <url>https://maven.pkg.github.com/UnitedDev/BukkitAPI</url>
         </repository>
         <repository>

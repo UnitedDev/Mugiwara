@@ -1,4 +1,4 @@
-package fr.uniteduhc.mugiwara.roles.marine;
+package fr.uniteduhc.mugiwara.roles.solo;
 
 import fr.uniteduhc.mugiwara.Mugiwara;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;

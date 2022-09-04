@@ -3,7 +3,7 @@ package fr.uniteduhc.mugiwara.power.impl;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;
 import fr.uniteduhc.mugiwara.power.CommandPower;
 import fr.uniteduhc.mugiwara.roles.RolesType;
-import fr.uniteduhc.mugiwara.roles.marine.KuzanRole;
+import fr.uniteduhc.mugiwara.roles.solo.KuzanRole;
 import fr.uniteduhc.mugiwara.utils.config.Messages;
 import org.bukkit.entity.Player;
 
