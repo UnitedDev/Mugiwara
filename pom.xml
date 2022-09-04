@@ -18,10 +18,7 @@
             <id>uniteduhc</id>
             <url>https://maven.pkg.github.com/UnitedDev/UHC</url>
         </repository>
-        <repository>
-            <id>uniteduhc</id>
-            <url>https://maven.pkg.github.com/UnitedDev/BukkitAPI</url>
-        </repository>
+
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io/</url>

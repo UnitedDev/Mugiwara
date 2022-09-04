@@ -2,7 +2,6 @@ package fr.uniteduhc.mugiwara.roles.mugiwara;
 
 import fr.uniteduhc.mugiwara.Mugiwara;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;
-import fr.uniteduhc.mugiwara.power.impl.DashPower;
 import fr.uniteduhc.mugiwara.roles.RolesType;
 import fr.uniteduhc.mugiwara.utils.utils.Utils;
 import fr.uniteduhc.uhc.UHC;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 public class ZoroRole extends RolesType.MURole implements Listener {
     public ZoroRole() {
         super(Arrays.asList(
-                new DashPower()
         ), 320000000L);
     }
 

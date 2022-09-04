@@ -2,159 +2,126 @@ package fr.uniteduhc.mugiwara.roles.solo;
 
 import fr.uniteduhc.mugiwara.Mugiwara;
 import fr.uniteduhc.mugiwara.game.player.MUPlayer;
-import fr.uniteduhc.mugiwara.power.impl.IcePower;
-import fr.uniteduhc.mugiwara.power.impl.IceRightPower;
+import fr.uniteduhc.mugiwara.power.impl.HieHieLeftPower;
+import fr.uniteduhc.mugiwara.power.impl.HieHieRightPower;
+import fr.uniteduhc.mugiwara.power.impl.IceTogglePower;
 import fr.uniteduhc.mugiwara.roles.RolesType;
-import fr.uniteduhc.mugiwara.utils.utils.Cooldown;
+import fr.uniteduhc.mugiwara.roles.marine.AkainuRole;
 import fr.uniteduhc.utils.Cuboid;
-import fr.uniteduhc.utils.ItemBuilder;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Getter
 @Setter
 public class KuzanRole extends RolesType.MURole implements Listener {
 
-    private int coup = 0;
-    private boolean isSaberMode = false;
-
     private int inWater = 0;
     private int timer = 0;
     private int endurence = 0;
-    private boolean ice;
-    private Player lastHit;
-    private List<Location> domeLocation = new ArrayList<>();
-    private final Cooldown domeCooldown = new Cooldown("domeCooldown");
-
-    private ItemStack iceSaber = new ItemBuilder(Material.DIAMOND_SWORD).setName("§bIce Saber").addEnchant(Enchantment.DAMAGE_ALL, 4).toItemStack();
+    private boolean ice = false;
+    private HieHiePowerType hieHiePowerType = HieHiePowerType.ICE_AGE;
 
     public KuzanRole() {
         super(Arrays.asList(
-                new IcePower(),
-                new IceRightPower()
+                new IceTogglePower(),
+                new HieHieLeftPower(),
+                new HieHieRightPower()
         ), 0L);
     }
 
-    @Override
     public RolesType getRole() {
         return RolesType.KUZAN;
     }
 
-    @Override
     public void onDistribute(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
-        Mugiwara.knowsRole(player, RolesType.AKAINU);
-        Mugiwara.knowsRole(player, RolesType.KIZARU);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2147483647, 0, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2147483647, 0, false, false));
     }
 
-    @Override
     public void onSecond(Player player) {
-        final Block block = player.getLocation().getBlock();
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 0, false, false));
-            //Messages.WATER.send(player);
+        Block block = player.getLocation().getBlock();
+        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) {
+            this.inWater++;
+        } else {
             this.inWater = 0;
         }
-
-        timer++;
-
-        Mugiwara.getInstance().addActionBar(player, "&cEndurance &8» &f" + endurence, "endurence");
-
-        if (timer % 3 == 0) {
-            if (endurence < 200)
-                endurence++;
+        if (this.inWater >= 5) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 120, 0, false, false));
+            this.inWater = 0;
         }
-
-        if (timer % 5 == 0) {
-            lastHit = null;
-        }
-
+        this.timer++;
+        Mugiwara.getInstance().addActionBar(player, "&cEndurance &8&f" + this.endurence, "endurence");
+        if (this.timer % 3 == 0 &&
+                this.endurence < 200)
+            this.endurence++;
         if (isIce()) {
-            Cuboid cuboid = new Cuboid(
-                    player.getLocation().clone().add(2, -1, 2),
-                    player.getLocation().clone().add(-2, -2, -2)
-            );
-            cuboid.getBlockList().stream().filter(block1 -> block1.getType().name().contains("WATER")).forEach(block1 -> {
-                block.setType(Material.PACKED_ICE);
-            });
+            Cuboid cuboid = new Cuboid(player.getLocation().clone().add(-5.0D, -1.0D, -5.0D), player.getLocation().clone().add(5.0D, 5.0D, 5.0D));
+            cuboid.getBlockListWithOnly(
+                    Arrays.asList(Material.WATER, Material.STATIONARY_WATER)).forEach(block1 -> block1.setType(Material.PACKED_ICE));
         }
-
-        if (domeCooldown.isCooldownNoMessage(player)) return;
-
-        domeLocation.stream()
-                .filter(domeLoc -> domeLoc.getBlock().getType() != Material.BEDROCK)
-                .forEach(domeLoc -> domeLoc.getBlock().setType(Material.AIR));
-
-    }
-
-    public void incrementCoup() {
-        if (!isSaberMode) return;
-        coup++;
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent e) {
-        if (!(e.getEntity() instanceof Player)) return;
-        if (!(e.getDamager() instanceof Player)) return;
-
-        Player damager = (Player) e.getDamager();
-
-        if(damager != getPlayer()) return;
-
-        Player player = (Player) e.getEntity();
-
-        MUPlayer muDamager = MUPlayer.get(damager);
+    public void onLava(PlayerBucketEmptyEvent e) {
+        if (!isIce())
+            return;
+        Player player = e.getPlayer();
         MUPlayer muPlayer = MUPlayer.get(player);
-
-        if(muPlayer.getRole() instanceof KuzanRole){
-
-            KuzanRole kuzanRole = (KuzanRole) muPlayer.getRole();
-
-            kuzanRole.setLastHit(damager);
-
-        }
-
-        if(!(muDamager.getRole() instanceof KuzanRole)) return;
-
-        KuzanRole kuzanRole = (KuzanRole) muDamager.getRole();
-
-        kuzanRole.incrementCoup();
-
-        if (kuzanRole.getCoup() == 30) {
-            damager.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-            damager.getInventory().remove(getIceSaber());
-            kuzanRole.setSaberMode(false);
-            kuzanRole.setCoup(0);
-        }
-
-        if (!(damager.getItemInHand().isSimilar(getIceSaber()) || kuzanRole.isSaberMode())) return;
-
-        if (Math.random() < 0.16D) {
-
-            player.getLocation().clone().add(0, -1, 0).getBlock().setType(Material.PACKED_ICE);
-
-        }
-
-
+        RolesType.MURole role = muPlayer.getRole();
+        if (e.getBucket() != Material.LAVA_BUCKET)
+            return;
+        if (role instanceof AkainuRole)
+            return;
+        Cuboid cuboid = new Cuboid(getPlayer().getLocation().clone().add(-5.0D, -1.0D, -5.0D), getPlayer().getLocation().clone().add(5.0D, 5.0D, 5.0D));
+        cuboid.getBlockList().stream()
+                .filter(block -> (block.getLocation().getBlockX() == player.getLocation().getBlockX()))
+                .filter(block -> (block.getLocation().getBlockY() == player.getLocation().getBlockY()))
+                .filter(block -> (block.getLocation().getBlockZ() == player.getLocation().getBlockZ()))
+                .forEach(block -> e.setCancelled(true));
     }
 
+    @EventHandler
+    public void onBreak(BlockBreakEvent e) {
+        Block block = e.getBlock();
+        if (block.hasMetadata("invincibiliy"))
+            e.setCancelled(true);
+    }
+
+    public enum HieHiePowerType {
+        ICE_AGE("Ice Age"),
+        PHEASANT_PEAK("Pheasant Peak"),
+        ICE_BALL("Ice Ball");
+
+        HieHiePowerType(String name) {
+            this.name = name;
+        }
+
+        private final String name;
+
+        public String getName() {
+            return this.name;
+        }
+
+        public static HieHiePowerType getNextPower(HieHiePowerType hieHiePowerType) {
+            if (hieHiePowerType == ICE_AGE)
+                return PHEASANT_PEAK;
+            if (hieHiePowerType == PHEASANT_PEAK)
+                return ICE_BALL;
+            if (hieHiePowerType == ICE_BALL)
+                return ICE_AGE;
+            return ICE_AGE;
+        }
+    }
 }
+

@@ -7,7 +7,7 @@ import fr.uniteduhc.mugiwara.roles.solo.KuzanRole;
 import fr.uniteduhc.mugiwara.utils.config.Messages;
 import org.bukkit.entity.Player;
 
-public class IcePower extends CommandPower {
+public class IceTogglePower extends CommandPower {
 
     @Override
     public String getArgument() {

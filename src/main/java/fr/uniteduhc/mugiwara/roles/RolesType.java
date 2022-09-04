@@ -57,7 +57,6 @@ public enum RolesType {
     SENGOKU("Sengoku", CampType.MARINE, SengokuRole.class, new ItemStack(Material.BONE)),
     KUMA("Bartholomew Kuma", CampType.MARINE, BartholomewKumaRole.class, new ItemStack(Material.ANVIL)),
     TSURU("Tsuru", CampType.MARINE, TsuruRole.class, new ItemStack(Material.SUGAR)),
-    KUZAN("Kuzan", CampType.MARINE, KuzanRole.class, new ItemStack(Material.PACKED_ICE)),
     CROCODILE("Crocodile", CampType.MARINE, CrocodileRole.class, new ItemStack(Material.INK_SACK, 1, (short)4)),
     PACIFISTA("Pacifista", CampType.MARINE, PacifistaRole.class, new ItemStack(Material.INK_SACK)),
 
@@ -69,6 +68,7 @@ public enum RolesType {
     KATAKURI("Charlotte Katakuri", CampType.BIGMOM_KAIDO, CharlotteKatakuriRole.class, new ItemStack(Material.SNOW_BALL)),
     BIG_MOM("Big Mom", CampType.BIGMOM_KAIDO, BigMomRole.class, new ItemStack(Material.CAKE)),
 
+    KUZAN("Kuzan", CampType.SOLO, KuzanRole.class, new ItemStack(Material.PACKED_ICE)),
     SABO("Sabo", CampType.SOLO, SaboRole.class, new ItemStack(Material.BLAZE_POWDER)),
     TEACH("Marshall D. Teach", CampType.SOLO, TeachRole.class, new ItemStack(Material.OBSIDIAN)),
 

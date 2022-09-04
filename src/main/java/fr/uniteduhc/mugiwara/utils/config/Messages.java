@@ -213,11 +213,9 @@ public enum Messages {
     AKAINU_INUGAMI_TARGET("&cAkainu &fa utilisé son pouvoir &6Inugami Guren &fsur vous."),
     AKAINU_INUGAMI_NEAR("&cVous n'êtes pas assez proche de <name>."),
 
-    KUZAN_LAST_HIT_NULL("&cAucune &fpersonne ne vous a touché les &c5 dernière secondes&f."),
-    KUZAN_IS_IN_SABER_MODE("&fVotre capacité &cIce Saber &fest déjà &cactivé&f."),
-    KUZAN_ICE_AGE_USE("&fVous avez utilisé votre pouvoir &bIce Age&f."),
-    KUZAN_ICE_SABER_USE("&fVous avez utilisé votre pouvoir &bIce Saber&f."),
-    KUZAN_HAS_NOT_OF_ENDURENCE("&cVous ne possédez pas assez d'endurence !"),
+    KUZAN_ICE_ON("&fVous venez &ad'activé &fvotre pouvoir."),
+    KUZAN_ICE_OFF("&fVous venez de &cdésactivé &fvotre pouvoir."),
+    KUZAN_HIE_SWITCH("&fVous venez de choisir le pouvoir &a<name>&f."),
 
     PACIFISTA_ANALYSE_SYNTAX("&cSyntax : /mu analyse <pseudo>"),
     PACIFISTA_ANALYSE_NEAR("&cVous n'êtes pas assez proche de <name>."),
