@@ -216,6 +216,8 @@ public enum Messages {
     KUZAN_ICE_ON("&fVous venez &ad'activé &fvotre pouvoir."),
     KUZAN_ICE_OFF("&fVous venez de &cdésactivé &fvotre pouvoir."),
     KUZAN_HIE_SWITCH("&fVous venez de choisir le pouvoir &a<name>&f."),
+    KUZAN_BALL_NULL("&cPersonne ne vous a touché pendant les 5 dernières secondes."),
+    KUZAN_REVANGE_CAN("&fVous possédez toutes les conditions pour utilisé /mu revenge"),
 
     PACIFISTA_ANALYSE_SYNTAX("&cSyntax : /mu analyse <pseudo>"),
     PACIFISTA_ANALYSE_NEAR("&cVous n'êtes pas assez proche de <name>."),

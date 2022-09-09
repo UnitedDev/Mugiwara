@@ -5,6 +5,7 @@ import fr.uniteduhc.mugiwara.game.player.MUPlayer;
 import fr.uniteduhc.mugiwara.power.RightClickPower;
 import fr.uniteduhc.mugiwara.roles.RolesType;
 import fr.uniteduhc.mugiwara.roles.solo.KuzanRole;
+import fr.uniteduhc.mugiwara.utils.config.Messages;
 import fr.uniteduhc.mugiwara.utils.utils.Utils;
 import fr.uniteduhc.mugiwara.utils.utils.packets.MathUtil;
 import fr.uniteduhc.uhc.game.player.UPlayer;
@@ -54,22 +55,38 @@ public class HieHieRightPower extends RightClickPower {
         RolesType.MURole role = muPlayer.getRole();
         KuzanRole kuzanRole = (KuzanRole) role;
         KuzanRole.HieHiePowerType hieHiePowerType = kuzanRole.getHieHiePowerType();
+
         if (hieHiePowerType == KuzanRole.HieHiePowerType.ICE_AGE) {
+
             if (kuzanRole.getEndurence() < 35) {
                 player.sendMessage(ChatUtil.prefix("&cVous ne posspas assez d'Endurence."));
                 return false;
             }
+
             kuzanRole.setEndurence(kuzanRole.getEndurence() - 35);
             iceAge(player);
+
         } else if (hieHiePowerType == KuzanRole.HieHiePowerType.PHEASANT_PEAK) {
+
             if (kuzanRole.getEndurence() < 35) {
                 player.sendMessage(ChatUtil.prefix("&cVous ne posspas assez d'Endurence."));
                 return false;
             }
+
             kuzanRole.setEndurence(kuzanRole.getEndurence() - 35);
             pheasantPeak(player);
+
         } else if (hieHiePowerType == KuzanRole.HieHiePowerType.ICE_BALL) {
-            iceBall(player, null);
+
+            if(kuzanRole.getEndurence() < 70){
+                player.sendMessage(ChatUtil.prefix("&cVous ne posspas assez d'Endurence."));
+                return false;
+            }
+
+            kuzanRole.setEndurence(kuzanRole.getEndurence() - 70);
+            Player target = kuzanRole.getLastHit();
+
+            iceBall(player, target);
         }
         return true;
     }
@@ -101,7 +118,7 @@ public class HieHieRightPower extends RightClickPower {
                 .forEach(location -> location.getBlock().setType(Material.PACKED_ICE));
     }
 
-    public void pheasantPeak(final Player player) {
+    public void pheasantPeak(Player player) {
         final Entity entity = player.getWorld().spawnEntity(player.getLocation(), EntityType.BAT);
         entity.setPassenger(player);
         (new BukkitRunnable() {
@@ -149,12 +166,24 @@ public class HieHieRightPower extends RightClickPower {
 
     public void iceBall(Player player, Player target) {
 
+        if(target == null){
+            Messages.KUZAN_BALL_NULL.send(player);
+            return;
+        }
+
+        target.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 10 * 20, 0, false, false));
         Location centerLocation = player.getLocation().clone();
         centerLocation.setY((player.getWorld().getHighestBlockYAt(player.getLocation()) - 1));
+
+        player.teleport(centerLocation.clone().add(10, 0, 0));
+        target.teleport(centerLocation.clone().add(-10, 0, 0));
+
         List<Location> sphere = MathUtil.getSphere(centerLocation, 15, true);
+
         MathUtil.getSphere(centerLocation, 15, false).stream()
                 .filter(location -> (location.getBlockY() == centerLocation.getBlockY()))
                 .forEach(sphere::add);
+
         sphere.stream()
                 .filter(location -> (location.getBlockY() > centerLocation.getBlockY() - 1))
                 .forEach(location -> {
