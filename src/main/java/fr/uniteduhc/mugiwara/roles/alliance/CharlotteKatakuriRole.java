@@ -17,12 +17,15 @@ import java.util.Arrays;
 
 public class CharlotteKatakuriRole extends RolesType.MURole {
 
-    private int inWater;
-
     public CharlotteKatakuriRole() {
         super(Arrays.asList(
 
         ), 1057000000L);
+    }
+
+    @Override
+    public boolean hasFruit() {
+        return true;
     }
 
     @Override
@@ -35,16 +38,7 @@ public class CharlotteKatakuriRole extends RolesType.MURole {
 
     @Override
     public void onSecond(Player player) {
-        final Block block = player.getLocation().getBlock();
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
-            //Messages.WATER.send(player);
-            this.inWater = 0;
-        }
+        super.onSecond(player);
 
         final int amountOfSnowballs = player.getInventory().getItem(player.getInventory().first(Material.SNOW_BALL)).getAmount();
 

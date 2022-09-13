@@ -28,7 +28,7 @@ import java.util.UUID;
 
 @Getter
 public class FujitoraRole extends RolesType.MURole implements Listener {
-    private int inWater = 0;
+
     private final HashMap<UUID, Integer> avancement = new HashMap<>();
 
     public FujitoraRole() {
@@ -55,17 +55,13 @@ public class FujitoraRole extends RolesType.MURole implements Listener {
     }
 
     @Override
+    public boolean hasFruit() {
+        return true;
+    }
+
+    @Override
     public void onSecond(Player player) {
-        Block block = player.getLocation().getBlock();
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
-            //Messages.WATER.send(player);
-            this.inWater = 0;
-        }
+        super.onSecond(player);
 
         Utils.getNearPlayers(player, 20).forEach(player1 -> {
             int avancement = this.avancement.getOrDefault(player1.getUniqueId(), 0);

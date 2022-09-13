@@ -28,8 +28,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class JackRole extends RolesType.MURole implements Listener {
-    // variable called inwater
-    private int inWater;
     private Block first;
     private Block second;
     private Block third;
@@ -55,17 +53,13 @@ public class JackRole extends RolesType.MURole implements Listener {
     }
 
     @Override
+    public boolean hasFruit() {
+        return true;
+    }
+
+    @Override
     public void onSecond(Player player) {
-        Block block = player.getLocation().getBlock();
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
-            //Messages.WATER.send(player);
-            this.inWater = 0;
-        }
+        super.onSecond(player);
     }
 
     @Override

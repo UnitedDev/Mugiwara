@@ -23,7 +23,6 @@ import java.util.UUID;
 @Getter
 public class BartholomewKumaRole extends RolesType.MURole implements Listener {
 
-    private int inWater;
     private final List<UUID> teleportedPlayers = new ArrayList<>();
 
     public BartholomewKumaRole() {
@@ -45,18 +44,13 @@ public class BartholomewKumaRole extends RolesType.MURole implements Listener {
     }
 
     @Override
+    public boolean hasFruit() {
+        return true;
+    }
+
+    @Override
     public void onSecond(Player player) {
-
-        final Block block = player.getLocation().getBlock();
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
-            //Messages.WATER.send(player);
-            this.inWater = 0;
-        }
+        super.onSecond(player);
     }
 
     @EventHandler

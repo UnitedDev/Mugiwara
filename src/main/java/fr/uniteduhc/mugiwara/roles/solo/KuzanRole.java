@@ -36,7 +36,6 @@ public class KuzanRole extends RolesType.MURole implements Listener {
 
     private Player lastHit = null;
     private int lastHitTimer = 0;
-    private int inWater = 0;
     private int timer = 0;
     private int endurence = 0;
     private boolean ice = false;
@@ -95,17 +94,13 @@ public class KuzanRole extends RolesType.MURole implements Listener {
 
     }
 
+    @Override
+    public boolean hasFruit() {
+        return true;
+    }
+
     public void onSecond(Player player) {
-        Block block = player.getLocation().getBlock();
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) {
-            this.inWater++;
-        } else {
-            this.inWater = 0;
-        }
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 120, 0, false, false));
-            this.inWater = 0;
-        }
+        super.onSecond(player);
 
         if(lastHit != null) lastHitTimer++;
 

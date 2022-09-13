@@ -19,9 +19,6 @@ import java.util.Arrays;
 @Setter
 public class CrocodileRole extends RolesType.MURole implements Listener {
 
-    private boolean isInWater = false;
-    private int inWater = 0;
-
     public CrocodileRole() {
         super(Arrays.asList(
                 new CrochetDamagePower(),
@@ -45,25 +42,16 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
     }
 
     @Override
+    public boolean hasFruit() {
+        return true;
+    }
+
+    @Override
     public void onSecond(Player player) {
+        super.onSecond(player);
+
         if (player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("SAND"))
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 4, 1, false, false));
-
-        if (isInWater(player)) {
-            this.inWater++;
-        } else {
-            this.isInWater = false;
-            this.inWater = 0;
-        }
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 0, false, false));
-            //Messages.WATER.send(player);
-            this.isInWater = true;
-            this.inWater = 0;
-        }
-
-
     }
 
     @EventHandler
@@ -91,10 +79,5 @@ public class CrocodileRole extends RolesType.MURole implements Listener {
             player.setFoodLevel(player.getFoodLevel() - 1);
         }
     }
-
-    public boolean isInWater(Player player) {
-        return player.getLocation().clone().getBlock().getType().name().contains("WATER") || player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("WATER");
-    }
-
 
 }

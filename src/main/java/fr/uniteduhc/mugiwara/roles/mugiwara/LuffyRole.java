@@ -32,7 +32,6 @@ import java.util.List;
 import static fr.uniteduhc.mugiwara.roles.RolesType.*;
 
 public class LuffyRole extends RolesType.MURole implements Listener {
-    private int inWater = 0;
     public static final ItemBuilder LUFFY_VIVE_CARD = new ItemBuilder(Material.PAPER).setName(Utils.notClickItem("&c&lLuffy Card"));
 
     public LuffyRole() {
@@ -76,8 +75,13 @@ public class LuffyRole extends RolesType.MURole implements Listener {
     }
 
     @Override
+    public boolean hasFruit() {
+        return true;
+    }
+
+    @Override
     public void onSecond(Player player) {
-        Block block = player.getLocation().getBlock();
+        super.onSecond(player);
 
         for (Player player1 : Utils.getPlayers()) {
             if (player1.getItemInHand().isSimilar(LUFFY_VIVE_CARD.toItemStack())) {
@@ -93,15 +97,6 @@ public class LuffyRole extends RolesType.MURole implements Listener {
             } else {
                 Mugiwara.getInstance().removeActionBar(player1, "luffy_vive_card");
             }
-        }
-
-        if (block.getType() == Material.STATIONARY_WATER || block.getType() == Material.WATER) this.inWater++;
-        else this.inWater = 0;
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
-            //Messages.WATER.send(player);
-            this.inWater = 0;
         }
 
         if (player.isOnGround() || player.getLocation().clone().add(0, -1, 0).getBlock().getType() != Material.AIR) {

@@ -22,6 +22,8 @@ import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +87,7 @@ public enum RolesType {
 
         private List<Power> powers;
         private long prime;
+        private int inWater;
 
         public MURole(List<Power> powers, long prime) {
             this.powers = new ArrayList<>(powers);
@@ -110,6 +113,11 @@ public enum RolesType {
         }
 
         @Override
+        public void onSecond(Player player) {
+            if(hasFruit()) onWaterNausea(player);
+        }
+
+        @Override
         public String[] getDescription() {
             return Messages.DESCRIPTION.get(getRole()).toArray(new String[0]);
         }
@@ -131,6 +139,25 @@ public enum RolesType {
         @Override
         public ItemStack getItem() {
             return getRole().getDisplay();
+        }
+
+        public boolean hasFruit(){
+            return false;
+        }
+
+        private void onWaterNausea(Player player){
+            if(isInWater(player)) this.inWater++;
+            else this.inWater = 0;
+
+            if(this.inWater >= 5){
+                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 2, false, false));
+                //Messages.WATER.send(player);
+                this.inWater = 0;
+            }
+        }
+
+        public boolean isInWater(Player player) {
+            return player.getLocation().clone().getBlock().getType().name().contains("WATER") || player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("WATER");
         }
     }
 }

@@ -13,8 +13,6 @@ import java.util.Random;
 
 public class EustassRole extends RolesType.MURole {
 
-    private int inWater = 0;
-
     private int time;
 
     public EustassRole() {
@@ -35,26 +33,19 @@ public class EustassRole extends RolesType.MURole {
     }
 
     @Override
-    public void onSecond(Player player) {
+    public boolean hasFruit() {
+        return true;
+    }
 
+    @Override
+    public void onSecond(Player player) {
+        super.onSecond(player);
 
         if (time % 600 == 0) {
             knowEmpereur(player);
         }
 
         time++;
-
-        if (isInWater(player)) {
-            this.inWater++;
-        } else {
-            this.inWater = 0;
-        }
-
-        if (this.inWater >= 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 6 * 20, 0, false, false));
-            //Messages.WATER.send(player);
-            this.inWater = 0;
-        }
 
     }
 
@@ -73,7 +64,4 @@ public class EustassRole extends RolesType.MURole {
 
     }
 
-    public boolean isInWater(Player player) {
-        return player.getLocation().clone().getBlock().getType().name().contains("WATER") || player.getLocation().clone().add(0, -1, 0).getBlock().getType().name().contains("WATER");
-    }
 }
